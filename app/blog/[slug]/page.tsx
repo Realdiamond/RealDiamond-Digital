@@ -167,7 +167,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
                   </div>
                   <div>
                     <h4 className="font-semibold text-foreground mb-1">{post.author}</h4>
-                    <p className="text-sm text-accent mb-2">CEO & Lead Strategist at Diamond Works</p>
+                    <p className="text-sm text-accent mb-2">CEO & Lead Strategist at RealDiamond Digital</p>
                     <p className="text-sm text-muted-foreground">
                       With years of experience in digital strategy and web development, Oluwatimilehin helps 
                       businesses build effective digital presences that drive real results.
@@ -207,7 +207,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
 
       <CTA 
         title="Ready to Build a Website That Works for Your Business?"
-        description="Let's discuss how Diamond Works can help you create a professional online presence."
+        description="Let's discuss how RealDiamond Digital can help you create a professional online presence."
       />
     </Layout>
   );

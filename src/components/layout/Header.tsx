@@ -47,7 +47,7 @@ const Header = () => {
               <Diamond className="w-5 h-5 text-accent-foreground" />
             </div>
             <span className="font-heading font-bold text-xl text-foreground">
-              Diamond <span className="text-gradient">Works</span>
+              <span className="text-gradient">RealDiamond</span> Digital
             </span>
           </Link>
 

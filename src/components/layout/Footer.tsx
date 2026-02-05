@@ -18,11 +18,11 @@ const Footer = () => {
                 <Diamond className="w-5 h-5 text-accent-foreground" />
               </div>
               <span className="font-heading font-bold text-xl text-foreground">
-                Diamond <span className="text-gradient">Works</span>
+                <span className="text-gradient">RealDiamond</span> Digital
               </span>
             </Link>
             <p className="text-muted-foreground text-sm leading-relaxed">
-              A full-service digital agency building high-performing digital experiences that help businesses grow.
+              Strategic web design, development & SEO that transforms visitors into customers and grows revenue.
             </p>
             <div className="flex gap-3">
               {[Linkedin, Twitter, Instagram].map((Icon, i) => (
@@ -100,7 +100,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="mt-16 pt-8 border-t border-border/50 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Diamond Works. All rights reserved.
+            © {new Date().getFullYear()} RealDiamond Digital. All rights reserved.
           </p>
           <div className="flex gap-6">
             <Link href="#" className="text-sm text-muted-foreground hover:text-accent transition-colors">

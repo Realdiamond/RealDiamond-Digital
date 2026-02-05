@@ -11,7 +11,7 @@ interface CTAProps {
 
 const CTA = ({
   title = "Let's Build Something Extraordinary",
-  description = "Ready to transform your digital presence? Let's discuss how Diamond Works can help you achieve your business goals.",
+  description = "Ready to transform your digital presence? Let's discuss how RealDiamond Digital can help you achieve your business goals.",
   buttonText = "Start Your Project",
   buttonLink = "/contact",
 }: CTAProps) => {

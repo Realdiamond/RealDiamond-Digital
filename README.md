@@ -1,4 +1,4 @@
-# Diamond Works - Next.js Website
+# RealDiamond Digital - Next.js Website
 
 A professional web design and development agency website built with Next.js 15, React 18, TypeScript, Tailwind CSS, and Sanity CMS.
 
@@ -178,4 +178,4 @@ This project is private and proprietary.
 
 ## 🤝 Support
 
-For support, contact Diamond Works at [your-email@example.com]
+For support, contact RealDiamond Digital at [your-email@example.com]

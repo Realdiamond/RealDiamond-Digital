@@ -6,8 +6,8 @@ import { apiVersion, dataset, projectId } from './sanity/env'
 import { codeInput } from '@sanity/code-input'
 
 export default defineConfig({
-  name: 'diamond-works',
-  title: 'Diamond Works CMS',
+  name: 'realdiamond-digital',
+  title: 'RealDiamond Digital CMS',
 
   projectId,
   dataset,

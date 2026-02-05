@@ -5,7 +5,7 @@ import { ArrowRight, Star, Quote, Play, Sparkles } from "lucide-react";
 
 const testimonials = [
   {
-    quote: "Diamond Works transformed our online presence completely. Our website now converts at 3x the rate of our old site, and we're ranking on the first page for our key terms.",
+    quote: "RealDiamond Digital transformed our online presence completely. Our website now converts at 3x the rate of our old site, and we're ranking on the first page for our key terms.",
     author: "Sarah Mitchell",
     role: "CEO, TechStart Solutions",
     rating: 5,
@@ -33,7 +33,7 @@ const testimonials = [
     type: "text",
   },
   {
-    quote: "Professional, responsive, and truly invested in our success. Diamond Works delivered a website that has become our most powerful marketing tool.",
+    quote: "Professional, responsive, and truly invested in our success. RealDiamond Digital delivered a website that has become our most powerful marketing tool.",
     author: "Amanda Foster",
     role: "Partner, Legal Partners LLP",
     rating: 5,
@@ -50,14 +50,14 @@ const testimonials = [
 
 const videoTestimonials = [
   {
-    title: "How Diamond Works Helped Us 3x Our Conversions",
+    title: "How RealDiamond Digital Helped Us 3x Our Conversions",
     author: "Sarah Mitchell",
     role: "CEO, TechStart Solutions",
     thumbnail: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&h=400&fit=crop",
     duration: "2:45",
   },
   {
-    title: "Our SEO Success Story with Diamond Works",
+    title: "Our SEO Success Story with RealDiamond Digital",
     author: "Emily Chen",
     role: "Marketing Director, Urban Developments",
     thumbnail: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600&h=400&fit=crop",
@@ -107,7 +107,7 @@ const TestimonialsPage = () => {
               Video <span className="text-gradient">Testimonials</span>
             </h2>
             <p className="text-muted-foreground max-w-xl mx-auto">
-              Watch our clients share their experiences working with Diamond Works
+              Watch our clients share their experiences working with RealDiamond Digital
             </p>
           </div>
 

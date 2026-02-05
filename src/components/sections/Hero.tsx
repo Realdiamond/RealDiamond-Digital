@@ -66,11 +66,10 @@ const Hero = () => {
 
             {/* Headline */}
             <h1 className="font-heading text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight animate-slide-up">
-              Digital Products
+              We Build Websites That
               <br />
-              That{" "}
               <span className="relative inline-block">
-                <span className="text-gradient">Convert</span>
+                <span className="text-gradient">Increase Revenue by 3x</span>
                 <svg 
                   className="absolute -bottom-2 left-0 w-full h-3" 
                   viewBox="0 0 300 12" 
@@ -95,7 +94,7 @@ const Hero = () => {
 
             {/* Subheadline */}
             <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed animate-slide-up max-w-xl" style={{ animationDelay: "0.1s" }}>
-              We design and build fast, beautiful websites with powerful SEO and smart digital systems that turn visitors into real customers.
+              Strategic web design, development, and SEO that transforms visitors into customers. Trusted by 50+ businesses to deliver measurable growth.
             </p>
 
             {/* CTAs */}
@@ -106,7 +105,7 @@ const Hero = () => {
                 className="group bg-gradient-to-r from-accent to-accent-secondary hover:shadow-glow text-white font-bold"
               >
                 <Link href="/contact">
-                  Start Your Project
+                  Book a 20-Min Strategy Call
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </Button>
@@ -117,7 +116,7 @@ const Hero = () => {
                 className="group border-2 font-semibold"
               >
                 <Link href="/projects">
-                  See Our Work
+                  View Our Portfolio
                   <Zap className="w-5 h-5 group-hover:rotate-12 transition-transform" />
                 </Link>
               </Button>

@@ -1,5 +1,6 @@
 import Layout from "@/components/layout/Layout";
 import Hero from "@/components/sections/Hero";
+import CaseStudies from "@/components/sections/CaseStudies";
 import TrustedBySection from "@/components/sections/TrustedBySection";
 import ImpactStatement from "@/components/sections/ImpactStatement";
 import BentoPortfolio from "@/components/sections/BentoPortfolio";
@@ -13,6 +14,7 @@ export default function Home() {
   return (
     <Layout>
       <Hero />
+      <CaseStudies />
       <TrustedBySection />
       <ImpactStatement />
       <BentoPortfolio />

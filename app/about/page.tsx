@@ -41,7 +41,7 @@ const About = () => {
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 px-4 py-2 glass-card mb-6">
               <Sparkles className="w-4 h-4 text-accent" />
-              <span className="text-sm font-medium text-muted-foreground">About Diamond Works</span>
+              <span className="text-sm font-medium text-muted-foreground">About RealDiamond Digital</span>
             </div>
             <h1 className="font-heading text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6">
               A Strategic Partner for Your{" "}
@@ -66,7 +66,7 @@ const About = () => {
               </h2>
               <div className="space-y-4 text-muted-foreground">
                 <p>
-                  Diamond Works was founded with a clear vision: to provide businesses with the same 
+                  RealDiamond Digital was founded with a clear vision: to provide businesses with the same 
                   level of digital expertise that large corporations have access to, but with the personal 
                   attention and agility that only a focused team can deliver.
                 </p>
@@ -124,11 +124,11 @@ const About = () => {
               </h2>
               <div className="space-y-4 text-muted-foreground">
                 <p>
-                  Diamond Works is led by <strong className="text-foreground">Oluwatimilehin Akinsanmi</strong>, 
+                  RealDiamond Digital is led by <strong className="text-foreground">Oluwatimilehin Akinsanmi</strong>, 
                   who brings years of experience in digital strategy, web development, and business growth.
                 </p>
                 <p>
-                  Unlike large agencies where your project might be handed off to junior staff, at Diamond Works, 
+                  Unlike large agencies where your project might be handed off to junior staff, at RealDiamond Digital, 
                   the CEO is actively involved in every engagement. This means senior-level strategic thinking and 
                   hands-on attention from day one.
                 </p>

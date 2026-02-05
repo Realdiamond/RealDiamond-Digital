@@ -15,14 +15,14 @@ const AboutPreview = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Content */}
           <div>
-            <p className="text-accent font-medium mb-4 tracking-wide uppercase text-sm">About Diamond Works</p>
+            <p className="text-accent font-medium mb-4 tracking-wide uppercase text-sm">About RealDiamond Digital</p>
             <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground mb-6">
               A Strategic Partner for Your{" "}
               <span className="text-gradient">Digital Growth</span>
             </h2>
             <p className="text-muted-foreground text-lg mb-8 leading-relaxed">
               Led by CEO Oluwatimilehin Akinsanmi and supported by a dedicated team of digital experts, 
-              Diamond Works combines strategic thinking with hands-on execution. We're not just 
+              RealDiamond Digital combines strategic thinking with hands-on execution. We're not just 
               service providers—we're your partners in building a digital presence that drives real business results.
             </p>
 
@@ -63,7 +63,7 @@ const AboutPreview = () => {
                   <Diamond className="w-16 h-16 text-accent-foreground" />
                 </div>
                 <p className="font-heading text-2xl font-bold text-foreground mb-2">
-                  Diamond Works
+                  RealDiamond Digital
                 </p>
                 <p className="text-muted-foreground">
                   Building Digital Excellence Since Day One

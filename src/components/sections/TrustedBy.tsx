@@ -51,7 +51,7 @@ const TrustedBy = () => {
 
       <div className="container-wide mt-10">
         <p className="text-center text-sm font-medium text-muted-foreground">
-          Join 50+ businesses that trust Diamond Works with their digital growth
+          Join 50+ businesses that trust RealDiamond Digital with their digital growth
         </p>
       </div>
     </section>
