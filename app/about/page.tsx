@@ -49,7 +49,7 @@ const About = () => {
             </h1>
             <p className="text-xl text-muted-foreground leading-relaxed">
               We're a CEO-led digital agency focused on building high-converting websites and local SEO strategies 
-              that help service businesses grow. We work closely with HVAC companies, plumbers, roofers, and cleaning services to deliver real leads and measurable revenue.
+              that help service businesses grow. We work closely with local service businesses like HVAC, plumbing, roofing, cleaning, and similar companies to deliver real leads and measurable revenue.
             </p>
           </div>
         </div>
@@ -76,8 +76,7 @@ const About = () => {
                   a different kind of agency—one that combines strategic thinking with hands-on execution.
                 </p>
                 <p>
-                  Today, we specialize in helping local service providers—HVAC companies, plumbers, roofers, 
-                  and cleaning services—who are ready to invest in their digital presence and see measurable returns.
+                  Today, we specialize in helping local service businesses like HVAC, plumbing, roofing, cleaning, and similar companies who are ready to invest in their digital presence and see measurable returns.
                 </p>
               </div>
             </div>

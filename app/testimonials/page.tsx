@@ -1,10 +1,10 @@
 import { Metadata } from 'next';
-import { Star, Quote, Sparkles } from 'lucide-react';
+import { Star, Quote, Sparkles, ArrowRight } from 'lucide-react';
 import { client } from '@/sanity/lib/client';
 import { VideoTestimonialCarousel } from '@/components/VideoTestimonialCarousel';
+import Layout from '@/components/layout/Layout';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { ArrowRight } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Client Testimonials | RealDiamond Digital',
@@ -82,7 +82,7 @@ export default async function TestimonialsPage() {
   const { textTestimonials, videoTestimonials } = await getTestimonials();
 
   return (
-    <>
+    <Layout>
       {/* Hero Section */}
       <section className="pt-24 pb-16 bg-background relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
@@ -217,6 +217,6 @@ export default async function TestimonialsPage() {
           </div>
         </div>
       </section>
-    </>
+    </Layout>
   );
 }

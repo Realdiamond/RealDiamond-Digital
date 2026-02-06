@@ -105,7 +105,7 @@ const Hero = () => {
                 asChild 
                 className="group bg-gradient-to-r from-accent to-accent-secondary hover:shadow-glow text-white font-bold"
               >
-                <Link href="/contact">
+                <Link href="/contact#consultation">
                   Book a 20-Min Strategy Call
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>

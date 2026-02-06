@@ -61,9 +61,9 @@ const Contact = () => {
                 </h2>
                 <div className="space-y-6">
                   {[
-                    { icon: Mail, label: "Email Us", value: "hello@diamondworks.com" },
-                    { icon: Phone, label: "Call Us", value: "+1 (555) 123-4567" },
-                    { icon: MapPin, label: "Location", value: "Working globally with clients worldwide" },
+                    { icon: Mail, label: "Email Us", value: "realdiamonddigital@gmail.com" },
+                    { icon: Phone, label: "Call Us", value: "08138462476" },
+                    { icon: MapPin, label: "Location", value: "Available Worldwide" },
                     { icon: Clock, label: "Response Time", value: "We respond within 24 business hours" },
                   ].map((item) => (
                     <div key={item.label} className="flex items-start gap-4">
@@ -80,7 +80,7 @@ const Contact = () => {
               </div>
 
               {/* Book a Call CTA */}
-              <div className="glass-card p-8 relative overflow-hidden">
+              <div id="consultation" className="glass-card p-8 relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-accent/10 to-accent-secondary/10" />
                 <div className="relative z-10">
                   <Calendar className="w-10 h-10 text-accent mb-4" />
@@ -91,10 +91,20 @@ const Contact = () => {
                     Schedule a free 30-minute consultation call to discuss your project and 
                     see if we're a good fit to work together.
                   </p>
-                  <Button variant="hero" className="w-full">
-                    Book a Free Consultation
-                    <ArrowRight className="w-4 h-4" />
-                  </Button>
+                  <div className="space-y-3">
+                    <Button asChild variant="hero" className="w-full">
+                      <a href="https://calendly.com/realdiamonddigital/30-min-consultation-event" target="_blank" rel="noopener noreferrer">
+                        Book via Calendly
+                        <Calendar className="w-4 h-4" />
+                      </a>
+                    </Button>
+                    <Button asChild variant="outline" className="w-full">
+                      <a href="https://wa.me/2348138462476?text=Hi,%20I'd%20like%20to%20schedule%20a%20consultation" target="_blank" rel="noopener noreferrer">
+                        Chat on WhatsApp
+                        <ArrowRight className="w-4 h-4" />
+                      </a>
+                    </Button>
+                  </div>
                 </div>
               </div>
 

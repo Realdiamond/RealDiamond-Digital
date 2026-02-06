@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Mail, Phone, MapPin, Linkedin, Twitter, Instagram, Diamond } from "lucide-react";
+import { Mail, Phone, MapPin, Linkedin, Twitter, Instagram, Diamond, MessageCircle } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -25,10 +25,17 @@ const Footer = () => {
               Strategic web design, development & SEO that transforms visitors into customers and grows revenue.
             </p>
             <div className="flex gap-3">
-              {[Linkedin, Twitter, Instagram].map((Icon, i) => (
+              {[
+                { Icon: Linkedin, href: "#" },
+                { Icon: Twitter, href: "#" },
+                { Icon: Instagram, href: "#" },
+                { Icon: MessageCircle, href: "https://wa.me/2348138462476" },
+              ].map(({ Icon, href }, i) => (
                 <a 
                   key={i}
-                  href="#" 
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-10 h-10 glass-card flex items-center justify-center text-muted-foreground hover:text-accent hover:border-accent/50 transition-all duration-300"
                 >
                   <Icon className="w-4 h-4" />
@@ -75,23 +82,27 @@ const Footer = () => {
           <div className="space-y-6">
             <h4 className="font-heading font-semibold text-lg text-foreground">Contact</h4>
             <ul className="space-y-4">
-              <li className="flex items-center gap-3 text-sm text-muted-foreground">
+              <li className="flex items-center gap-3 text-sm">
                 <div className="w-8 h-8 glass-card flex items-center justify-center">
                   <Mail className="w-4 h-4 text-accent" />
                 </div>
-                hello@diamondworks.com
+                <a href="mailto:realdiamonddigital@gmail.com" className="text-muted-foreground hover:text-accent transition-colors">
+                  realdiamonddigital@gmail.com
+                </a>
               </li>
-              <li className="flex items-center gap-3 text-sm text-muted-foreground">
+              <li className="flex items-center gap-3 text-sm">
                 <div className="w-8 h-8 glass-card flex items-center justify-center">
                   <Phone className="w-4 h-4 text-accent" />
                 </div>
-                +1 (555) 123-4567
+                <a href="tel:08138462476" className="text-muted-foreground hover:text-accent transition-colors">
+                  08138462476
+                </a>
               </li>
               <li className="flex items-start gap-3 text-sm text-muted-foreground">
                 <div className="w-8 h-8 glass-card flex items-center justify-center flex-shrink-0">
                   <MapPin className="w-4 h-4 text-accent" />
                 </div>
-                Working globally with clients worldwide
+                <span>Available Worldwide</span>
               </li>
             </ul>
           </div>
