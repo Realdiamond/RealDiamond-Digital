@@ -13,7 +13,7 @@ const services = [
 
 const Hero = () => {
   return (
-    <section className="relative h-[85vh] pt-20 flex items-center justify-center overflow-hidden bg-secondary/10">
+    <section className="relative min-h-[90vh] sm:h-[85vh] pt-16 sm:pt-20 pb-12 sm:pb-0 flex items-center justify-center overflow-hidden bg-secondary/10">
       {/* Mesh Pattern */}
       <div 
         className="absolute inset-0 opacity-[0.015]"
@@ -89,16 +89,16 @@ const Hero = () => {
 
       <div className="container-wide relative z-10 text-center px-4">
         {/* Main Content */}
-        <div className="max-w-5xl mx-auto space-y-8">
+        <div className="max-w-5xl mx-auto space-y-6 sm:space-y-8">
           {/* Massive Headline */}
-          <h1 className="font-heading text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold leading-[0.95] tracking-tighter animate-fade-in">
+          <h1 className="font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold leading-[0.95] tracking-tighter animate-fade-in">
             More Calls.
             <br />
             <span className="text-gradient">More Revenue.</span>
           </h1>
 
           {/* Punchy Subheadline */}
-          <p className="text-xl md:text-2xl lg:text-3xl text-muted-foreground font-light max-w-3xl mx-auto animate-slide-up" style={{ animationDelay: "0.1s" }}>
+          <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-muted-foreground font-light max-w-3xl mx-auto animate-slide-up px-4" style={{ animationDelay: "0.1s" }}>
             We build high-converting websites and run local SEO for service businesses that want real results.
           </p>
 
@@ -107,7 +107,7 @@ const Hero = () => {
             <Button 
               size="lg" 
               asChild 
-              className="group bg-gradient-to-r from-accent to-accent-secondary hover:shadow-glow text-white font-semibold text-base sm:text-lg px-6 py-5 sm:px-8 sm:py-6 h-auto w-[90%] sm:w-auto"
+              className="group bg-gradient-to-r from-accent to-accent-secondary hover:shadow-glow text-white font-semibold text-base sm:text-lg px-[15px] py-4 sm:px-8 sm:py-6 h-auto w-[90%] sm:w-auto"
             >
               <Link href="/contact#consultation">
                 Get Your Free Strategy Call
@@ -118,7 +118,7 @@ const Hero = () => {
               variant="outline" 
               size="lg" 
               asChild 
-              className="group border-2 font-semibold text-base sm:text-lg px-6 py-5 sm:px-8 sm:py-6 h-auto w-[90%] sm:w-auto"
+              className="group border-2 font-semibold text-base sm:text-lg px-[15px] py-4 sm:px-8 sm:py-6 h-auto w-[90%] sm:w-auto"
             >
               <Link href="/projects">
                 View All Projects
@@ -127,23 +127,22 @@ const Hero = () => {
             </Button>
           </div>
 
-          {/* Services Grid */}
-          <div className="pt-12 animate-fade-in" style={{ animationDelay: "0.3s" }}>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-3xl mx-auto">
+          {/* Floating Service Cards */}
+          <div className="pt-8 sm:pt-12 animate-fade-in" style={{ animationDelay: "0.3s" }}>
+            <div className="grid grid-cols-2 md:flex md:flex-wrap justify-center gap-3 sm:gap-4">
               {services.map((service) => {
                 const Icon = service.icon;
                 return (
                   <div
                     key={service.label}
-                    className="group relative overflow-hidden rounded-2xl bg-card/50 backdrop-blur-sm border border-border/50 p-6 hover:border-accent/50 transition-all duration-300 hover:shadow-lg cursor-default"
+                    className="group glass-card px-4 py-3 sm:px-6 sm:py-4 hover:shadow-elevated transition-all duration-300 hover:-translate-y-1 cursor-default"
                   >
-                    <div className="flex flex-col items-center text-center gap-3">
-                      <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${service.color} flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg`}>
-                        <Icon className="w-6 h-6 text-white" />
+                    <div className="flex flex-col md:flex-row items-center gap-2 sm:gap-3">
+                      <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br ${service.color} flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0`}>
+                        <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                       </div>
-                      <span className="font-semibold text-foreground text-sm">{service.label}</span>
+                      <span className="font-semibold text-foreground text-xs sm:text-sm text-center md:text-left">{service.label}</span>
                     </div>
-                    <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300`} />
                   </div>
                 );
               })}
@@ -151,27 +150,8 @@ const Hero = () => {
           </div>
 
           {/* Trust Indicator */}
-          <div className="pt-4 space-y-6 animate-fade-in" style={{ animationDelay: "0.4s" }}>
-            <div className="text-sm text-muted-foreground">
-              Trusted by growing innovative businesses
-            </div>
-            
-            {/* Logo Carousel */}
-            <div className="relative overflow-hidden max-w-2xl mx-auto">
-              <div className="flex gap-8 animate-marquee">
-                {[...Array(6)].map((_, i) => (
-                  <div key={i} className="flex-shrink-0 w-32 h-16 rounded-lg bg-card/30 backdrop-blur-sm border border-border/30 flex items-center justify-center">
-                    <div className="text-muted-foreground/50 font-semibold text-sm">Logo {i + 1}</div>
-                  </div>
-                ))}
-                {/* Duplicate for seamless loop */}
-                {[...Array(6)].map((_, i) => (
-                  <div key={`dup-${i}`} className="flex-shrink-0 w-32 h-16 rounded-lg bg-card/30 backdrop-blur-sm border border-border/30 flex items-center justify-center">
-                    <div className="text-muted-foreground/50 font-semibold text-sm">Logo {i + 1}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
+          <div className="pt-3 sm:pt-4 text-xs sm:text-sm text-muted-foreground animate-fade-in px-4" style={{ animationDelay: "0.4s" }}>
+            Trusted by 50+ service businesses • 3x average increase in calls
           </div>
         </div>
       </div>
