@@ -1,7 +1,7 @@
 import { metadata, viewport } from 'next-sanity/studio'
 import StudioClient from './studioClient'
 
-export const dynamic = 'force-static'
+export const dynamic = 'force-dynamic'
 
 export { metadata, viewport }
 
