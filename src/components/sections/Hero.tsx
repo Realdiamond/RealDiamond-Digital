@@ -13,13 +13,7 @@ const services = [
 
 const Hero = () => {
   return (
-    <section className="relative h-[85vh] flex items-center justify-center overflow-hidden bg-background">
-      {/* Subtle Background Elements - Less Gradient */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute w-[500px] h-[500px] rounded-full blur-[140px] opacity-5 bg-accent top-1/3 left-1/3 animate-pulse" />
-        <div className="absolute w-[300px] h-[300px] rounded-full blur-[120px] opacity-5 bg-accent-secondary bottom-1/3 right-1/3 animate-pulse" style={{ animationDelay: "2s" }} />
-      </div>
-
+    <section className="relative h-[85vh] pt-20 flex items-center justify-center overflow-hidden bg-secondary/10">
       {/* Mesh Pattern */}
       <div 
         className="absolute inset-0 opacity-[0.015]"
@@ -30,8 +24,8 @@ const Hero = () => {
       />
 
       {/* Floating Cards - Left Side */}
-      <div className="absolute left-8 top-1/2 -translate-y-1/2 hidden xl:block animate-fade-in" style={{ animationDelay: "0.5s" }}>
-        <div className="space-y-6">
+      <div className="absolute left-16 top-1/2 -translate-y-1/2 hidden xl:block animate-fade-in" style={{ animationDelay: "0.5s" }}>
+        <div className="space-y-10">
           {/* Success Card */}
           <div className="w-64 glass-card p-5 animate-float">
             <div className="flex items-center gap-3 mb-2">
@@ -67,9 +61,11 @@ const Hero = () => {
           {/* Stats Card */}
           <div className="w-60 glass-card p-5 animate-float" style={{ animationDelay: "-1s" }}>
             <div className="flex items-center gap-3">
-              <div className="flex -space-x-2">
-                {[...Array(3)].map((_, i) => (
-                  <div key={i} className="w-9 h-9 rounded-full bg-gradient-to-br from-accent to-accent-secondary border-2 border-background" />
+              <div className="flex gap-0.5">
+                {[...Array(5)].map((_, i) => (
+                  <svg key={i} className="w-4 h-4 fill-yellow-400" viewBox="0 0 20 20">
+                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                  </svg>
                 ))}
               </div>
               <div>
