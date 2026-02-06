@@ -3,12 +3,30 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowUpRight, TrendingUp } from "lucide-react";
-import { projects } from "@/data/projects";
 import { useState } from "react";
+import { urlFor } from "@/sanity/lib/client";
 
-const BentoPortfolio = () => {
+interface Project {
+  _id: string;
+  title: string;
+  slug: { current: string };
+  category: string;
+  description: string;
+  image: any;
+  results?: string[];
+}
+
+interface BentoPortfolioProps {
+  projects: Project[];
+}
+
+const BentoPortfolio = ({ projects }: BentoPortfolioProps) => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const featuredProjects = projects.slice(0, 4);
+  
+  if (featuredProjects.length === 0) {
+    return null;
+  }
 
   return (
     <section className="py-32 bg-background relative overflow-hidden">
@@ -32,14 +50,14 @@ const BentoPortfolio = () => {
         <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-12 gap-4 md:gap-6 mb-12">
           {/* Large Featured - Spans 8 cols on lg, 4 on md */}
           <Link
-            href={`/projects/${featuredProjects[0].slug}`}
+            href={`/projects/${featuredProjects[0].slug.current}`}
             className="group relative md:col-span-4 lg:col-span-8 row-span-2 rounded-3xl overflow-hidden glass-card hover:shadow-elevated transition-all duration-500"
             onMouseEnter={() => setHoveredIndex(0)}
             onMouseLeave={() => setHoveredIndex(null)}
           >
             <div className="relative h-[500px] md:h-[600px]">
               <Image
-                src={featuredProjects[0].image}
+                src={urlFor(featuredProjects[0].image).width(1200).height(800).url()}
                 alt={featuredProjects[0].title}
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-110"
@@ -72,15 +90,16 @@ const BentoPortfolio = () => {
           </Link>
 
           {/* Medium - Top Right */}
+          {featuredProjects[1] && (
           <Link
-            href={`/projects/${featuredProjects[1].slug}`}
+            href={`/projects/${featuredProjects[1].slug.current}`}
             className="group relative md:col-span-2 lg:col-span-4 rounded-3xl overflow-hidden glass-card hover:shadow-elevated transition-all duration-500"
             onMouseEnter={() => setHoveredIndex(1)}
             onMouseLeave={() => setHoveredIndex(null)}
           >
             <div className="relative h-[280px] md:h-[290px]">
               <Image
-                src={featuredProjects[1].image}
+                src={urlFor(featuredProjects[1].image).width(600).height(400).url()}
                 alt={featuredProjects[1].title}
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-110"
@@ -101,17 +120,19 @@ const BentoPortfolio = () => {
               </div>
             </div>
           </Link>
+          )}
 
           {/* Medium - Bottom Right */}
+          {featuredProjects[2] && (
           <Link
-            href={`/projects/${featuredProjects[2].slug}`}
+            href={`/projects/${featuredProjects[2].slug.current}`}
             className="group relative md:col-span-2 lg:col-span-4 rounded-3xl overflow-hidden glass-card hover:shadow-elevated transition-all duration-500"
             onMouseEnter={() => setHoveredIndex(2)}
             onMouseLeave={() => setHoveredIndex(null)}
           >
             <div className="relative h-[280px] md:h-[290px]">
               <Image
-                src={featuredProjects[2].image}
+                src={urlFor(featuredProjects[2].image).width(600).height(400).url()}
                 alt={featuredProjects[2].title}
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-110"
@@ -132,6 +153,7 @@ const BentoPortfolio = () => {
               </div>
             </div>
           </Link>
+          )}
 
           {/* Full Width CTA Card */}
           <div className="md:col-span-6 lg:col-span-12 rounded-3xl overflow-hidden glass-card p-12 bg-gradient-to-br from-accent/5 via-accent-secondary/5 to-transparent border-2 border-accent/20 hover:border-accent/40 transition-all duration-500 group cursor-pointer">

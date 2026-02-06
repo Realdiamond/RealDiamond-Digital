@@ -2,7 +2,7 @@ import Layout from "@/components/layout/Layout";
 import Hero from "@/components/sections/Hero";
 import TrustedBySection from "@/components/sections/TrustedBySection";
 import ServicesGrid from "@/components/sections/ServicesGrid";
-import BentoPortfolio from "@/components/sections/BentoPortfolio";
+import BentoPortfolioWrapper from "@/components/sections/BentoPortfolioWrapper";
 import ImpactStatement from "@/components/sections/ImpactStatement";
 import ProcessTimeline from "@/components/sections/ProcessTimeline";
 import TestimonialsShowcaseWrapper from "@/components/sections/TestimonialsShowcaseWrapper";
@@ -15,7 +15,7 @@ export default function Home() {
       <Hero />
       <TrustedBySection />
       <ServicesGrid />
-      <BentoPortfolio />
+      <BentoPortfolioWrapper />
       <ImpactStatement />
       <ProcessTimeline />
       <TestimonialsShowcaseWrapper />

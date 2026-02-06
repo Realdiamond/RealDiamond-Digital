@@ -22,6 +22,13 @@ export const project = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: 'featured',
+      title: 'Featured on Homepage',
+      type: 'boolean',
+      description: 'Show this project in the homepage featured section',
+      initialValue: false,
+    }),
+    defineField({
       name: 'category',
       title: 'Category',
       type: 'string',
