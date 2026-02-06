@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Mail, Phone, MapPin, Linkedin, Twitter, Instagram, Diamond } from "lucide-react";
-import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
+import { FaWhatsapp } from "react-icons/fa";
 
 const Footer = () => {
   return (
@@ -47,7 +47,7 @@ const Footer = () => {
                 rel="noopener noreferrer"
                 className="w-10 h-10 glass-card flex items-center justify-center text-muted-foreground hover:text-accent hover:border-accent/50 transition-all duration-300"
               >
-                <WhatsAppIcon className="w-4 h-4" />
+                <FaWhatsapp className="w-5 h-5" />
               </a>
             </div>
           </div>

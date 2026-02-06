@@ -29,7 +29,7 @@ const iconMap: any = {
   "zap": Zap,
   "shopping-cart": ShoppingCart,
   "trending-up": TrendingUp,
-};
+}; 
 
 export default async function ServicesGrid() {
   const services = await getServices();
@@ -64,7 +64,7 @@ export default async function ServicesGrid() {
                 
                 <div className="relative z-10">
                   {/* Icon */}
-                  <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${service.gradient} flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-lg`}>
+                  <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-lg ${service.gradient ? `bg-gradient-to-br ${service.gradient}` : 'bg-gradient-to-br from-accent to-accent-secondary'}`}>
                     <IconComponent className="w-8 h-8 text-white" />
                   </div>
 

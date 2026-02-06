@@ -2,7 +2,7 @@ import Layout from "@/components/layout/Layout";
 import ContactForm from "@/components/ContactForm";
 import FAQ from "@/components/sections/FAQ";
 import { Button } from "@/components/ui/button";
-import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
+import { FaWhatsapp } from "react-icons/fa";
 import { 
   Mail, 
   Phone, 
@@ -102,7 +102,7 @@ const Contact = () => {
                     <Button asChild variant="outline" className="flex-1">
                       <a href="https://wa.me/2348138462476?text=Hi,%20I'd%20like%20to%20schedule%20a%20consultation" target="_blank" rel="noopener noreferrer">
                         Chat on WhatsApp
-                        <WhatsAppIcon className="w-4 h-4" />
+                        <FaWhatsapp className="w-4 h-4" />
                       </a>
                     </Button>
                   </div>
