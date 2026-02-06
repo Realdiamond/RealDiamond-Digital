@@ -202,13 +202,6 @@ export const project = defineType({
       placeholder: 'e.g., 2024',
     }),
     defineField({
-      name: 'featured',
-      title: 'Featured Project',
-      type: 'boolean',
-      description: 'Show this project in featured sections',
-      initialValue: false,
-    }),
-    defineField({
       name: 'order',
       title: 'Display Order',
       type: 'number',
