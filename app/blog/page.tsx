@@ -4,8 +4,6 @@ import CTA from "@/components/sections/CTA";
 import { ArrowRight, Clock, User, Sparkles } from "lucide-react";
 import { client } from "@/sanity/lib/client";
 
-const categories = ["All", "Web Development", "SEO", "WordPress", "Optimization", "Business Growth"];
-
 async function getBlogPosts() {
   const posts = await client.fetch(`
     *[_type == "blog"] | order(publishedDate desc) {
@@ -13,7 +11,7 @@ async function getBlogPosts() {
       title,
       "slug": slug.current,
       excerpt,
-      category,
+      "category": category->title,
       author,
       publishedDate,
       readTime,
@@ -24,8 +22,20 @@ async function getBlogPosts() {
   return posts;
 }
 
+async function getCategories() {
+  const categories = await client.fetch(`
+    *[_type == "category"] | order(order asc) {
+      _id,
+      title,
+      "slug": slug.current
+    }
+  `);
+  return categories;
+}
+
 export default async function Blog() {
   const blogPosts = await getBlogPosts();
+  const categories = await getCategories();
   return (
     <Layout>
       {/* Hero */}
@@ -57,16 +67,17 @@ export default async function Blog() {
       <section className="py-6 bg-secondary/30 border-y border-border/50">
         <div className="container-wide">
           <div className="flex flex-wrap gap-3">
-            {categories.map((category) => (
+            <button
+              className="px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 bg-gradient-to-r from-accent to-accent-secondary text-accent-foreground shadow-glow"
+            >
+              All
+            </button>
+            {categories.map((category: any) => (
               <button
-                key={category}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                  category === "All"
-                    ? "bg-gradient-to-r from-accent to-accent-secondary text-accent-foreground shadow-glow"
-                    : "glass-card text-muted-foreground hover:text-foreground hover:border-accent/50"
-                }`}
+                key={category._id}
+                className="px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 glass-card text-muted-foreground hover:text-foreground hover:border-accent/50"
               >
-                {category}
+                {category.title}
               </button>
             ))}
           </div>

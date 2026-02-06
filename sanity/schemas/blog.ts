@@ -107,17 +107,8 @@ export const blogPost = defineType({
     defineField({
       name: 'category',
       title: 'Category',
-      type: 'string',
-      options: {
-        list: [
-          { title: 'Web Development', value: 'Web Development' },
-          { title: 'SEO', value: 'SEO' },
-          { title: 'WordPress', value: 'WordPress' },
-          { title: 'Optimization', value: 'Optimization' },
-          { title: 'Business Growth', value: 'Business Growth' },
-          { title: 'Design', value: 'Design' },
-        ],
-      },
+      type: 'reference',
+      to: [{ type: 'category' }],
       validation: (Rule) => Rule.required(),
     }),
     defineField({
