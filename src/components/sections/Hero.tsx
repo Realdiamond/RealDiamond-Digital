@@ -68,8 +68,9 @@ const Hero = () => {
             <h1 className="font-heading text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight animate-slide-up">
               Your Complete
               <br />
+              Digital Growth{" "}
               <span className="relative inline-block">
-                <span className="text-gradient">Digital Growth Partner</span>
+                <span className="text-gradient">Partner</span>
                 <svg 
                   className="absolute -bottom-2 left-0 w-full h-3" 
                   viewBox="0 0 300 12" 
@@ -94,7 +95,7 @@ const Hero = () => {
 
             {/* Subheadline */}
             <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed animate-slide-up max-w-xl" style={{ animationDelay: "0.1s" }}>
-              Web design, development, SEO, and digital marketing that transforms your business. From strategy to execution, we deliver measurable growth.
+              From stunning web design to powerful SEO strategies, we craft digital solutions that turn clicks into customers and traffic into revenue.
             </p>
 
             {/* CTAs */}
@@ -116,7 +117,7 @@ const Hero = () => {
                 className="group border-2 font-semibold"
               >
                 <Link href="/projects">
-                  View Our Portfolio
+                  View Our Projects
                   <Zap className="w-5 h-5 group-hover:rotate-12 transition-transform" />
                 </Link>
               </Button>

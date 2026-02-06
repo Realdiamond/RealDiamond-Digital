@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Globe, Search, Palette, Zap, ArrowRight } from "lucide-react";
+import { Globe, Search, Palette, Zap, ArrowRight, ShoppingCart, TrendingUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { client } from "@/sanity/lib/client";
 
@@ -27,6 +27,8 @@ const iconMap: any = {
   "search": Search,
   "palette": Palette,
   "zap": Zap,
+  "shopping-cart": ShoppingCart,
+  "trending-up": TrendingUp,
 };
 
 export default async function ServicesGrid() {

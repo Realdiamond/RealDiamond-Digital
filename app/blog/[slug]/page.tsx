@@ -78,7 +78,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
   return (
     <Layout>
       {/* Hero */}
-      <section className="pt-32 pb-12 bg-background relative overflow-hidden">
+      <section className="pt-24 pb-12 bg-background relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
           <div className="bg-orb bg-orb-1 opacity-15" />
           <div className="bg-orb bg-orb-2 opacity-10" />
@@ -86,14 +86,6 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
 
         <div className="container-wide relative">
           <div className="max-w-4xl mx-auto">
-            <Link 
-              href="/blog" 
-              className="inline-flex items-center gap-2 text-muted-foreground hover:text-accent mb-6 transition-colors"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              Back to Blog
-            </Link>
-            
             <span className="inline-block px-3 py-1 bg-accent/20 text-accent text-sm font-medium rounded-full mb-4">
               {post.category}
             </span>

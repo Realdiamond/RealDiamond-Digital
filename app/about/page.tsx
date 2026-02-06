@@ -31,7 +31,7 @@ const About = () => {
   return (
     <Layout>
       {/* Hero */}
-      <section className="pt-32 pb-20 bg-background relative overflow-hidden">
+      <section className="pt-24 pb-16 bg-background relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
           <div className="bg-orb bg-orb-1 opacity-20" />
           <div className="bg-orb bg-orb-2 opacity-15" />

@@ -25,7 +25,7 @@ const ImpactStatement = () => {
           {/* Supporting Text */}
           <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             Every pixel, every line of code, every design decision is engineered to convert visitors into customers. 
-            Because pretty websites don't pay the bills—<span className="text-foreground font-semibold">results do</span>.
+            Because pretty websites don't pay the bills; <span className="text-foreground font-semibold">results do</span>.
           </p>
 
           {/* Metrics Row */}

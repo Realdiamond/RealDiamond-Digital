@@ -29,7 +29,7 @@ export default async function Blog() {
   return (
     <Layout>
       {/* Hero */}
-      <section className="pt-32 pb-20 bg-background relative overflow-hidden">
+      <section className="pt-24 pb-16 bg-background relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
           <div className="bg-orb bg-orb-1 opacity-20" />
           <div className="bg-orb bg-orb-2 opacity-15" />
@@ -138,12 +138,20 @@ export default async function Blog() {
           )}
 
           {/* Load More */}
-          {blogPosts.length > 0 && (
-            <div className="mt-12 text-center">
-              <button className="text-accent font-medium inline-flex items-center gap-2 hover:gap-3 transition-all glass-card px-6 py-3 hover:border-accent/50">
-                Load More Articles
-                <ArrowRight className="w-4 h-4" />
-              </button>
+          {blogPosts.length > 10 && (
+            <div className="mt-12 flex justify-center gap-2">
+              {[1, 2, 3].map((page) => (
+                <button
+                  key={page}
+                  className={`w-10 h-10 rounded-lg font-medium transition-all ${
+                    page === 1
+                      ? "bg-accent text-white"
+                      : "glass-card text-muted-foreground hover:text-foreground hover:border-accent/50"
+                  }`}
+                >
+                  {page}
+                </button>
+              ))}
             </div>
           )}
         </div>

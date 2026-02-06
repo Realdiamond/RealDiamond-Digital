@@ -94,7 +94,7 @@ const Header = () => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="lg:hidden py-6 border-t border-border/50 animate-fade-in">
+          <div className="lg:hidden py-6 border-t border-border/50 animate-fade-in bg-background/95 backdrop-blur-md">
             <div className="flex flex-col gap-2">
               {navLinks.map((link) => (
                 <Link
@@ -104,7 +104,7 @@ const Header = () => {
                   className={`text-base font-medium py-3 px-4 rounded-xl transition-all ${
                     isActive(link.href)
                       ? "text-accent bg-accent/10"
-                      : "text-muted-foreground hover:text-foreground hover:bg-secondary"
+                      : "text-foreground hover:text-accent hover:bg-secondary"
                   }`}
                 >
                   {link.label}
