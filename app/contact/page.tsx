@@ -2,6 +2,7 @@ import Layout from "@/components/layout/Layout";
 import ContactForm from "@/components/ContactForm";
 import FAQ from "@/components/sections/FAQ";
 import { Button } from "@/components/ui/button";
+import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { 
   Mail, 
   Phone, 
@@ -91,17 +92,17 @@ const Contact = () => {
                     Schedule a free 30-minute consultation call to discuss your project and 
                     see if we're a good fit to work together.
                   </p>
-                  <div className="space-y-3">
-                    <Button asChild variant="hero" className="w-full">
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    <Button asChild variant="hero" className="flex-1">
                       <a href="https://calendly.com/realdiamonddigital/30-min-consultation-event" target="_blank" rel="noopener noreferrer">
                         Book via Calendly
                         <Calendar className="w-4 h-4" />
                       </a>
                     </Button>
-                    <Button asChild variant="outline" className="w-full">
+                    <Button asChild variant="outline" className="flex-1">
                       <a href="https://wa.me/2348138462476?text=Hi,%20I'd%20like%20to%20schedule%20a%20consultation" target="_blank" rel="noopener noreferrer">
                         Chat on WhatsApp
-                        <ArrowRight className="w-4 h-4" />
+                        <WhatsAppIcon className="w-4 h-4" />
                       </a>
                     </Button>
                   </div>

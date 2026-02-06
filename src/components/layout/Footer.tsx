@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Mail, Phone, MapPin, Linkedin, Twitter, Instagram, Diamond, MessageCircle } from "lucide-react";
+import { Mail, Phone, MapPin, Linkedin, Twitter, Instagram, Diamond } from "lucide-react";
+import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 
 const Footer = () => {
   return (
@@ -29,7 +30,6 @@ const Footer = () => {
                 { Icon: Linkedin, href: "#" },
                 { Icon: Twitter, href: "#" },
                 { Icon: Instagram, href: "#" },
-                { Icon: MessageCircle, href: "https://wa.me/2348138462476" },
               ].map(({ Icon, href }, i) => (
                 <a 
                   key={i}
@@ -41,6 +41,14 @@ const Footer = () => {
                   <Icon className="w-4 h-4" />
                 </a>
               ))}
+              <a 
+                href="https://wa.me/2348138462476"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 glass-card flex items-center justify-center text-muted-foreground hover:text-accent hover:border-accent/50 transition-all duration-300"
+              >
+                <WhatsAppIcon className="w-4 h-4" />
+              </a>
             </div>
           </div>
 
