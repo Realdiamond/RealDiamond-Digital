@@ -33,6 +33,9 @@ export async function generateStaticParams() {
   return posts.map((post: any) => ({ slug: post.slug }));
 }
 
+// Revalidate every 60 seconds - content updates within 1 minute
+export const revalidate = 60;
+
 export default async function BlogPost({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const post = await getBlogPost(slug);
