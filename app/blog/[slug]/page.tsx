@@ -15,7 +15,7 @@ async function getBlogPost(slug: string) {
       "slug": slug.current,
       excerpt,
       content,
-      category,
+      "category": category->title,
       author,
       publishedDate,
       readTime,

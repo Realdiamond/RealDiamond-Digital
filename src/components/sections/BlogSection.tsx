@@ -10,7 +10,7 @@ async function getRecentPosts() {
       title,
       "slug": slug.current,
       excerpt,
-      category,
+      "category": category->title,
       readTime,
       publishedDate,
       "image": image.asset->url
