@@ -122,37 +122,10 @@ const Hero = () => {
             >
               <Link href="/projects">
                 View All Projects
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
             </Button>
           </div>
 
-          {/* Floating Service Cards */}
-          <div className="pt-8 sm:pt-12 animate-fade-in" style={{ animationDelay: "0.3s" }}>
-            <div className="grid grid-cols-2 md:flex md:flex-wrap justify-center gap-3 sm:gap-4">
-              {services.map((service) => {
-                const Icon = service.icon;
-                return (
-                  <div
-                    key={service.label}
-                    className="group glass-card px-4 py-3 sm:px-6 sm:py-4 hover:shadow-elevated transition-all duration-300 hover:-translate-y-1 cursor-default"
-                  >
-                    <div className="flex flex-col md:flex-row items-center gap-2 sm:gap-3">
-                      <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br ${service.color} flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0`}>
-                        <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
-                      </div>
-                      <span className="font-semibold text-foreground text-xs sm:text-sm text-center md:text-left">{service.label}</span>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Trust Indicator */}
-          <div className="pt-3 sm:pt-4 text-xs sm:text-sm text-muted-foreground animate-fade-in px-4" style={{ animationDelay: "0.4s" }}>
-            Trusted by 50+ service businesses • 3x average increase in calls
-          </div>
         </div>
       </div>
     </section>
