@@ -107,18 +107,18 @@ const Hero = () => {
             <Button 
               size="lg" 
               asChild 
-              className="group bg-gradient-to-r from-accent to-accent-secondary hover:shadow-glow text-white font-semibold text-base sm:text-lg px-[15px] py-4 sm:px-8 sm:py-6 h-auto w-[90%] sm:w-auto"
+              className="group bg-gradient-to-r from-accent to-accent-secondary hover:shadow-glow text-white font-semibold text-sm sm:text-base px-6 py-3 sm:px-7 sm:py-5 h-auto w-[90%] sm:w-auto"
             >
               <Link href="/contact#consultation">
                 Get Your Free Strategy Call
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
             </Button>
             <Button 
               variant="outline" 
               size="lg" 
               asChild 
-              className="group border-2 font-semibold text-base sm:text-lg px-[15px] py-4 sm:px-8 sm:py-6 h-auto w-[90%] sm:w-auto"
+              className="group border-2 font-semibold text-sm sm:text-base px-6 py-3 sm:px-7 sm:py-5 h-auto w-[90%] sm:w-auto"
             >
               <Link href="/projects">
                 View All Projects
