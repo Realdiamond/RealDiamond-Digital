@@ -1,16 +1,22 @@
-const TrustedBySection = () => {
-  const clients = [
-    { name: "TechFlow", initials: "TF" },
-    { name: "GrowthLab", initials: "GL" },
-    { name: "Nexus Co", initials: "NC" },
-    { name: "Vertex", initials: "VX" },
-    { name: "Momentum", initials: "MM" },
-    { name: "Synergy", initials: "SY" },
-    { name: "Horizon", initials: "HZ" },
-    { name: "Pulse", initials: "PL" },
-    { name: "Quantum", initials: "QT" },
-    { name: "Stellar", initials: "ST" },
-  ];
+import { client } from "@/sanity/lib/client";
+import { urlForImage } from "@/sanity/lib/image";
+import Image from "next/image";
+
+async function getCompanyLogos() {
+  const logos = await client.fetch(`
+    *[_type == "companyLogo"] | order(order asc) {
+      _id,
+      name,
+      initials,
+      logo,
+      website
+    }
+  `);
+  return logos;
+}
+
+const TrustedBySection = async () => {
+  const clients = await getCompanyLogos();
 
   // Triple the array for seamless infinite scroll
   const tripleClients = [...clients, ...clients, ...clients];
@@ -34,12 +40,24 @@ const TrustedBySection = () => {
         <div className="flex animate-marquee hover:pause">
           {tripleClients.map((client, index) => (
             <div 
-              key={`${client.name}-${index}`}
+              key={`${client._id}-${index}`}
               className="flex-shrink-0 mx-12 group cursor-default"
             >
-              <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-accent to-accent-secondary flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
-                <span className="font-heading font-bold text-xl text-white">{client.initials}</span>
-              </div>
+              {client.logo ? (
+                <div className="w-20 h-20 rounded-2xl bg-white/5 backdrop-blur-sm flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300 overflow-hidden">
+                  <Image
+                    src={urlForImage(client.logo).width(80).height(80).url()}
+                    alt={client.logo.alt || client.name}
+                    width={80}
+                    height={80}
+                    className="object-contain p-2"
+                  />
+                </div>
+              ) : (
+                <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-accent to-accent-secondary flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                  <span className="font-heading font-bold text-xl text-white">{client.initials}</span>
+                </div>
+              )}
             </div>
           ))}
         </div>
