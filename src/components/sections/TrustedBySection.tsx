@@ -22,50 +22,43 @@ const TrustedBySection = async () => {
   const doubledClients = [...clients, ...clients];
 
   return (
-    <section className="relative pt-2 pb-12 sm:pt-4 sm:pb-16 bg-secondary/10 overflow-hidden">
-      {/* Mesh Pattern */}
-      <div 
-        className="absolute inset-0 opacity-[0.015]"
-        style={{
-          backgroundImage: `radial-gradient(circle at 2px 2px, hsl(var(--accent)) 1px, transparent 0)`,
-          backgroundSize: '64px 64px',
-        }}
-      />
-      
-      <div className="container-wide mb-8 relative z-10">
-        <div className="text-center">
-          <p className="text-base font-semibold text-gradient">
-            Trusted by growing service businesses
-          </p>
-        </div>
+    <section className="relative py-12 sm:py-16 bg-gradient-to-b from-background to-secondary/5 overflow-hidden">
+      {/* Subtle heading */}
+      <div className="container-wide mb-12 text-center">
+        <p className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
+          Trusted by leading brands
+        </p>
       </div>
 
-      {/* Scrolling Logo Carousel */}
-      <div className="relative z-10">
-        {/* Gradient masks for smooth fade effect */}
-        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-background via-background to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-background via-background to-transparent z-10 pointer-events-none" />
+      {/* Infinite scrolling marquee */}
+      <div className="relative">
+        {/* Gradient fade edges */}
+        <div className="absolute left-0 top-0 bottom-0 w-24 sm:w-32 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-24 sm:w-32 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
         
-        <div className="flex w-max animate-marquee hover:pause">
+        {/* Scrolling container with w-max for content-based width */}
+        <div className="flex w-max animate-marquee">
           {doubledClients.map((client, index) => (
             <div 
               key={`${client._id}-${index}`}
-              className="flex-shrink-0 px-12"
+              className="flex-shrink-0 px-8 sm:px-12"
             >
               {client.logo ? (
-                <div className="h-20 max-w-[160px] flex items-center justify-center">
+                <div className="h-16 sm:h-20 w-32 sm:w-40 flex items-center justify-center group transition-all duration-300">
                   <Image
                     src={urlForImage(client.logo).width(160).height(80).url()}
                     alt={client.logo.alt || client.name}
                     width={160}
                     height={80}
-                    className="object-contain h-full w-auto max-w-full"
+                    className="object-contain h-full w-auto max-w-full grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300"
                     unoptimized
                   />
                 </div>
               ) : (
-                <div className="w-32 h-20 rounded-2xl bg-gradient-to-br from-accent to-accent-secondary flex items-center justify-center">
-                  <span className="font-heading font-bold text-xl text-white">{client.initials}</span>
+                <div className="h-16 sm:h-20 w-32 sm:w-40 flex items-center justify-center">
+                  <div className="px-4 py-2 rounded-lg bg-secondary/30 backdrop-blur-sm border border-border/50 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
+                    <span className="font-heading font-bold text-lg text-foreground">{client.initials}</span>
+                  </div>
                 </div>
               )}
             </div>
