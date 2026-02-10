@@ -89,7 +89,7 @@ const Hero = () => {
 
       <div className="container-wide relative z-10 text-center px-4">
         {/* Main Content */}
-        <div className="max-w-5xl mx-auto space-y-6 sm:space-y-8">
+        <div className="max-w-5xl mx-auto space-y-4 sm:space-y-6">
           {/* Massive Headline */}
           <h1 className="font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold leading-[0.95] tracking-tighter animate-fade-in">
             More Calls.

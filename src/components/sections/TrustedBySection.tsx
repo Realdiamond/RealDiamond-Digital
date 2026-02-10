@@ -22,7 +22,7 @@ const TrustedBySection = async () => {
   const tripleClients = [...clients, ...clients, ...clients];
 
   return (
-    <section className="relative py-16 bg-secondary/10 border-y border-border/50 overflow-hidden">
+    <section className="relative py-12 sm:py-16 bg-secondary/10 overflow-hidden">
       {/* Mesh Pattern */}
       <div 
         className="absolute inset-0 opacity-[0.015]"
@@ -53,17 +53,17 @@ const TrustedBySection = async () => {
               className="flex-shrink-0 mx-12 group cursor-default"
             >
               {client.logo ? (
-                <div className="w-32 h-20 rounded-2xl bg-white/5 backdrop-blur-sm flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300 overflow-hidden">
+                <div className="w-32 h-20 flex items-center justify-center">
                   <Image
                     src={urlForImage(client.logo).width(128).height(80).url()}
                     alt={client.logo.alt || client.name}
                     width={128}
                     height={80}
-                    className="object-contain p-2"
+                    className="object-cover"
                   />
                 </div>
               ) : (
-                <div className="w-32 h-20 rounded-2xl bg-gradient-to-br from-accent to-accent-secondary flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                <div className="w-32 h-20 rounded-2xl bg-gradient-to-br from-accent to-accent-secondary flex items-center justify-center">
                   <span className="font-heading font-bold text-xl text-white">{client.initials}</span>
                 </div>
               )}
