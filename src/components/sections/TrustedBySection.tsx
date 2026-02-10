@@ -46,11 +46,11 @@ const TrustedBySection = async () => {
         <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-background via-background to-transparent z-10 pointer-events-none" />
         <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-background via-background to-transparent z-10 pointer-events-none" />
         
-        <div className="flex animate-marquee hover:pause">
+        <div className="flex w-max animate-marquee hover:pause">
           {doubledClients.map((client, index) => (
             <div 
               key={`${client._id}-${index}`}
-              className="flex-shrink-0 mx-12 group cursor-default"
+              className="flex-shrink-0 px-12"
             >
               {client.logo ? (
                 <div className="h-20 max-w-[160px] flex items-center justify-center">
