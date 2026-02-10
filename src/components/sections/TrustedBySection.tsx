@@ -18,8 +18,8 @@ async function getCompanyLogos() {
 const TrustedBySection = async () => {
   const clients = await getCompanyLogos();
 
-  // Triple the array for seamless infinite scroll
-  const tripleClients = [...clients, ...clients, ...clients];
+  // Double the array for seamless infinite scroll
+  const doubledClients = [...clients, ...clients];
 
   return (
     <section className="relative pt-2 pb-12 sm:pt-4 sm:pb-16 bg-secondary/10 overflow-hidden">
@@ -47,19 +47,19 @@ const TrustedBySection = async () => {
         <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-background via-background to-transparent z-10 pointer-events-none" />
         
         <div className="flex animate-marquee hover:pause">
-          {tripleClients.map((client, index) => (
+          {doubledClients.map((client, index) => (
             <div 
               key={`${client._id}-${index}`}
               className="flex-shrink-0 mx-12 group cursor-default"
             >
               {client.logo ? (
-                <div className="w-32 h-20 flex items-center justify-center">
+                <div className="h-20 max-w-[160px] flex items-center justify-center">
                   <Image
-                    src={urlForImage(client.logo).width(128).height(80).url()}
+                    src={urlForImage(client.logo).width(160).height(80).url()}
                     alt={client.logo.alt || client.name}
-                    width={128}
+                    width={160}
                     height={80}
-                    className="object-contain w-full h-full"
+                    className="object-contain h-full w-auto max-w-full"
                     unoptimized
                   />
                 </div>
