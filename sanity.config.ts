@@ -12,7 +12,11 @@ export default defineConfig({
   projectId,
   dataset,
 
-  plugins: [structureTool(), visionTool({ defaultApiVersion: apiVersion }), codeInput()],
+  plugins: [
+    structureTool({ name: 'studio', title: 'Structure' }),
+    visionTool({ defaultApiVersion: apiVersion }),
+    codeInput(),
+  ],
 
   schema,
 })
