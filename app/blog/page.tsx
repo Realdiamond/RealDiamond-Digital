@@ -4,6 +4,14 @@ import CTA from "@/components/sections/CTA";
 import { ArrowRight, Clock, User, Sparkles } from "lucide-react";
 import { client } from "@/sanity/lib/client";
 import BlogContent from "@/components/blog/BlogContent";
+import { generateSEO } from '@/lib/seo';
+
+export const metadata = generateSEO({
+  title: 'Blog',
+  description: 'Expert insights on web development, SEO, digital marketing, and business growth strategies. Practical tips and tutorials to help your business succeed online.',
+  keywords: ['web development blog', 'SEO tips', 'digital marketing insights', 'business growth', 'WordPress tutorials', 'Next.js guides'],
+  canonical: 'https://realdiamond-digital.vercel.app/blog',
+});
 
 async function getBlogPosts() {
   const posts = await client.fetch(`

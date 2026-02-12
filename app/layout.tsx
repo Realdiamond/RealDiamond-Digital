@@ -19,15 +19,9 @@ export default function RootLayout({
     url: "https://realdiamond-digital.vercel.app",
     logo: "https://realdiamond-digital.vercel.app/logo.png",
     description: "Strategic web design, development, SEO, and digital marketing agency",
-    email: "oluwatimilehinakinsanmi@gmail.com",
-    telephone: "+2347068718657",
-    address: {
-      streetAddress: "Shopping Complex, Oke Ogba",
-      addressLocality: "Akure",
-      addressRegion: "Ondo State",
-      postalCode: "340271",
-      addressCountry: "NG",
-    },
+    email: "realdiamonddigital@gmail.com",
+    telephone: "+2348138462476",
+    areaServed: "Worldwide",
     sameAs: [
       "https://twitter.com/realdiamonddigital",
       "https://linkedin.com/company/realdiamonddigital",

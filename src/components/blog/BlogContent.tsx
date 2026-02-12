@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { User, Clock } from "lucide-react";
+import { User, Clock, Search } from "lucide-react";
 import { calculateReadTime } from '@/lib/readtime';
 
 interface BlogPost {
@@ -30,14 +30,39 @@ interface BlogContentProps {
 
 export default function BlogContent({ posts, categories }: BlogContentProps) {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  const [searchQuery, setSearchQuery] = useState<string>("");
 
-  // Filter posts based on selected category
-  const filteredPosts = selectedCategory === "all" 
-    ? posts 
-    : posts.filter(post => post.category === selectedCategory);
+  // Filter posts based on selected category and search query
+  const filteredPosts = posts.filter(post => {
+    const matchesCategory = selectedCategory === "all" || post.category === selectedCategory;
+    const matchesSearch = searchQuery === "" || 
+      post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      post.excerpt.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      post.category.toLowerCase().includes(searchQuery.toLowerCase());
+    
+    return matchesCategory && matchesSearch;
+  });
 
   return (
     <>
+      {/* Search Bar */}
+      <section className="py-8 bg-background">
+        <div className="container-wide">
+          <div className="max-w-2xl mx-auto">
+            <div className="relative">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+              <input
+                type="text"
+                placeholder="Search articles by title, category, or keyword..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-12 pr-4 py-3 glass-card text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-accent/50 transition-colors"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Category Filter */}
       <section className="py-6 bg-secondary/30 border-y border-border/50">
         <div className="container-wide">
@@ -75,9 +100,11 @@ export default function BlogContent({ posts, categories }: BlogContentProps) {
           {filteredPosts.length === 0 ? (
             <div className="text-center py-16">
               <p className="text-xl text-muted-foreground">
-                {selectedCategory === "all" 
-                  ? "No blog posts yet. Check back soon!"
-                  : `No posts found in "${selectedCategory}" category.`
+                {searchQuery !== "" 
+                  ? `No posts found matching "${searchQuery}". Try a different search term.`
+                  : selectedCategory === "all" 
+                    ? "No blog posts yet. Check back soon!"
+                    : `No posts found in "${selectedCategory}" category.`
                 }
               </p>
             </div>

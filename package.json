@@ -44,6 +44,7 @@
     "@sanity/client": "^7.11.1",
     "@sanity/code-input": "^6.0.0",
     "@sanity/vision": "^4.21.0",
+    "@sentry/nextjs": "^10.38.0",
     "@tanstack/react-query": "^5.83.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",

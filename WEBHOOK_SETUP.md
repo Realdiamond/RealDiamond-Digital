@@ -92,14 +92,14 @@ No full rebuild needed!
 ## Supported Content Types (Automatic)
 
 The webhook automatically handles:
-- **Blog posts** → `/blog`
-- **Projects** → `/projects`
-- **Services** → `/services`
-- **Testimonials** → `/testimonials`
+- **Blog posts** → `/blog` + Homepage (recent posts section)
+- **Projects** → `/projects` + Homepage (featured projects portfolio)
+- **Services** → `/services` + Homepage (services grid)
+- **Testimonials** → `/testimonials` + Homepage (testimonials showcase)
 - **Categories** → `/blog`
 - **FAQs** → `/contact`
 - **Team members** → `/about`
-- **Company logos** → Homepage
+- **Company logos** → Homepage (trusted by section)
 
 ### Adding New Content Types
 

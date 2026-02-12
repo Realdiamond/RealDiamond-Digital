@@ -5,13 +5,14 @@ export interface Organization {
   description: string;
   email: string;
   telephone: string;
-  address: {
+  address?: {
     streetAddress: string;
     addressLocality: string;
     addressRegion: string;
     postalCode: string;
     addressCountry: string;
   };
+  areaServed?: string;
   sameAs: string[];
 }
 
@@ -43,14 +44,17 @@ export function generateOrganizationSchema(org: Organization) {
     description: org.description,
     email: org.email,
     telephone: org.telephone,
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: org.address.streetAddress,
-      addressLocality: org.address.addressLocality,
-      addressRegion: org.address.addressRegion,
-      postalCode: org.address.postalCode,
-      addressCountry: org.address.addressCountry,
-    },
+    ...(org.address && {
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: org.address.streetAddress,
+        addressLocality: org.address.addressLocality,
+        addressRegion: org.address.addressRegion,
+        postalCode: org.address.postalCode,
+        addressCountry: org.address.addressCountry,
+      },
+    }),
+    ...(org.areaServed && { areaServed: org.areaServed }),
     sameAs: org.sameAs,
   };
 }
@@ -108,19 +112,22 @@ export function generateLocalBusinessSchema(business: Organization & { priceRang
     telephone: business.telephone,
     email: business.email,
     priceRange: business.priceRange || '$$',
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: business.address.streetAddress,
-      addressLocality: business.address.addressLocality,
-      addressRegion: business.address.addressRegion,
-      postalCode: business.address.postalCode,
-      addressCountry: business.address.addressCountry,
-    },
-    geo: {
-      '@type': 'GeoCoordinates',
-      latitude: 0, // Add your actual coordinates
-      longitude: 0,
-    },
+    ...(business.address && {
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: business.address.streetAddress,
+        addressLocality: business.address.addressLocality,
+        addressRegion: business.address.addressRegion,
+        postalCode: business.address.postalCode,
+        addressCountry: business.address.addressCountry,
+      },
+      geo: {
+        '@type': 'GeoCoordinates',
+        latitude: 0,
+        longitude: 0,
+      },
+    }),
+    ...(business.areaServed && { areaServed: business.areaServed }),
     sameAs: business.sameAs,
   };
 }

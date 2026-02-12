@@ -2,12 +2,20 @@ import Link from "next/link";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import CTA from "@/components/sections/CTA";
+import { generateSEO } from '@/lib/seo';
 import { 
   ArrowRight, 
   Globe, 
   Search, 
   Palette, 
   TrendingUp,
+
+export const metadata = generateSEO({
+  title: 'Our Services',
+  description: 'Expert web design, development, SEO, and digital marketing services. We create custom solutions that drive growth and deliver measurable ROI for your business.',
+  keywords: ['web design services', 'SEO services', 'digital marketing', 'web development', 'ecommerce solutions', 'custom websites'],
+  canonical: 'https://realdiamond-digital.vercel.app/services',
+});
   CheckCircle,
   Code,
   FileCode,

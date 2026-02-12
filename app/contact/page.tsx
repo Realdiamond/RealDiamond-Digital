@@ -3,11 +3,19 @@ import ContactForm from "@/components/ContactForm";
 import FAQ from "@/components/sections/FAQ";
 import { Button } from "@/components/ui/button";
 import { FaWhatsapp } from "react-icons/fa";
+import { generateSEO } from '@/lib/seo';
 import { 
   Mail, 
   Phone, 
   MapPin, 
-  Clock, 
+  Clock,
+
+export const metadata = generateSEO({
+  title: 'Contact Us',
+  description: 'Get in touch with RealDiamond Digital. Schedule a free consultation to discuss your web design, SEO, or digital marketing project. Available worldwide.',
+  keywords: ['contact', 'free consultation', 'get quote', 'digital marketing consultation', 'web design inquiry'],
+  canonical: 'https://realdiamond-digital.vercel.app/contact',
+}); 
   CheckCircle, 
   ArrowRight,
   Calendar,

@@ -3,6 +3,14 @@ import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import CTA from "@/components/sections/CTA";
 import { ArrowRight, Target, Users, Lightbulb, Award, Clock, Heart, Sparkles, Diamond } from "lucide-react";
+import { generateSEO } from '@/lib/seo';
+
+export const metadata = generateSEO({
+  title: 'About Us',
+  description: 'Meet the team behind RealDiamond Digital. We combine strategic thinking with creative execution to deliver measurable results for businesses worldwide.',
+  keywords: ['about us', 'digital agency team', 'web design experts', 'SEO specialists', 'digital marketing professionals'],
+  canonical: 'https://realdiamond-digital.vercel.app/about',
+});
 
 const values = [
   {

@@ -2,6 +2,14 @@ import { client } from "@/sanity/lib/client";
 import Layout from "@/components/layout/Layout";
 import { Sparkles } from "lucide-react";
 import ProjectsFilter from "@/components/ProjectsFilter";
+import { generateSEO } from '@/lib/seo';
+
+export const metadata = generateSEO({
+  title: 'Our Projects',
+  description: 'Explore our portfolio of successful web design, SEO, and digital marketing projects. See how we've helped businesses achieve measurable growth and results.',
+  keywords: ['portfolio', 'web design projects', 'SEO case studies', 'digital marketing results', 'client success stories'],
+  canonical: 'https://realdiamond-digital.vercel.app/projects',
+});
 
 async function getProjects() {
   const projects = await client.fetch(`

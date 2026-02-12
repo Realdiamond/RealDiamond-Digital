@@ -3,11 +3,12 @@ import Link from "next/link";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import CTA from "@/components/sections/CTA";
-import { ArrowLeft, ArrowRight, Clock, User, Calendar, Share2, Sparkles } from "lucide-react";
+import { ArrowLeft, ArrowRight, Clock, User, Calendar, Sparkles } from "lucide-react";
 import { client } from "@/sanity/lib/client";
 import { PortableText } from "@portabletext/react";
-
+import { generateSEO } from '@/lib/seo';
 import { calculateReadTime } from '@/lib/readtime';
+import ShareButtons from '@/components/ShareButtons';
 
 async function getBlogPost(slug: string) {
   const post = await client.fetch(
@@ -27,6 +28,29 @@ async function getBlogPost(slug: string) {
     { slug }
   );
   return post;
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const post = await getBlogPost(slug);
+  
+  if (!post) {
+    return {};
+  }
+
+  return generateSEO({
+    title: post.title,
+    description: post.metaDescription || post.excerpt,
+    keywords: post.metaKeywords || [post.category, 'blog', 'tutorial'],
+    ogImage: post.image,
+    ogType: 'article',
+    article: {
+      publishedTime: post.publishedDate,
+      author: post.author,
+      tags: [post.category],
+    },
+    canonical: `https://realdiamond-digital.vercel.app/blog/${slug}`,
+  });
 }
 
 export async function generateStaticParams() {
@@ -147,12 +171,11 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
 
               {/* Share */}
               <div className="mt-12 pt-8 border-t border-border/50">
-                <div className="flex items-center gap-4">
-                  <span className="text-muted-foreground">Share this article:</span>
-                  <button className="w-10 h-10 glass-card flex items-center justify-center hover:border-accent/50 transition-colors">
-                    <Share2 className="w-4 h-4 text-foreground" />
-                  </button>
-                </div>
+                <ShareButtons 
+                  title={post.title}
+                  url={`/blog/${params.slug}`}
+                  description={post.excerpt || post.metaDescription || ''}
+                />
               </div>
 
               {/* Author Box */}

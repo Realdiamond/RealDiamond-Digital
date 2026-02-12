@@ -94,11 +94,10 @@ export function generateSEO({
       creator: '@realdiamonddigital',
     },
     other: {
-      'og:phone_number': '+1-XXX-XXX-XXXX', // Add your phone number
-      'og:email': 'akinsanmioluwatimilehin@gmail.com',
-      'og:locality': 'Your City', // Add your city
-      'og:region': 'Your State', // Add your state
-      'og:country-name': 'United States', // Add your country
+      'og:phone_number': '+2348138462476',
+      'og:email': 'realdiamonddigital@gmail.com',
+      'og:availability': 'Worldwide',
+      'og:service-area': 'Global',
     },
   };
 }

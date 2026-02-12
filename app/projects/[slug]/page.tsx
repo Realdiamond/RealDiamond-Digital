@@ -4,6 +4,7 @@ import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight, Clock, MapPin, Users, Calendar, CheckCircle2, Quote } from "lucide-react";
 import { client } from "@/sanity/lib/client";
+import { generateSEO } from '@/lib/seo';
 
 async function getProject(slug: string) {
   const project = await client.fetch(
@@ -51,6 +52,32 @@ async function getAdjacentProjects(currentSlug: string) {
 
 // Static with on-demand revalidation via webhook
 export const revalidate = false;
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const project = await getProject(slug);
+  
+  if (!project) {
+    return {};
+  }
+
+  const categoryMap: Record<string, string> = {
+    web: 'Web Design',
+    seo: 'SEO',
+    branding: 'Branding',
+    ecommerce: 'E-commerce',
+  };
+
+  const categoryName = categoryMap[project.category] || project.category;
+
+  return generateSEO({
+    title: `${project.title} - ${categoryName} Project`,
+    description: project.description,
+    keywords: [...(project.tags || []), categoryName, 'case study', 'portfolio'],
+    ogImage: project.image,
+    canonical: `https://realdiamond-digital.vercel.app/projects/${slug}`,
+  });
+}
 
 export async function generateStaticParams() {
   const projects = await client.fetch(`*[_type == "project"] { "slug": slug.current }`);
