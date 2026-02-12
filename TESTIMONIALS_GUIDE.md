@@ -6,7 +6,7 @@ Your testimonials system is now fully integrated with Sanity CMS, supporting bot
 ## Adding Testimonials in Sanity Studio
 
 ### Access Sanity Studio
-1. Visit: `https://realdiamond-digital.vercel.app/studio` (or `http://localhost:3000/studio` locally)
+1. Visit: `https://realdiamond-digital.vercel.app/myworks` (or `http://localhost:3000/myworks` locally)
 2. Navigate to **Content** → **Testimonials**
 
 ---

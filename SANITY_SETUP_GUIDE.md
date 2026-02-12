@@ -17,7 +17,7 @@ All schemas created in `sanity/schemas/`:
 - **companyLogo.ts** - Trusted company logos
 
 ### 3. **Sanity Studio**
-- Accessible at: **http://localhost:3000/studio**
+- Accessible at: **http://localhost:3000/myworks**
 - Full content management interface
 - Vision tool enabled for testing GROQ queries
 
@@ -31,7 +31,7 @@ All schemas created in `sanity/schemas/`:
 ## 🚀 Next Steps
 
 ### Step 1: Access Sanity Studio
-1. Open your browser and go to: **http://localhost:3000/studio**
+1. Open your browser and go to: **http://localhost:3000/myworks**
 2. Sign in with your Sanity account
 3. You should see all 7 content types in the sidebar
 
@@ -58,7 +58,7 @@ I can create a migration script to bulk import your 15 projects and other conten
 
 ## 📝 Example: Creating Your First Project in Sanity
 
-1. Go to http://localhost:3000/studio
+1. Go to http://localhost:3000/myworks
 2. Click **Projects** in the sidebar
 3. Click **+ Create** button
 4. Fill in the fields (example from your data):
@@ -187,7 +187,7 @@ export default async function BlogPage() {
 ```
 
 ### Testing GROQ Queries
-1. Go to http://localhost:3000/studio
+1. Go to http://localhost:3000/myworks
 2. Click the **Vision** icon (🔮) in the top menu
 3. Write and test GROQ queries in real-time
 
@@ -195,7 +195,7 @@ export default async function BlogPage() {
 
 ## 🎯 Quick Win: Test Your Setup
 
-1. Go to http://localhost:3000/studio
+1. Go to http://localhost:3000/myworks
 2. Create one test blog post
 3. Query it using Vision tool:
    ```groq

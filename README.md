@@ -66,9 +66,9 @@ Open [http://localhost:3000](http://localhost:3000) in your browser to see the r
 
 ### Sanity Studio Setup
 
-The project includes an integrated Sanity Studio accessible at `/studio`:
+The project includes an integrated Sanity Studio accessible at `/myworks`:
 
-1. Navigate to [http://localhost:3000/studio](http://localhost:3000/studio)
+1. Navigate to [http://localhost:3000/myworks](http://localhost:3000/myworks)
 2. Sign in with your Sanity account
 3. Start adding content (projects, blog posts, testimonials, etc.)
 

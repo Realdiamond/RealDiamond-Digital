@@ -2,8 +2,8 @@
 User-agent: *
 Allow: /
 
-# Disallow admin/studio routes
-Disallow: /studio/
+# Disallow admin CMS routes
+Disallow: /myworks/
 Disallow: /api/
 
 # Sitemap

@@ -13,7 +13,7 @@ export default defineConfig({
   dataset,
 
   plugins: [
-    structureTool({ name: 'studio', title: 'Structure' }),
+    structureTool({ name: 'myworks', title: 'Structure' }),
     visionTool({ defaultApiVersion: apiVersion }),
     codeInput(),
   ],

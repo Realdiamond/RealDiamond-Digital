@@ -70,7 +70,7 @@ Copy the output (it will look like: `dGhpc2lzYXNlY3JldGtleWZvcndlYmhvb2tz...`)
 
 ## Testing
 
-1. Go to your Sanity Studio: https://realdiamond-digital.vercel.app/studio
+1. Go to your Sanity Studio: https://realdiamond-digital.vercel.app/myworks
 2. Edit any blog post and click **Publish**
 3. Immediately go to your live blog page
 4. Refresh → Changes should appear within 5-10 seconds! 🎉
