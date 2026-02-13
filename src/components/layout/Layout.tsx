@@ -1,6 +1,8 @@
 import { ReactNode } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
+import AvailabilityBadge from "@/components/AvailabilityBadge";
+import WhatsAppChat from "@/components/WhatsAppChat";
 
 interface LayoutProps {
   children: ReactNode;
@@ -14,6 +16,10 @@ const Layout = ({ children }: LayoutProps) => {
         {children}
       </main>
       <Footer />
+      
+      {/* Fixed Components */}
+      <AvailabilityBadge />
+      <WhatsAppChat />
     </div>
   );
 };

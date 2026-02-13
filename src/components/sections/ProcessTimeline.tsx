@@ -94,16 +94,6 @@ const ProcessTimeline = () => {
               </div>
             ))}
           </div>
-
-          {/* Bottom CTA */}
-          <div className="mt-16 text-center">
-            <div className="inline-flex items-center gap-3 px-6 py-3 glass-card">
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                <span className="text-sm font-semibold text-foreground">Currently accepting new projects</span>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>

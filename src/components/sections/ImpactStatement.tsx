@@ -11,7 +11,7 @@ const ImpactStatement = () => {
       <div className="container-wide relative">
         <div className="max-w-5xl mx-auto text-center space-y-12">
           {/* Main Statement */}
-          <h2 className="font-heading text-4xl md:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tight text-white">
+          <h2 className="font-heading text-4xl md:text-5xl lg:text-7xl font-bold leading-[1.1] tracking-tight text-white">
             We don't build websites.
             <br />
             We build{" "}
@@ -32,7 +32,7 @@ const ImpactStatement = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-12">
             {[
               {
-                metric: "$2.5M+",
+                metric: "$200k+",
                 label: "Revenue Generated",
                 desc: "For our clients in 2025"
               },

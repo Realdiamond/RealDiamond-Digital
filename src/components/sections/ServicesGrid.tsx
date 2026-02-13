@@ -134,7 +134,7 @@ export default async function ServicesGrid() {
             Not sure what you need? Let's figure it out together.
           </p>
           <Button size="lg" asChild className="bg-gradient-to-r from-accent to-accent-secondary text-white font-bold">
-            <Link href="/contact">
+            <Link href="/contact#consultation">
               Schedule a Free Consultation
               <ArrowRight className="w-4 h-4" />
             </Link>
