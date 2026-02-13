@@ -13,7 +13,7 @@ const services = [
 
 const Hero = () => {
   return (
-    <section className="relative min-h-[60vh] sm:h-[85vh] pt-8 sm:pt-12 pb-12 sm:pb-0 flex items-center justify-center overflow-hidden bg-secondary/10">
+    <section className="relative min-h-[60vh] sm:h-[70vh] pt-8 sm:pt-12 pb-4 sm:pb-0 flex items-center justify-center overflow-hidden bg-secondary/10">
       {/* Mesh Pattern */}
       <div 
         className="absolute inset-0 opacity-[0.015]"
