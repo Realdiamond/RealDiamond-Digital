@@ -9,7 +9,7 @@ import { client } from "@/sanity/lib/client";
 
 async function getFAQs() {
   const faqs = await client.fetch(`
-    *[_type == "faq" && active == true] | order(order asc) {
+    *[_type == "faq" && active == true] | order(coalesce(order, 999) asc) {
       _id,
       question,
       answer,

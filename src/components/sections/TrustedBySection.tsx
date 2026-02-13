@@ -3,7 +3,7 @@ import { urlForImage } from "@/sanity/lib/image";
 
 async function getCompanyLogos() {
   const logos = await client.fetch(`
-    *[_type == "companyLogo"] | order(order asc) {
+    *[_type == "companyLogo"] | order(coalesce(order, 999) asc) {
       _id,
       name,
       initials,

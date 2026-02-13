@@ -45,7 +45,7 @@ interface TestimonialData {
 // Fetch testimonials from Sanity
 async function getTestimonials() {
   const textTestimonials = await client.fetch<TestimonialData[]>(
-    `*[_type == "testimonial" && type == "text"] | order(order asc) {
+    `*[_type == "testimonial" && type == "text"] | order(coalesce(order, 999) asc) {
       _id,
       type,
       name,
@@ -59,7 +59,7 @@ async function getTestimonials() {
   );
 
   const videoTestimonials = await client.fetch<TestimonialData[]>(
-    `*[_type == "testimonial" && type == "video"] | order(order asc) {
+    `*[_type == "testimonial" && type == "video"] | order(coalesce(order, 999) asc) {
       _id,
       type,
       name,

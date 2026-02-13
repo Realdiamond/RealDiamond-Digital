@@ -13,7 +13,7 @@ export const metadata = generateSEO({
 
 async function getProjects() {
   const projects = await client.fetch(`
-    *[_type == "project"] | order(order asc) {
+    *[_type == "project"] | order(coalesce(order, 999) asc) {
       _id,
       title,
       "slug": slug.current,

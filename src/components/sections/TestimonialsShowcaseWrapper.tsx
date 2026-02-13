@@ -3,7 +3,7 @@ import TestimonialsShowcase from "./TestimonialsShowcase";
 
 async function getTestimonials() {
   const testimonials = await client.fetch(`
-    *[_type == "testimonial" && featured == true] | order(order asc) {
+    *[_type == "testimonial" && featured == true] | order(coalesce(order, 999) asc) {
       _id,
       quote,
       author,

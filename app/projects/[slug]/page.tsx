@@ -36,7 +36,7 @@ async function getProject(slug: string) {
 
 async function getAdjacentProjects(currentSlug: string) {
   const allProjects = await client.fetch(`
-    *[_type == "project"] | order(order asc) {
+    *[_type == "project"] | order(coalesce(order, 999) asc) {
       "slug": slug.current,
       title,
       "image": image.asset->url

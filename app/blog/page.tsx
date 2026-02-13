@@ -33,7 +33,7 @@ async function getBlogPosts() {
 
 async function getCategories() {
   const categories = await client.fetch(`
-    *[_type == "category"] | order(order asc) {
+    *[_type == "category"] | order(coalesce(order, 999) asc) {
       _id,
       title,
       "slug": slug.current
