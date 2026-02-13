@@ -107,7 +107,7 @@ const Hero = () => {
             <Button 
               size="lg" 
               asChild 
-              className="group bg-gradient-to-r from-accent to-accent-secondary hover:shadow-glow text-white font-semibold text-sm sm:text-base px-6 py-3 sm:px-7 sm:py-5 h-auto w-[90%] sm:w-auto"
+              className="group bg-gradient-to-r from-accent to-accent-secondary hover:shadow-glow text-white font-semibold text-sm sm:text-base px-6 py-4 sm:px-7 sm:py-5 h-auto w-[90%] sm:w-auto"
             >
               <Link href="/contact#consultation">
                 Get Your Free Strategy Call
@@ -118,7 +118,7 @@ const Hero = () => {
               variant="outline" 
               size="lg" 
               asChild 
-              className="group border-2 font-semibold text-sm sm:text-base px-6 py-3 sm:px-7 sm:py-5 h-auto w-[90%] sm:w-auto"
+              className="group border-2 font-semibold text-sm sm:text-base px-6 py-4 sm:px-7 sm:py-5 h-auto w-[90%] sm:w-auto"
             >
               <Link href="/projects">
                 View All Projects
