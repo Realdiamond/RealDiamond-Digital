@@ -93,7 +93,7 @@ export function generateSEO({
       card: 'summary_large_image',
       title: fullTitle,
       description,
-      images: [ogImage.startsWith('http') ? ogImage : `${siteConfig.url}${ogImage}`],
+      images: [finalOgImage.startsWith('http') ? finalOgImage : `${siteConfig.url}${finalOgImage}`],
       creator: '@realdiamonddigital',
     },
     other: {
