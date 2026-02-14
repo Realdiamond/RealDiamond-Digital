@@ -109,6 +109,7 @@ async function getServices(): Promise<Service[]> {
 
 const Services = async () => {
   const services = await getServices();
+
   return (
     <Layout>
       {/* Hero */}
@@ -141,13 +142,15 @@ const Services = async () => {
         <div className="container-wide">
           <div className="space-y-24">
             {services.map((service, index) => {
-              const ServiceIcon = iconMap[service.icon] || Globe;
+              // Defensive icon lookup with trimming
+              const iconKey = service.icon?.trim() || '';
+              const ServiceIcon = iconMap[iconKey] || Globe;
               
               return (
               <div
                 key={service.id.current}
                 id={service.id.current}
-                className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-start ${
+                className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-start scroll-mt-24 ${
                   index % 2 === 1 ? "lg:flex-row-reverse" : ""
                 }`}
               >
@@ -189,7 +192,8 @@ const Services = async () => {
                     <h4 className="font-semibold text-foreground mb-3">Includes</h4>
                     <div className="flex flex-wrap gap-3">
                       {service.subServices.map((sub) => {
-                        const SubIcon = iconMap[sub.icon] || Code;
+                        const subIconKey = sub.icon?.trim() || '';
+                        const SubIcon = iconMap[subIconKey] || Code;
                         return (
                           <div key={sub._key} className="flex items-center gap-2 bg-secondary px-3 py-2 rounded-xl text-sm border border-border/50">
                             <SubIcon className="w-4 h-4 text-accent" />

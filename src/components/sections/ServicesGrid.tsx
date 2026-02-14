@@ -105,7 +105,8 @@ export default async function ServicesGrid() {
         {/* Services Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
           {services.map((service: any, index: number) => {
-            const IconComponent = iconMap[service.icon] || Globe;
+            const iconKey = service.icon?.trim() || '';
+            const IconComponent = iconMap[iconKey] || Globe;
             const serviceGradient = getServiceGradient(service.title, service.gradient);
             
             return (
@@ -138,7 +139,8 @@ export default async function ServicesGrid() {
                   {service.subServices && service.subServices.length > 0 && (
                     <div className="flex flex-wrap gap-2 mb-6">
                       {service.subServices.slice(0, 4).map((sub: any) => {
-                        const SubIcon = iconMap[sub.icon] || Code;
+                        const subIconKey = sub.icon?.trim() || '';
+                        const SubIcon = iconMap[subIconKey] || Code;
                         return (
                           <span
                             key={sub._key}
