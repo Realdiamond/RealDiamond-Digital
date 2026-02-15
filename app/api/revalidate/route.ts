@@ -11,6 +11,7 @@ const pathMap: Record<string, string> = {
   'faq': '/contact',
   'teamMember': '/about',
   'companyLogo': '/',
+  'siteSettings': '/',
 };
 
 export async function POST(request: NextRequest) {

@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 };
 
 // Time-based ISR (60s) + on-demand revalidation via webhook
-export const revalidate = 60;
+export const revalidate = 1800; // 30 minutes - testimonials change rarely
 
 // Define types
 interface TestimonialData {
@@ -61,7 +61,7 @@ async function getTestimonials() {
     }`,
     {},
     {
-      next: { revalidate: 60 }
+      next: { revalidate: 1800 } // 30 minutes - testimonials change rarely
     }
   );
 
@@ -82,7 +82,7 @@ async function getTestimonials() {
     }`,
     {},
     {
-      next: { revalidate: 60 }
+      next: { revalidate: 1800 } // 30 minutes - testimonials change rarely
     }
   );
 

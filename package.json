@@ -8,8 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "vitest run",
-    "test:watch": "vitest"
+    "clear-cache": "tsx scripts/clear-cache.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

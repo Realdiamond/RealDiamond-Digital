@@ -17,7 +17,7 @@ async function getFeaturedProjects() {
       query,
       {},
       {
-        next: { revalidate: 60 }
+        next: { revalidate: 900 } // 15 minutes - projects update occasionally
       }
     );
     return projects;

@@ -12,7 +12,7 @@ async function getCompanyLogos() {
     }`,
     {},
     {
-      next: { revalidate: 60 }
+      next: { revalidate: 3600 } // 1 hour - logos change very rarely
     }
   );
   return logos;

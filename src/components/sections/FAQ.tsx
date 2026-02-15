@@ -17,7 +17,7 @@ async function getFAQs() {
     }`,
     {},
     {
-      next: { revalidate: 60 }
+      next: { revalidate: 86400 } // 24 hours - FAQs rarely change
     }
   );
   return faqs;

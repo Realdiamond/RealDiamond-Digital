@@ -31,7 +31,7 @@ async function getProject(slug: string) {
     }`,
     { slug },
     {
-      next: { revalidate: 60 }
+      next: { revalidate: 900 } // 15 minutes - projects update occasionally
     }
   );
   return project;
@@ -46,7 +46,7 @@ async function getAdjacentProjects(currentSlug: string) {
     }`,
     {},
     {
-      next: { revalidate: 60 }
+      next: { revalidate: 900 } // 15 minutes
     }
   );
   
@@ -58,7 +58,7 @@ async function getAdjacentProjects(currentSlug: string) {
 }
 
 // Time-based ISR (60s) + on-demand revalidation via webhook
-export const revalidate = 60;
+export const revalidate = 900; // 15 minutes - projects update occasionally
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -91,7 +91,7 @@ export async function generateStaticParams() {
     `*[_type == "project"] { "slug": slug.current }`,
     {},
     {
-      next: { revalidate: 60 }
+      next: { revalidate: 900 } // 15 minutes
     }
   );
   return projects.map((project: any) => ({ slug: project.slug }));

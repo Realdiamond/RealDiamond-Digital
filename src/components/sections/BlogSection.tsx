@@ -18,7 +18,7 @@ async function getRecentPosts() {
     }`,
     {},
     {
-      next: { revalidate: 60 }
+      next: { revalidate: 60 } // 1 minute - blog posts update frequently
     }
   );
   return posts;

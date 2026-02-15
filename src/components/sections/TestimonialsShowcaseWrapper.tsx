@@ -15,7 +15,7 @@ async function getTestimonials() {
     }`,
     {},
     {
-      next: { revalidate: 60 }
+      next: { revalidate: 1800 } // 30 minutes - testimonials change rarely
     }
   );
   return testimonials;

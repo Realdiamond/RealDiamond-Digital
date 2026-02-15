@@ -29,7 +29,7 @@ async function getBlogPosts() {
     }`,
     {},
     {
-      next: { revalidate: 60 }
+      next: { revalidate: 60 } // 1 minute - blog posts update frequently
     }
   );
   return posts;
@@ -44,14 +44,14 @@ async function getCategories() {
     }`,
     {},
     {
-      next: { revalidate: 60 }
+      next: { revalidate: 60 } // 1 minute - categories change with blog
     }
   );
   return categories;
 }
 
 // Time-based ISR (60s) + on-demand revalidation via webhook
-export const revalidate = 60;
+export const revalidate = 60; // 1 minute - blog posts update frequently
 
 export default async function Blog() {
   const blogPosts = await getBlogPosts();

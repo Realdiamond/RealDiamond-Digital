@@ -1,6 +1,3 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import { client } from "../../sanity/lib/client";
 
 interface SiteSettings {
@@ -9,39 +6,42 @@ interface SiteSettings {
   availabilityColor: "green" | "yellow" | "red";
 }
 
-const AvailabilityBadge = () => {
-  const [settings, setSettings] = useState<SiteSettings | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchSettings = async () => {
-      try {
-        const query = `*[_type == "siteSettings"][0]{
-          availabilityEnabled,
-          availabilityMessage,
-          availabilityColor
-        }`;
-        
-        const data = await client.fetch(query);
-        setSettings(data);
-      } catch (error) {
-        console.error("Error fetching site settings:", error);
-        // Fallback to default
-        setSettings({
-          availabilityEnabled: true,
-          availabilityMessage: "Currently accepting new projects",
-          availabilityColor: "green",
-        });
-      } finally {
-        setLoading(false);
+async function getSiteSettings(): Promise<SiteSettings | null> {
+  try {
+    const query = `*[_type == "siteSettings"][0]{
+      availabilityEnabled,
+      availabilityMessage,
+      availabilityColor
+    }`;
+    
+    const data = await client.fetch(
+      query,
+      {},
+      {
+        next: { revalidate: 86400 } // 24 hours - site settings rarely change
       }
+    );
+    
+    return data || {
+      availabilityEnabled: true,
+      availabilityMessage: "Currently accepting new projects",
+      availabilityColor: "green",
     };
+  } catch (error) {
+    console.error("Error fetching site settings:", error);
+    return {
+      availabilityEnabled: true,
+      availabilityMessage: "Currently accepting new projects",
+      availabilityColor: "green",
+    };
+  }
+}
 
-    fetchSettings();
-  }, []);
+const AvailabilityBadge = async () => {
+  const settings = await getSiteSettings();
 
-  // Don't render if loading, disabled, or no settings
-  if (loading || !settings || !settings.availabilityEnabled) {
+  // Don't render if disabled or no settings
+  if (!settings || !settings.availabilityEnabled) {
     return null;
   }
 

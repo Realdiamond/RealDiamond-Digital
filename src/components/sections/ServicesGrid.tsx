@@ -44,7 +44,7 @@ async function getServices() {
     }`,
     {},
     {
-      next: { revalidate: 60 }
+      next: { revalidate: 1800 } // 30 minutes - services change rarely
     }
   );
   return services;

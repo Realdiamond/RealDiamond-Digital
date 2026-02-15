@@ -4,6 +4,21 @@ export default {
   darkMode: ["class"],
   content: ["./pages/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}", "./src/**/*.{ts,tsx}"],
   prefix: "",
+  safelist: [
+    // Service gradient classes from Sanity
+    'from-accent',
+    'to-cyan-400',
+    'from-accent-secondary',
+    'to-pink-400',
+    'from-orange-400',
+    'to-amber-400',
+    'from-green-400',
+    'to-emerald-400',
+    // Ensure all gradient combinations work
+    'bg-gradient-to-br',
+    'bg-gradient-to-r',
+    'bg-gradient-to-t',
+  ],
   theme: {
     container: {
       center: true,

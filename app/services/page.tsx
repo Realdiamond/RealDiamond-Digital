@@ -101,7 +101,7 @@ async function getServices(): Promise<Service[]> {
     }`,
     {},
     {
-      next: { revalidate: 60 }
+      next: { revalidate: 1800 } // 30 minutes - services change rarely
     }
   );
   return services;

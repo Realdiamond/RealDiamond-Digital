@@ -27,7 +27,7 @@ async function getBlogPost(slug: string) {
     }`,
     { slug },
     {
-      next: { revalidate: 60 }
+      next: { revalidate: 60 } // 1 minute - blog posts update frequently
     }
   );
   return post;
@@ -61,14 +61,14 @@ export async function generateStaticParams() {
     `*[_type == "blog"] { "slug": slug.current }`,
     {},
     {
-      next: { revalidate: 60 }
+      next: { revalidate: 60 } // 1 minute
     }
   );
   return posts.map((post: any) => ({ slug: post.slug }));
 }
 
 // Time-based ISR (60s) + on-demand revalidation via webhook
-export const revalidate = 60;
+export const revalidate = 60; // 1 minute - blog posts update frequently
 
 export default async function BlogPost({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
