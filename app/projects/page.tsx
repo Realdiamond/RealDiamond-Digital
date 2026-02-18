@@ -40,6 +40,7 @@ export const revalidate = 900; // 15 minutes - projects update occasionally
 const serviceCategories = [
   { id: "all", name: "All Projects" },
   { id: "web", name: "Web Design" },
+  { id: "webdev", name: "Web Development" },
   { id: "seo", name: "SEO" },
   { id: "branding", name: "Branding" },
   { id: "ecommerce", name: "E-Commerce" },

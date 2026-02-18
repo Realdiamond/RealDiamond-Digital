@@ -35,6 +35,7 @@ export const project = defineType({
       options: {
         list: [
           { title: 'Web Design', value: 'web' },
+          { title: 'Web Development', value: 'webdev' },
           { title: 'SEO', value: 'seo' },
           { title: 'Branding', value: 'branding' },
           { title: 'E-commerce', value: 'ecommerce' },
