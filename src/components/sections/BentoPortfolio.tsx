@@ -56,12 +56,14 @@ const BentoPortfolio = ({ projects }: BentoPortfolioProps) => {
             onMouseLeave={() => setHoveredIndex(null)}
           >
             <div className="relative h-[500px] md:h-[600px]">
+              {featuredProjects[0].image && urlFor(featuredProjects[0].image) && (
               <Image
-                src={urlFor(featuredProjects[0].image).width(1200).height(800).url()}
+                src={urlFor(featuredProjects[0].image)?.width(1200).height(800).url() || ''}
                 alt={featuredProjects[0].title}
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-110"
               />
+              )}
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
               
               <div className="absolute bottom-0 left-0 right-0 p-8">
@@ -98,12 +100,14 @@ const BentoPortfolio = ({ projects }: BentoPortfolioProps) => {
             onMouseLeave={() => setHoveredIndex(null)}
           >
             <div className="relative h-[280px] md:h-[290px]">
+              {featuredProjects[1].image && urlFor(featuredProjects[1].image) && (
               <Image
-                src={urlFor(featuredProjects[1].image).width(600).height(400).url()}
+                src={urlFor(featuredProjects[1].image)?.width(600).height(400).url() || ''}
                 alt={featuredProjects[1].title}
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-110"
               />
+              )}
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
               
               <div className="absolute bottom-0 left-0 right-0 p-6">
@@ -131,12 +135,14 @@ const BentoPortfolio = ({ projects }: BentoPortfolioProps) => {
             onMouseLeave={() => setHoveredIndex(null)}
           >
             <div className="relative h-[280px] md:h-[290px]">
+              {featuredProjects[2].image && urlFor(featuredProjects[2].image) && (
               <Image
-                src={urlFor(featuredProjects[2].image).width(600).height(400).url()}
+                src={urlFor(featuredProjects[2].image)?.width(600).height(400).url() || ''}
                 alt={featuredProjects[2].title}
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-110"
               />
+              )}
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
               
               <div className="absolute bottom-0 left-0 right-0 p-6">
