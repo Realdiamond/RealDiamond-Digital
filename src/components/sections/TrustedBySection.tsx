@@ -41,31 +41,34 @@ const TrustedBySection = async () => {
         
         {/* Scrolling container with w-max for content-based width */}
         <div className="flex w-max animate-marquee">
-          {doubledClients.map((client, index) => (
-            <div 
-              key={`${client._id}-${index}`}
-              className="flex-shrink-0 px-4 sm:px-6"
-            >
-              {client.logo ? (
-                <div
-                  className="h-16 sm:h-20 w-40 sm:w-48 flex-shrink-0 
-                             bg-center bg-no-repeat bg-contain
-                             opacity-90 hover:opacity-100 
-                             transition-all duration-300"
-                  style={{
-                    backgroundImage: `url(${urlForImage(client.logo).width(400).url()})`,
-                  }}
-                  aria-label={client.name}
-                />
-              ) : (
-                <div className="h-16 sm:h-20 w-32 sm:w-40 flex items-center justify-center">
-                  <div className="px-4 py-2 rounded-lg bg-secondary/30 backdrop-blur-sm border border-border/50 opacity-80 hover:opacity-100 transition-all duration-300">
-                    <span className="font-heading font-bold text-lg text-foreground">{client.initials}</span>
+          {doubledClients.map((client, index) => {
+            const imageUrl = client.logo ? urlForImage(client.logo)?.width(400).url() : null;
+            return (
+              <div 
+                key={`${client._id}-${index}`}
+                className="flex-shrink-0 px-4 sm:px-6"
+              >
+                {imageUrl ? (
+                  <div
+                    className="h-16 sm:h-20 w-40 sm:w-48 flex-shrink-0 
+                               bg-center bg-no-repeat bg-contain
+                               opacity-90 hover:opacity-100 
+                               transition-all duration-300"
+                    style={{
+                      backgroundImage: `url(${imageUrl})`,
+                    }}
+                    aria-label={client.name}
+                  />
+                ) : (
+                  <div className="h-16 sm:h-20 w-32 sm:w-40 flex items-center justify-center">
+                    <div className="px-4 py-2 rounded-lg bg-secondary/30 backdrop-blur-sm border border-border/50 opacity-80 hover:opacity-100 transition-all duration-300">
+                      <span className="font-heading font-bold text-lg text-foreground">{client.initials}</span>
+                    </div>
                   </div>
-                </div>
-              )}
-            </div>
-          ))}
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

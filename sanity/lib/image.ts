@@ -8,6 +8,10 @@ const imageBuilder = createImageUrlBuilder({
   dataset: dataset || '',
 })
 
-export const urlForImage = (source: Image) => {
+export const urlForImage = (source: Image | null | undefined) => {
+  // Return null if source is invalid - caller should handle this
+  if (!source || !source.asset) {
+    return null
+  }
   return imageBuilder?.image(source).auto('format').fit('max')
 }
