@@ -227,7 +227,7 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-[400px] lg:h-[500px] object-contain bg-secondary/20"
+                  className="w-full h-[400px] lg:h-[500px] object-cover"
                 />
               </div>
             </div>
