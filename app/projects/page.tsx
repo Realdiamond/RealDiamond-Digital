@@ -28,14 +28,14 @@ async function getProjects() {
     }`,
     {},
     {
-      next: { revalidate: 900 } // 15 minutes - projects update occasionally
+      next: { revalidate: 0 } // Disable cache - rely on webhook revalidation
     }
   );
   return projects;
 }
 
 // Time-based ISR (60s) + on-demand revalidation via webhook
-export const revalidate = 900; // 15 minutes - projects update occasionally
+export const revalidate = 60; // 1 minute - projects update occasionally
 
 const serviceCategories = [
   { id: "all", name: "All Projects" },

@@ -145,25 +145,9 @@ export const project = defineType({
     defineField({
       name: 'testimonial',
       title: 'Client Testimonial',
-      type: 'object',
-      fields: [
-        {
-          name: 'quote',
-          title: 'Quote',
-          type: 'text',
-          rows: 3,
-        },
-        {
-          name: 'author',
-          title: 'Author',
-          type: 'string',
-        },
-        {
-          name: 'role',
-          title: 'Role',
-          type: 'string',
-        },
-      ],
+      type: 'reference',
+      to: [{ type: 'testimonial' }],
+      description: 'Select a testimonial from your testimonials collection',
     }),
     defineField({
       name: 'gallery',
@@ -201,6 +185,15 @@ export const project = defineType({
       title: 'Year',
       type: 'string',
       placeholder: 'e.g., 2024',
+    }),
+    defineField({
+      name: 'projectUrl',
+      title: 'Live Project URL',
+      type: 'url',
+      description: 'Link to the live website/project (optional)',
+      validation: (Rule) => Rule.uri({
+        scheme: ['http', 'https'],
+      }),
     }),
     defineField({
       name: 'order',

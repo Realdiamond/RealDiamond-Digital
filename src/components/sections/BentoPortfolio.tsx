@@ -24,6 +24,18 @@ const BentoPortfolio = ({ projects }: BentoPortfolioProps) => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const featuredProjects = projects.slice(0, 4);
   
+  // Category name mapping for full display
+  const getCategoryName = (category: string) => {
+    const categoryMap: Record<string, string> = {
+      web: 'Web Design',
+      webdev: 'Web Development',
+      seo: 'SEO',
+      branding: 'Branding',
+      ecommerce: 'E-commerce',
+    };
+    return categoryMap[category] || category;
+  };
+  
   if (featuredProjects.length === 0) {
     return null;
   }
@@ -69,7 +81,7 @@ const BentoPortfolio = ({ projects }: BentoPortfolioProps) => {
               <div className="absolute bottom-0 left-0 right-0 p-8">
                 <div className="flex items-center gap-2 mb-3">
                   <span className="px-3 py-1 bg-accent text-accent-foreground text-xs font-bold rounded-full uppercase">
-                    {featuredProjects[0].category}
+                    {getCategoryName(featuredProjects[0].category)}
                   </span>
                   {featuredProjects[0].results.slice(0, 1).map((result) => (
                     <span key={result} className="px-3 py-1 bg-accent-secondary/20 text-accent-secondary text-xs font-semibold rounded-full">
@@ -112,7 +124,7 @@ const BentoPortfolio = ({ projects }: BentoPortfolioProps) => {
               
               <div className="absolute bottom-0 left-0 right-0 p-6">
                 <span className="inline-block px-3 py-1 bg-accent text-accent-foreground text-xs font-bold rounded-full uppercase mb-3">
-                  {featuredProjects[1].category}
+                  {getCategoryName(featuredProjects[1].category)}
                 </span>
                 <h3 className="font-heading text-xl md:text-2xl font-bold text-white mb-2">
                   {featuredProjects[1].title}
@@ -147,7 +159,7 @@ const BentoPortfolio = ({ projects }: BentoPortfolioProps) => {
               
               <div className="absolute bottom-0 left-0 right-0 p-6">
                 <span className="inline-block px-3 py-1 bg-accent text-accent-foreground text-xs font-bold rounded-full uppercase mb-3">
-                  {featuredProjects[2].category}
+                  {getCategoryName(featuredProjects[2].category)}
                 </span>
                 <h3 className="font-heading text-xl md:text-2xl font-bold text-white mb-2">
                   {featuredProjects[2].title}

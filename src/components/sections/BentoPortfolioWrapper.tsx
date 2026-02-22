@@ -17,7 +17,7 @@ async function getFeaturedProjects() {
       query,
       {},
       {
-        next: { revalidate: 900 } // 15 minutes - projects update occasionally
+        next: { revalidate: 0 } // Disable cache - rely on webhook revalidation
       }
     );
     return projects;

@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, ArrowRight, Clock, MapPin, Users, Calendar, CheckCircle2, Quote } from "lucide-react";
+import { ArrowLeft, ArrowRight, Clock, MapPin, Users, Calendar, CheckCircle2, Quote, ExternalLink } from "lucide-react";
 import { client } from "@/sanity/lib/client";
 import { generateSEO } from '@/lib/seo';
 
@@ -22,16 +22,23 @@ async function getProject(slug: string) {
       solution,
       strategy,
       services,
-      testimonial,
+      testimonial->{
+        quote,
+        author,
+        role,
+        company,
+        rating
+      },
       "gallery": gallery[].asset->url,
       duration,
       year,
+      projectUrl,
       featured,
       order
     }`,
     { slug },
     {
-      next: { revalidate: 900 } // 15 minutes - projects update occasionally
+      next: { revalidate: 0 } // Disable cache - rely on webhook revalidation
     }
   );
   return project;
@@ -46,7 +53,7 @@ async function getAdjacentProjects(currentSlug: string) {
     }`,
     {},
     {
-      next: { revalidate: 900 } // 15 minutes
+      next: { revalidate: 0 } // Disable cache - rely on webhook revalidation
     }
   );
   
@@ -58,7 +65,7 @@ async function getAdjacentProjects(currentSlug: string) {
 }
 
 // Time-based ISR (60s) + on-demand revalidation via webhook
-export const revalidate = 900; // 15 minutes - projects update occasionally
+export const revalidate = 60; // 1 minute - projects update occasionally
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -91,7 +98,7 @@ export async function generateStaticParams() {
     `*[_type == "project"] { "slug": slug.current }`,
     {},
     {
-      next: { revalidate: 900 } // 15 minutes
+      next: { revalidate: 0 } // Disable cache - rely on webhook revalidation
     }
   );
   return projects.map((project: any) => ({ slug: project.slug }));
@@ -120,9 +127,19 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
           <div className="grid lg:grid-cols-2 gap-12 items-start">
             {/* Left: Content */}
             <div>
-              <span className="px-3 py-1 glass-card text-xs font-medium text-accent mb-4 inline-block">
-                {project.tags[0]}
-              </span>
+              <div className="flex flex-wrap items-center gap-2 mb-4">
+                <span className="px-3 py-1 glass-card text-xs font-medium text-accent">
+                  {project.category === 'web' ? 'Web Design' :
+                   project.category === 'webdev' ? 'Web Development' :
+                   project.category === 'seo' ? 'SEO' :
+                   project.category === 'branding' ? 'Branding' :
+                   project.category === 'ecommerce' ? 'E-commerce' : project.category}
+                </span>
+                <span className="text-muted-foreground text-xs">•</span>
+                <span className="px-3 py-1 glass-card text-xs font-medium text-foreground">
+                  {project.client.industry}
+                </span>
+              </div>
               <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
                 {project.title}
               </h1>
@@ -171,7 +188,7 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
               </div>
 
               {/* Results */}
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-wrap gap-3 mb-8">
                 {project.results.map((result) => (
                   <span
                     key={result}
@@ -181,6 +198,27 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
                   </span>
                 ))}
               </div>
+
+              {/* Live Project Button - Conditional */}
+              {project.projectUrl && (
+                <div>
+                  <Button
+                    variant="hero"
+                    size="lg"
+                    asChild
+                    className="group"
+                  >
+                    <a
+                      href={project.projectUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      View Live Project
+                      <ExternalLink className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                    </a>
+                  </Button>
+                </div>
+              )}
             </div>
 
             {/* Right: Image */}
@@ -189,7 +227,7 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-[400px] lg:h-[500px] object-cover"
+                  className="w-full h-[400px] lg:h-[500px] object-contain bg-secondary/20"
                 />
               </div>
             </div>
