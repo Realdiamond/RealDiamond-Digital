@@ -4,7 +4,8 @@ import { useState, useEffect } from "react";
 // import Link from "next/link"; // Removed for full reload navigation
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Diamond } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import Image from "next/image";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -42,13 +43,15 @@ const Header = () => {
       <div className="container-wide">
         <nav className="flex items-center justify-between h-20">
           {/* Logo */}
-          <a href="/" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 bg-gradient-to-br from-accent to-accent-secondary rounded-xl flex items-center justify-center shadow-glow group-hover:shadow-[0_0_30px_-5px_hsl(174_84%_50%/0.6)] transition-all duration-300">
-              <Diamond className="w-5 h-5 text-accent-foreground" />
-            </div>
-            <span className="font-heading font-bold text-xl text-foreground">
-              <span className="text-gradient">RealDiamond</span> Digital
-            </span>
+          <a href="/" className="flex items-center group">
+            <Image
+              src="/icons/logo.png"
+              alt="RealDiamond Digital"
+              width={160}
+              height={48}
+              className="h-12 w-auto object-contain transition-opacity duration-300 group-hover:opacity-80"
+              priority
+            />
           </a>
 
           {/* Desktop Navigation */}

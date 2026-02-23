@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { Mail, Phone, MapPin, Linkedin, Twitter, Instagram, Diamond } from "lucide-react";
+import { Mail, Phone, MapPin, Linkedin, Twitter, Instagram } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
+import Image from "next/image";
 
 const Footer = () => {
   return (
@@ -14,13 +15,14 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand */}
           <div className="space-y-6">
-            <Link href="/" className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-accent to-accent-secondary rounded-xl flex items-center justify-center">
-                <Diamond className="w-5 h-5 text-accent-foreground" />
-              </div>
-              <span className="font-heading font-bold text-xl text-foreground">
-                <span className="text-gradient">RealDiamond</span> Digital
-              </span>
+            <Link href="/" className="flex items-center">
+              <Image
+                src="/icons/logo.png"
+                alt="RealDiamond Digital"
+                width={160}
+                height={48}
+                className="h-12 w-auto object-contain"
+              />
             </Link>
             <p className="text-muted-foreground text-sm leading-relaxed">
               Strategic web design, development & SEO that transforms visitors into customers and grows revenue.
