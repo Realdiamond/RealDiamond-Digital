@@ -7,9 +7,9 @@ import { Button } from './ui/button';
 
 interface VideoTestimonial {
   _id: string;
-  name: string;
+  author: string;
   company?: string;
-  position?: string;
+  role?: string;
   videoSource?: 'youtube' | 'upload';
   videoUrl?: string;
   videoFile?: {
@@ -95,7 +95,7 @@ export function VideoTestimonialCarousel({ testimonials }: VideoTestimonialCarou
                         {thumbnailUrl && (
                           <img 
                             src={thumbnailUrl} 
-                            alt={testimonial.videoTitle || `${testimonial.name} testimonial`}
+                            alt={testimonial.videoTitle || `${testimonial.author} testimonial`}
                             className="w-full h-full object-cover"
                           />
                         )}
@@ -141,12 +141,12 @@ export function VideoTestimonialCarousel({ testimonials }: VideoTestimonialCarou
                   {/* Testimonial Info */}
                   <div className="p-6">
                     <h3 className="font-heading text-lg font-semibold text-foreground mb-1">
-                      {testimonial.name}
+                      {testimonial.author}
                     </h3>
-                    {(testimonial.position || testimonial.company) && (
+                    {(testimonial.role || testimonial.company) && (
                       <p className="text-sm text-muted-foreground">
-                        {testimonial.position}
-                        {testimonial.position && testimonial.company && ', '}
+                        {testimonial.role}
+                        {testimonial.role && testimonial.company && ', '}
                         {testimonial.company}
                       </p>
                     )}
