@@ -18,17 +18,16 @@ export const revalidate = 1800; // 30 minutes - testimonials change rarely
 interface TestimonialData {
   _id: string;
   type: 'text' | 'video';
-  name: string;
+  author: string;
   company?: string;
-  position?: string;
-  content?: string;
+  role?: string;
+  quote?: string;
   rating?: number;
   image?: {
     asset: {
       url: string;
     };
   };
-  quote?: string;
   videoSource?: 'youtube' | 'upload';
   videoUrl?: string;
   videoFile?: {
@@ -70,9 +69,9 @@ async function getTestimonials() {
     `*[_type == "testimonial" && type == "video"] | order(coalesce(order, 999) asc) {
       _id,
       type,
-      name,
+      author,
       company,
-      position,
+      role,
       videoSource,
       videoUrl,
       "videoFile": videoFile.asset->{url},
@@ -162,7 +161,7 @@ export default async function TestimonialsPage() {
                     </div>
                   )}
 
-                  {/* Quote */}
+                  {/* Content */}
                   <p className="text-muted-foreground mb-6 relative z-10 leading-relaxed">
                     "{testimonial.quote}"
                   </p>
