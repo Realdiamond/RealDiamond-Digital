@@ -2,8 +2,11 @@ import Link from "next/link";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import CTA from "@/components/sections/CTA";
-import { ArrowRight, Target, Users, Lightbulb, Award, Clock, Heart, Sparkles, Diamond } from "lucide-react";
+import { ArrowRight, Target, Users, Lightbulb, Award, Clock, Heart, Sparkles, Diamond, TrendingUp, Star, Zap } from "lucide-react";
 import { generateSEO } from '@/lib/seo';
+import { client } from '@/sanity/lib/client';
+import { urlFor } from '@/sanity/lib/image';
+import Image from 'next/image';
 
 export const metadata = generateSEO({
   title: 'About Us',
@@ -11,6 +14,30 @@ export const metadata = generateSEO({
   keywords: ['about us', 'digital agency team', 'web design experts', 'SEO specialists', 'digital marketing professionals'],
   canonical: 'https://realdiamond-digital.vercel.app/about',
 });
+
+// Time-based ISR
+export const revalidate = 3600; // 1 hour
+
+// Fetch CEO/team data
+async function getCEOData() {
+  const ceo = await client.fetch(
+    `*[_type == "teamMember" && role match "CEO*"][0]{
+      name,
+      role,
+      initials,
+      bio,
+      "image": image.asset->{url},
+      linkedin,
+      twitter,
+      email
+    }`,
+    {},
+    {
+      next: { revalidate: 3600 }
+    }
+  );
+  return ceo;
+}
 
 const values = [
   {
@@ -35,7 +62,9 @@ const values = [
   },
 ];
 
-const About = () => {
+const About = async () => {
+  const ceo = await getCEOData();
+
   return (
     <Layout>
       {/* Hero */}
@@ -89,13 +118,43 @@ const About = () => {
               </div>
             </div>
 
-            {/* Visual */}
+            {/* Visual - Stats */}
             <div className="relative">
-              <div className="glass-card p-12 relative overflow-hidden">
+              <div className="glass-card p-8 relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-accent/10 to-accent-secondary/10" />
-                <div className="text-center relative z-10">
-                  <Award className="w-16 h-16 text-accent mx-auto mb-4" />
-                  <p className="text-foreground font-heading text-xl font-medium">Excellence in Digital Strategy</p>
+                <div className="relative z-10 space-y-8">
+                  {/* Stat 1 */}
+                  <div className="flex items-center gap-4">
+                    <div className="w-16 h-16 bg-gradient-to-br from-accent to-accent-secondary rounded-xl flex items-center justify-center flex-shrink-0">
+                      <TrendingUp className="w-8 h-8 text-accent-foreground" />
+                    </div>
+                    <div>
+                      <p className="text-3xl font-heading font-bold text-foreground">50+</p>
+                      <p className="text-sm text-muted-foreground">Projects Delivered</p>
+                    </div>
+                  </div>
+                  
+                  {/* Stat 2 */}
+                  <div className="flex items-center gap-4">
+                    <div className="w-16 h-16 bg-gradient-to-br from-accent-secondary to-accent rounded-xl flex items-center justify-center flex-shrink-0">
+                      <Star className="w-8 h-8 text-accent-foreground" />
+                    </div>
+                    <div>
+                      <p className="text-3xl font-heading font-bold text-foreground">4.9/5</p>
+                      <p className="text-sm text-muted-foreground">Client Satisfaction</p>
+                    </div>
+                  </div>
+                  
+                  {/* Stat 3 */}
+                  <div className="flex items-center gap-4">
+                    <div className="w-16 h-16 bg-gradient-to-br from-accent to-accent-secondary rounded-xl flex items-center justify-center flex-shrink-0">
+                      <Zap className="w-8 h-8 text-accent-foreground" />
+                    </div>
+                    <div>
+                      <p className="text-3xl font-heading font-bold text-foreground">3-5</p>
+                      <p className="text-sm text-muted-foreground">Expert Team Members</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -109,16 +168,30 @@ const About = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             {/* Image */}
             <div className="lg:order-2">
-              <div className="glass-card p-12 relative overflow-hidden">
+              <div className="glass-card p-8 relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-accent-secondary/10 to-accent/10" />
                 <div className="text-center relative z-10">
-                  <div className="w-32 h-32 bg-gradient-to-br from-accent to-accent-secondary rounded-full flex items-center justify-center mx-auto mb-6 animate-float shadow-glow">
-                    <span className="font-heading text-4xl font-bold text-accent-foreground">OA</span>
-                  </div>
+                  {ceo?.image?.url ? (
+                    <div className="w-48 h-48 mx-auto mb-6 rounded-full overflow-hidden shadow-glow">
+                      <Image
+                        src={ceo.image.url}
+                        alt={ceo.name || 'CEO'}
+                        width={192}
+                        height={192}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  ) : (
+                    <div className="w-48 h-48 bg-gradient-to-br from-accent to-accent-secondary rounded-full flex items-center justify-center mx-auto mb-6 animate-float shadow-glow">
+                      <span className="font-heading text-5xl font-bold text-accent-foreground">
+                        {ceo?.initials || 'OA'}
+                      </span>
+                    </div>
+                  )}
                   <p className="text-foreground font-heading text-xl font-semibold">
-                    Oluwatimilehin Akinsanmi
+                    {ceo?.name || 'Oluwatimilehin Akinsanmi'}
                   </p>
-                  <p className="text-muted-foreground">CEO & Lead Strategist</p>
+                  <p className="text-muted-foreground">{ceo?.role || 'CEO & Lead Strategist'}</p>
                 </div>
               </div>
             </div>
@@ -130,22 +203,28 @@ const About = () => {
                 CEO-Led, <span className="text-gradient">Personally Invested</span>
               </h2>
               <div className="space-y-4 text-muted-foreground">
-                <p>
-                  RealDiamond Digital is led by <strong className="text-foreground">Oluwatimilehin Akinsanmi</strong>, 
-                  who brings years of experience in digital strategy, web development, and business growth.
-                </p>
-                <p>
-                  Unlike large agencies where your project might be handed off to junior staff, at RealDiamond Digital, 
-                  the CEO is actively involved in every engagement. This means senior-level strategic thinking and 
-                  hands-on attention from day one.
-                </p>
-                <p>
-                  Backed by a dedicated team of 3-5 specialists in design, development, and SEO, we deliver the 
-                  capabilities of a full-service agency with the personal commitment of a trusted partner.
-                </p>
+                {ceo?.bio ? (
+                  <p>{ceo.bio}</p>
+                ) : (
+                  <>
+                    <p>
+                      RealDiamond Digital is led by <strong className="text-foreground">{ceo?.name || 'Oluwatimilehin Akinsanmi'}</strong>, 
+                      who brings years of experience in digital strategy, web development, and business growth.
+                    </p>
+                    <p>
+                      Unlike large agencies where your project might be handed off to junior staff, at RealDiamond Digital, 
+                      the CEO is actively involved in every engagement. This means senior-level strategic thinking and 
+                      hands-on attention from day one.
+                    </p>
+                    <p>
+                      Backed by a dedicated team of 3-5 specialists in design, development, and SEO, we deliver the 
+                      capabilities of a full-service agency with the personal commitment of a trusted partner.
+                    </p>
+                  </>
+                )}
               </div>
               <div className="mt-8">
-                <Button variant="accent" asChild>
+                <Button className="bg-gradient-to-r from-accent to-accent-secondary hover:shadow-glow text-white font-semibold" asChild>
                   <Link href="/contact">
                     Let's Discuss Your Project
                     <ArrowRight className="w-4 h-4" />
