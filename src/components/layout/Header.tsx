@@ -41,15 +41,15 @@ const Header = () => {
       }`}
     >
       <div className="container-wide">
-        <nav className="flex items-center justify-between h-32 py-4">
+        <nav className="flex items-center justify-between h-20">
           {/* Logo */}
           <a href="/" className="flex items-center group">
             <Image
               src="/icons/logo.png"
               alt="RealDiamond Digital"
-              width={450}
-              height={180}
-              className="h-24 w-auto object-contain transition-opacity duration-300 group-hover:opacity-80"
+              width={400}
+              height={160}
+              className="h-32 w-auto object-contain transition-opacity duration-300 group-hover:opacity-80"
               priority
             />
           </a>
@@ -76,7 +76,7 @@ const Header = () => {
 
           {/* CTA Button */}
           <div className="hidden lg:block">
-            <Button variant="accent">
+            <Button className="bg-gradient-to-r from-accent to-accent-secondary hover:shadow-glow text-white font-semibold">
               <a href="/contact">Start Project</a>
             </Button>
           </div>
@@ -113,7 +113,7 @@ const Header = () => {
                   {link.label}
                 </a>
               ))}
-              <Button variant="accent" className="mt-4">
+              <Button className="mt-4 bg-gradient-to-r from-accent to-accent-secondary hover:shadow-glow text-white font-semibold">
                 <a href="/contact" onClick={() => setIsMenuOpen(false)}>
                   Start Project
                 </a>
