@@ -51,10 +51,10 @@ async function getTestimonials() {
     `*[_type == "testimonial" && type == "text"] | order(coalesce(order, 999) asc) {
       _id,
       type,
-      name,
+      author,
       company,
-      position,
-      content,
+      role,
+      quote,
       rating,
       "image": image.asset->{url},
       order
@@ -161,9 +161,9 @@ export default async function TestimonialsPage() {
                     </div>
                   )}
 
-                  {/* Content */}
+                  {/* Quote */}
                   <p className="text-muted-foreground mb-6 relative z-10 leading-relaxed">
-                    "{testimonial.content}"
+                    "{testimonial.quote}"
                   </p>
 
                   {/* Author Info */}
@@ -171,17 +171,17 @@ export default async function TestimonialsPage() {
                     {testimonial.image?.asset?.url && (
                       <img
                         src={testimonial.image.asset.url}
-                        alt={testimonial.name}
+                        alt={testimonial.author}
                         className="w-12 h-12 rounded-full object-cover"
                       />
                     )}
                     <div>
                       <p className="font-semibold text-foreground">
-                        {testimonial.name}
+                        {testimonial.author}
                       </p>
                       <p className="text-sm text-muted-foreground">
-                        {testimonial.position}
-                        {testimonial.position && testimonial.company && ', '}
+                        {testimonial.role}
+                        {testimonial.role && testimonial.company && ', '}
                         {testimonial.company}
                       </p>
                     </div>
