@@ -19,9 +19,9 @@ const Footer = () => {
               <Image
                 src="/icons/logo.png"
                 alt="RealDiamond Digital"
-                width={200}
-                height={80}
-                className="h-20 w-auto object-contain"
+                width={300}
+                height={120}
+                className="h-24 w-auto object-contain"
               />
             </Link>
             <p className="text-muted-foreground text-sm leading-relaxed">

@@ -47,9 +47,9 @@ const Header = () => {
             <Image
               src="/icons/logo.png"
               alt="RealDiamond Digital"
-              width={200}
-              height={80}
-              className="h-20 w-auto object-contain transition-opacity duration-300 group-hover:opacity-80"
+              width={400}
+              height={160}
+              className="h-32 w-auto object-contain transition-opacity duration-300 group-hover:opacity-80"
               priority
             />
           </a>
