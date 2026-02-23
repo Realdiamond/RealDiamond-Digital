@@ -49,7 +49,7 @@ const Header = () => {
               alt="RealDiamond Digital"
               width={400}
               height={160}
-              className="h-32 w-auto object-contain transition-opacity duration-300 group-hover:opacity-80"
+              className="w-auto object-contain transition-opacity duration-300 group-hover:opacity-80"
               priority
             />
           </a>
