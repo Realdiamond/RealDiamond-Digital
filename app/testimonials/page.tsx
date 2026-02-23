@@ -28,6 +28,7 @@ interface TestimonialData {
       url: string;
     };
   };
+  quote?: string;
   videoSource?: 'youtube' | 'upload';
   videoUrl?: string;
   videoFile?: {
