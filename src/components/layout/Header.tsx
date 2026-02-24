@@ -42,7 +42,7 @@ const Header = () => {
     >
       <div className="container-wide">
         <nav className="flex items-center justify-between h-20">
-          {/* Logo */}
+          {/* Logo container*/}
           <a href="/" className="flex items-center justify-center group">
             <Image
               src="/icons/logo-s.png"

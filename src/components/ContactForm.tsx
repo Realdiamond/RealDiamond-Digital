@@ -4,12 +4,12 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Send } from "lucide-react";
-import { useToast } from "@/components/ui/use-toast";
+import { Send, CheckCircle2 } from "lucide-react";
 
 export default function ContactForm() {
-  const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [error, setError] = useState("");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -21,6 +21,7 @@ export default function ContactForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setError("");
 
     try {
       const response = await fetch('/api/contact', {
@@ -34,31 +35,12 @@ export default function ContactForm() {
       const data = await response.json();
 
       if (response.ok) {
-        toast({
-          title: "Message sent successfully!",
-          description: "We'll get back to you within 24 hours.",
-        });
-
-        setFormData({
-          name: "",
-          email: "",
-          company: "",
-          service: "",
-          message: "",
-        });
+        setIsSuccess(true);
       } else {
-        toast({
-          title: "Failed to send message",
-          description: data.error || "Please try again later.",
-          variant: "destructive",
-        });
+        setError(data.error || "Failed to send message. Please try again.");
       }
     } catch (error) {
-      toast({
-        title: "Failed to send message",
-        description: "Please try again later.",
-        variant: "destructive",
-      });
+      setError("Network error. Please check your connection and try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -71,10 +53,55 @@ export default function ContactForm() {
       ...prev,
       [e.target.name]: e.target.value,
     }));
+    // Clear error when user starts typing
+    if (error) setError("");
   };
+
+  const resetForm = () => {
+    setIsSuccess(false);
+    setFormData({
+      name: "",
+      email: "",
+      company: "",
+      service: "",
+      message: "",
+    });
+  };
+
+  // Success State
+  if (isSuccess) {
+    return (
+      <div className="text-center py-12 space-y-6">
+        <div className="flex justify-center">
+          <div className="w-20 h-20 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center">
+            <CheckCircle2 className="w-10 h-10 text-green-600 dark:text-green-400" />
+          </div>
+        </div>
+        <div className="space-y-3">
+          <h3 className="text-2xl font-bold text-foreground">Message Sent Successfully!</h3>
+          <p className="text-muted-foreground max-w-md mx-auto">
+            Thank you for reaching out! We've received your message and will get back to you within 24 hours.
+          </p>
+        </div>
+        <Button
+          onClick={resetForm}
+          variant="outline"
+          className="mt-4"
+        >
+          Send Another Message
+        </Button>
+      </div>
+    );
+  }
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
+      {/* Error Message */}
+      {error && (
+        <div className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
+          <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
+        </div>
+      )}
       {/* Name */}
       <div>
         <label htmlFor="name" className="block text-sm font-semibold text-foreground mb-2">
