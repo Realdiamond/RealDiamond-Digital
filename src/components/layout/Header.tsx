@@ -45,7 +45,7 @@ const Header = () => {
           {/* Logo */}
           <a href="/" className="flex items-center justify-center group">
             <Image
-              src="/icons/logo.png"
+              src="/icons/logo-s.png"
               alt="RealDiamond Digital"
               width={400}
               height={160}
