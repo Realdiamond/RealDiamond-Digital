@@ -41,17 +41,18 @@ const Header = () => {
       }`}
     >
       <div className="container-wide">
-        <nav className="flex items-center justify-between h-28">
+        <nav className="flex items-center justify-between h-20">
           {/* Logo */}
-          {/* <a href="/" className="flex items-center justify-center group">
+          <a href="/" className="flex items-center justify-center group">
             <Image
               src="/icons/logo.png"
               alt="RealDiamond Digital"
-              width={450}
-              height={180}
-              className="h-24 w-auto object-contain transition-opacity duration-300 group-hover:opacity-80"
+              width={400}
+              height={160}
+              className="h-16 w-auto object-contain transition-opacity duration-300 group-hover:opacity-80"
+              priority
             />
-          </a> */}
+          </a>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-8">
