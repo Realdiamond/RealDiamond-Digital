@@ -23,8 +23,8 @@ export async function POST(req: Request) {
         },
         body: JSON.stringify({
           sender: {
-            name: 'RealDiamond Digital Contact Form',
-            email: 'realdiamonddigital@gmail.com',
+            name: 'RealDiamond Digital',
+            email: 'contact@realdiamonddigital.studio',
           },
           to: [
             {
@@ -32,10 +32,6 @@ export async function POST(req: Request) {
               name: 'RealDiamond Digital Team',
             },
           ],
-          replyTo: {
-            email: email,
-            name: name,
-          },
           subject: `New Contact Form Submission from ${name}`,
           htmlContent: `
             <h2>New Contact Form Submission</h2>
@@ -54,11 +50,8 @@ export async function POST(req: Request) {
       if (!response.ok) {
         const errorData = await response.json();
         console.error('Brevo API error:', errorData);
-        console.error('Response status:', response.status);
         throw new Error('Failed to send email');
       }
-
-      console.log('Email sent successfully via Brevo');
     } else {
       // Fallback: Log to console for development
       console.log('Contact Form Submission:', {
