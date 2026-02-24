@@ -50,7 +50,6 @@ const Header = () => {
               width={450}
               height={180}
               className="h-24 w-auto object-contain transition-opacity duration-300 group-hover:opacity-80"
-              priority
             />
           </a>
 
