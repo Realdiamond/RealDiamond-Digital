@@ -43,7 +43,7 @@ const Header = () => {
       <div className="container-wide">
         <nav className="flex items-center justify-between h-28">
           {/* Logo */}
-          <a href="/" className="flex items-center justify-center group">
+          {/* <a href="/" className="flex items-center justify-center group">
             <Image
               src="/icons/logo.png"
               alt="RealDiamond Digital"
@@ -51,7 +51,7 @@ const Header = () => {
               height={180}
               className="h-24 w-auto object-contain transition-opacity duration-300 group-hover:opacity-80"
             />
-          </a>
+          </a> */}
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-8">
