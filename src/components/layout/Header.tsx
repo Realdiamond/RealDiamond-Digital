@@ -43,13 +43,13 @@ const Header = () => {
       <div className="container-wide">
         <nav className="flex items-center justify-between h-28">
           {/* Logo */}
-          <a href="/" className="flex items-center justify-center group h-full py-2">
+          <a href="/" className="flex items-center justify-center group">
             <Image
               src="/icons/logo.png"
               alt="RealDiamond Digital"
-              width={400}
-              height={160}
-              className="h-full w-auto object-contain transition-opacity duration-300 group-hover:opacity-80"
+              width={450}
+              height={180}
+              className="h-24 w-auto object-contain transition-opacity duration-300 group-hover:opacity-80"
               priority
             />
           </a>
