@@ -5,7 +5,6 @@ import CTA from "@/components/sections/CTA";
 import { ArrowRight, Target, Users, Lightbulb, Award, Clock, Heart, Sparkles, Diamond, TrendingUp, Star, Zap } from "lucide-react";
 import { generateSEO } from '@/lib/seo';
 import { client } from '@/sanity/lib/client';
-import { urlFor } from '@/sanity/lib/image';
 import Image from 'next/image';
 
 export const metadata = generateSEO({
