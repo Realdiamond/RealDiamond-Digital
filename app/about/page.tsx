@@ -167,31 +167,41 @@ const About = async () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             {/* Image */}
             <div className="lg:order-2">
-              <div className="glass-card p-8 relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-accent-secondary/10 to-accent/10" />
-                <div className="text-center relative z-10">
-                  {ceo?.image?.url ? (
-                    <div className="w-48 h-48 mx-auto mb-6 rounded-full overflow-hidden shadow-glow">
-                      <Image
-                        src={ceo.image.url}
-                        alt={ceo.name || 'CEO'}
-                        width={192}
-                        height={192}
-                        className="w-full h-full object-cover"
-                      />
+              <div className="glass-card overflow-hidden relative group h-[500px]">
+                {ceo?.image?.url ? (
+                  <>
+                    <Image
+                      src={ceo.image.url}
+                      alt={ceo.name || 'CEO'}
+                      fill
+                      className="object-cover"
+                    />
+                    {/* Gradient overlay for text readability */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
+                    {/* Name at bottom */}
+                    <div className="absolute bottom-0 left-0 right-0 p-8 text-left z-10">
+                      <p className="text-foreground font-heading text-2xl md:text-3xl font-bold mb-2">
+                        {ceo?.name || 'Oluwatimilehin Akinsanmi'}
+                      </p>
+                      <p className="text-muted-foreground text-lg">{ceo?.role || 'CEO & Lead Strategist'}</p>
                     </div>
-                  ) : (
-                    <div className="w-48 h-48 bg-gradient-to-br from-accent to-accent-secondary rounded-full flex items-center justify-center mx-auto mb-6 animate-float shadow-glow">
-                      <span className="font-heading text-5xl font-bold text-accent-foreground">
+                  </>
+                ) : (
+                  <>
+                    <div className="absolute inset-0 bg-gradient-to-br from-accent to-accent-secondary flex items-center justify-center">
+                      <span className="font-heading text-8xl font-bold text-accent-foreground opacity-20">
                         {ceo?.initials || 'OA'}
                       </span>
                     </div>
-                  )}
-                  <p className="text-foreground font-heading text-xl font-semibold">
-                    {ceo?.name || 'Oluwatimilehin Akinsanmi'}
-                  </p>
-                  <p className="text-muted-foreground">{ceo?.role || 'CEO & Lead Strategist'}</p>
-                </div>
+                    {/* Name at bottom */}
+                    <div className="absolute bottom-0 left-0 right-0 p-8 text-left z-10 bg-gradient-to-t from-background to-transparent">
+                      <p className="text-foreground font-heading text-2xl md:text-3xl font-bold mb-2">
+                        {ceo?.name || 'Oluwatimilehin Akinsanmi'}
+                      </p>
+                      <p className="text-muted-foreground text-lg">{ceo?.role || 'CEO & Lead Strategist'}</p>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
 
