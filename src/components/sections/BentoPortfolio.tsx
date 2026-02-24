@@ -43,7 +43,6 @@ const BentoPortfolio = ({ projects }: BentoPortfolioProps) => {
   return (
     <section className="py-32 bg-background relative overflow-hidden">
       <div className="container-wide relative">
-        {/* Header */}
         <div className="max-w-2xl mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 mb-6">
             <TrendingUp className="w-4 h-4 text-accent" />
@@ -58,9 +57,7 @@ const BentoPortfolio = ({ projects }: BentoPortfolioProps) => {
           </p>
         </div>
 
-        {/* Bento Grid */}
         <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-12 gap-4 md:gap-6 mb-12">
-          {/* Large Featured - Spans 8 cols on lg, 4 on md */}
           <Link
             href={`/projects/${featuredProjects[0].slug.current}`}
             className="group relative md:col-span-4 lg:col-span-8 row-span-2 rounded-3xl overflow-hidden glass-card hover:shadow-elevated transition-all duration-500"
@@ -103,7 +100,6 @@ const BentoPortfolio = ({ projects }: BentoPortfolioProps) => {
             </div>
           </Link>
 
-          {/* Medium - Top Right */}
           {featuredProjects[1] && (
           <Link
             href={`/projects/${featuredProjects[1].slug.current}`}
@@ -138,7 +134,6 @@ const BentoPortfolio = ({ projects }: BentoPortfolioProps) => {
           </Link>
           )}
 
-          {/* Medium - Bottom Right */}
           {featuredProjects[2] && (
           <Link
             href={`/projects/${featuredProjects[2].slug.current}`}
@@ -173,7 +168,6 @@ const BentoPortfolio = ({ projects }: BentoPortfolioProps) => {
           </Link>
           )}
 
-          {/* Full Width CTA Card */}
           <div className="md:col-span-6 lg:col-span-12 rounded-3xl overflow-hidden glass-card p-12 bg-gradient-to-br from-accent/5 via-accent-secondary/5 to-transparent border-2 border-accent/20 hover:border-accent/40 transition-all duration-500 group cursor-pointer">
             <div className="max-w-2xl">
               <h3 className="font-heading text-3xl md:text-4xl font-bold mb-4">

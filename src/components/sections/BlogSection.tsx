@@ -29,13 +29,11 @@ export default async function BlogSection() {
 
   return (
     <section className="py-32 bg-gradient-to-b from-background to-secondary/20 relative overflow-hidden">
-      {/* Background */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="bg-orb bg-orb-3 opacity-5" />
       </div>
 
       <div className="container-wide relative">
-        {/* Header */}
         <div className="max-w-2xl mb-16">
           <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
             Latest from Our{" "}
@@ -46,7 +44,6 @@ export default async function BlogSection() {
           </p>
         </div>
 
-        {/* Blog Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
           {posts.map((post: any, index: number) => (
             <Link
@@ -54,7 +51,6 @@ export default async function BlogSection() {
               href={`/blog/${post.slug}`}
               className="group glass-card overflow-hidden hover:shadow-elevated transition-all duration-500 hover:-translate-y-2"
             >
-              {/* Image */}
               {post.image && (
                 <div className="relative h-48 overflow-hidden bg-gradient-to-br from-accent/10 to-accent-secondary/10">
                   <img
@@ -62,7 +58,6 @@ export default async function BlogSection() {
                     alt={post.title}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
-                  {/* Category Badge */}
                   <div className="absolute top-4 left-4">
                     <span className="px-3 py-1 bg-accent text-accent-foreground text-xs font-bold rounded-full uppercase">
                       {post.category}
@@ -71,9 +66,7 @@ export default async function BlogSection() {
                 </div>
               )}
 
-              {/* Content */}
               <div className="p-6">
-                {/* Meta */}
                 <div className="flex items-center gap-4 text-xs text-muted-foreground mb-4">
                   <span className="flex items-center gap-1">
                     <Calendar className="w-3 h-3" />
@@ -85,17 +78,14 @@ export default async function BlogSection() {
                   </span>
                 </div>
 
-                {/* Title */}
                 <h3 className="font-heading text-xl font-bold text-foreground mb-3 group-hover:text-accent transition-colors line-clamp-2">
                   {post.title}
                 </h3>
 
-                {/* Excerpt */}
                 <p className="text-muted-foreground text-sm leading-relaxed mb-4 line-clamp-3">
                   {post.excerpt}
                 </p>
 
-                {/* Read More */}
                 <div className="flex items-center gap-2 text-accent font-semibold text-sm group-hover:gap-3 transition-all">
                   <span>Read Article</span>
                   <ArrowRight className="w-4 h-4" />
@@ -105,7 +95,6 @@ export default async function BlogSection() {
           ))}
         </div>
 
-        {/* CTA */}
         <div className="text-center">
           <Button variant="outline" size="lg" asChild>
             <Link href="/blog">

@@ -11,7 +11,7 @@ export const metadata = generateSEO({
   title: 'About Us',
   description: 'Meet the team behind RealDiamond Digital. We combine strategic thinking with creative execution to deliver measurable results for businesses worldwide.',
   keywords: ['about us', 'digital agency team', 'web design experts', 'SEO specialists', 'digital marketing professionals'],
-  canonical: 'https://realdiamond-digital.vercel.app/about',
+  canonical: 'https://realdiamonddigital.studio/about',
 });
 
 // Time-based ISR
@@ -66,7 +66,6 @@ const About = async () => {
 
   return (
     <Layout>
-      {/* Hero */}
       <section className="pt-24 pb-16 bg-background relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
           <div className="bg-orb bg-orb-1 opacity-20" />
@@ -91,7 +90,6 @@ const About = async () => {
         </div>
       </section>
 
-      {/* Our Story */}
       <section className="py-20 bg-background">
         <div className="container-wide">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -117,12 +115,10 @@ const About = async () => {
               </div>
             </div>
 
-            {/* Visual - Stats */}
             <div className="relative">
               <div className="glass-card p-8 relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-accent/10 to-accent-secondary/10" />
                 <div className="relative z-10 space-y-8">
-                  {/* Stat 1 */}
                   <div className="flex items-center gap-4">
                     <div className="w-16 h-16 bg-gradient-to-br from-accent to-accent-secondary rounded-xl flex items-center justify-center flex-shrink-0">
                       <TrendingUp className="w-8 h-8 text-accent-foreground" />
@@ -133,7 +129,6 @@ const About = async () => {
                     </div>
                   </div>
                   
-                  {/* Stat 2 */}
                   <div className="flex items-center gap-4">
                     <div className="w-16 h-16 bg-gradient-to-br from-accent-secondary to-accent rounded-xl flex items-center justify-center flex-shrink-0">
                       <Star className="w-8 h-8 text-accent-foreground" />
@@ -144,7 +139,6 @@ const About = async () => {
                     </div>
                   </div>
                   
-                  {/* Stat 3 */}
                   <div className="flex items-center gap-4">
                     <div className="w-16 h-16 bg-gradient-to-br from-accent to-accent-secondary rounded-xl flex items-center justify-center flex-shrink-0">
                       <Zap className="w-8 h-8 text-accent-foreground" />
@@ -161,11 +155,9 @@ const About = async () => {
         </div>
       </section>
 
-      {/* Leadership */}
       <section className="py-20 bg-secondary/30 border-y border-border/50">
         <div className="container-wide">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            {/* Image */}
             <div className="lg:order-2">
               <div className="glass-card overflow-hidden relative group h-[650px] md:h-[700px]">
                 {ceo?.image ? (
@@ -176,9 +168,7 @@ const About = async () => {
                       fill
                       className="object-cover object-top"
                     />
-                    {/* Gradient overlay for text readability */}
                     <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 via-30% to-transparent" />
-                    {/* Name at bottom */}
                     <div className="absolute bottom-0 left-0 right-0 p-8 text-left z-10">
                       <p className="text-gradient font-heading text-2xl md:text-3xl font-bold mb-2">
                         {ceo?.name || 'Oluwatimilehin Akinsanmi'}
@@ -193,7 +183,6 @@ const About = async () => {
                         {ceo?.initials || 'OA'}
                       </span>
                     </div>
-                    {/* Name at bottom */}
                     <div className="absolute bottom-0 left-0 right-0 p-8 text-left z-10 bg-gradient-to-t from-background via-background/50 via-30% to-transparent">
                       <p className="text-gradient font-heading text-2xl md:text-3xl font-bold mb-2">
                         {ceo?.name || 'Oluwatimilehin Akinsanmi'}
@@ -205,7 +194,6 @@ const About = async () => {
               </div>
             </div>
 
-            {/* Content */}
             <div className="lg:order-1">
               <p className="text-accent font-medium mb-4 tracking-wide uppercase text-sm">Leadership</p>
               <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-6">
@@ -245,7 +233,6 @@ const About = async () => {
         </div>
       </section>
 
-      {/* Our Values */}
       <section className="py-20 bg-background">
         <div className="container-wide">
           <div className="max-w-2xl mx-auto text-center mb-16">
@@ -272,7 +259,6 @@ const About = async () => {
         </div>
       </section>
 
-      {/* The Team */}
       <section className="py-20 bg-secondary/30 border-y border-border/50">
         <div className="container-wide">
           <div className="max-w-2xl mx-auto text-center mb-16">

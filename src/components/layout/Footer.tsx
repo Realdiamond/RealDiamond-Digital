@@ -6,14 +6,12 @@ import Image from "next/image";
 const Footer = () => {
   return (
     <footer className="bg-secondary/50 border-t border-border/50 relative overflow-hidden">
-      {/* Background Elements */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="bg-orb bg-orb-2 opacity-20" />
       </div>
 
       <div className="container-wide section-padding relative">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-          {/* Brand */}
           <div className="space-y-6">
             <Link href="/" className="flex items-center">
               <Image
@@ -29,8 +27,8 @@ const Footer = () => {
             </p>
             <div className="flex gap-3">
               {[
-                { Icon: Linkedin, href: "#" },
-                { Icon: Twitter, href: "#" },
+                { Icon: Linkedin, href: "https://www.linkedin.com/in/oluwatimilehin0-akinsanmi1/" },
+                { Icon: Twitter, href: "https://x.com/Iam_RealDiamond/" },
                 { Icon: Instagram, href: "#" },
               ].map(({ Icon, href }, i) => (
                 <a 
@@ -54,7 +52,6 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Services */}
           <div className="space-y-6">
             <h4 className="font-heading font-semibold text-lg text-foreground">Services</h4>
             <ul className="space-y-3">
@@ -68,7 +65,6 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Company */}
           <div className="space-y-6">
             <h4 className="font-heading font-semibold text-lg text-foreground">Company</h4>
             <ul className="space-y-3">
@@ -88,7 +84,6 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Contact */}
           <div className="space-y-6">
             <h4 className="font-heading font-semibold text-lg text-foreground">Contact</h4>
             <ul className="space-y-4">
@@ -118,7 +113,6 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Bottom Bar */}
         <div className="mt-16 pt-8 border-t border-border/50 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-muted-foreground">
             © {new Date().getFullYear()} RealDiamond Digital. All rights reserved.

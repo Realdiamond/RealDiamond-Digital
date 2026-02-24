@@ -26,20 +26,16 @@ const TrustedBySection = async () => {
 
   return (
     <section className="relative pt-12 pb-12 sm:pt-16 sm:pb-16 bg-gradient-to-b from-background to-secondary/5 overflow-hidden">
-      {/* Subtle heading */}
       <div className="container-wide mb-12 text-center">
         <p className="text-base font-medium text-muted-foreground uppercase tracking-wider">
           Trusted by leading brands
         </p>
       </div>
 
-      {/* Infinite scrolling marquee */}
       <div className="relative">
-        {/* Gradient fade edges */}
         <div className="absolute left-0 top-0 bottom-0 w-24 sm:w-32 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
         <div className="absolute right-0 top-0 bottom-0 w-24 sm:w-32 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
         
-        {/* Scrolling container with w-max for content-based width */}
         <div className="flex w-max animate-marquee">
           {doubledClients.map((client, index) => {
             const imageUrl = client.logo ? urlForImage(client.logo)?.width(400).url() : null;

@@ -48,13 +48,11 @@ const TestimonialsShowcase = ({ initialTestimonials }: { initialTestimonials: Te
 
   return (
     <section className="py-32 bg-gradient-to-b from-background to-secondary/20 relative overflow-hidden">
-      {/* Background */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="bg-orb bg-orb-2 opacity-10" />
       </div>
 
       <div className="container-wide relative">
-        {/* Header */}
         <div className="max-w-2xl mx-auto text-center mb-16">
           <div className="flex items-center justify-center gap-1 mb-4">
             {[...Array(5)].map((_, i) => (
@@ -69,10 +67,8 @@ const TestimonialsShowcase = ({ initialTestimonials }: { initialTestimonials: Te
           </p>
         </div>
 
-        {/* Testimonials Carousel - 2 per slide */}
         <div className="max-w-6xl mx-auto mb-12">
           <div className="relative overflow-hidden">
-            {/* Testimonials Grid */}
             <div 
               className={`grid grid-cols-1 md:grid-cols-2 gap-8 mb-8 transition-all duration-500 ease-in-out ${
                 isAnimating 
@@ -88,26 +84,21 @@ const TestimonialsShowcase = ({ initialTestimonials }: { initialTestimonials: Te
                   key={testimonial.author}
                   className="glass-card p-8 relative group hover:shadow-elevated transition-all duration-500"
                 >
-                  {/* Quote Icon */}
                   <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-gradient-to-br from-accent/20 to-accent-secondary/20 flex items-center justify-center opacity-50 group-hover:opacity-100 transition-opacity">
                     <Quote className="w-6 h-6 text-accent" />
                   </div>
 
-                  {/* Content */}
                   <div className="relative z-10">
-                    {/* Rating */}
                     <div className="flex items-center gap-1 mb-4">
                       {[...Array(testimonial.rating)].map((_, i) => (
                         <Star key={i} className="w-4 h-4 fill-accent text-accent" />
                       ))}
                     </div>
 
-                    {/* Quote */}
                     <blockquote className="text-lg text-foreground leading-relaxed mb-6 min-h-[120px]">
                       "{testimonial.quote}"
                     </blockquote>
 
-                    {/* Author Info */}
                     <div className="flex items-center justify-between gap-4 pt-6 border-t border-border/50">
                       <div>
                         <div className="font-bold text-foreground">
@@ -118,7 +109,6 @@ const TestimonialsShowcase = ({ initialTestimonials }: { initialTestimonials: Te
                         </div>
                       </div>
 
-                      {/* Result Badge */}
                       <div className="px-4 py-2 bg-gradient-to-r from-accent to-accent-secondary rounded-full text-white font-bold text-sm whitespace-nowrap">
                         {testimonial.result}
                       </div>
@@ -128,7 +118,6 @@ const TestimonialsShowcase = ({ initialTestimonials }: { initialTestimonials: Te
               ))}
             </div>
 
-            {/* Navigation Controls */}
             <div className="flex items-center justify-center gap-4">
               <button
                 onClick={prevSlide}
@@ -138,7 +127,6 @@ const TestimonialsShowcase = ({ initialTestimonials }: { initialTestimonials: Te
                 <ChevronLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
               </button>
 
-              {/* Slide Indicators */}
               <div className="flex gap-2">
                 {[...Array(totalSlides)].map((_, index) => (
                   <button
@@ -165,7 +153,6 @@ const TestimonialsShowcase = ({ initialTestimonials }: { initialTestimonials: Te
           </div>
         </div>
 
-        {/* Stats */}
         <div className="grid grid-cols-3 gap-8 max-w-3xl mx-auto">
           {[
             { value: "50+", label: "Happy Clients" },

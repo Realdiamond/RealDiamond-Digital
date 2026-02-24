@@ -1,7 +1,6 @@
 import { revalidatePath } from 'next/cache';
 import { NextRequest, NextResponse } from 'next/server';
 
-// Map Sanity document types to their URL paths
 const pathMap: Record<string, string> = {
   'blog': '/blog',
   'project': '/projects', 
@@ -16,7 +15,6 @@ const pathMap: Record<string, string> = {
 
 export async function POST(request: NextRequest) {
   try {
-    // Verify secret token for security
     const secret = request.nextUrl.searchParams.get('secret');
     
     if (secret !== process.env.SANITY_REVALIDATE_SECRET) {
@@ -33,24 +31,20 @@ export async function POST(request: NextRequest) {
       }, { status: 400 });
     }
 
-    // Extract document type and slug from Sanity webhook
     const { _type, slug } = body;
     
     console.log(`🔄 Revalidating: ${_type}${slug?.current ? ` - ${slug.current}` : ''}`);
     
-    // Revalidate specific document page if it has a slug
     const basePath = pathMap[_type];
     if (basePath) {
       if (slug?.current) {
         await revalidatePath(`${basePath}/${slug.current}`);
         console.log(`✅ Revalidated: ${basePath}/${slug.current}`);
       }
-      // Always revalidate the listing page
       await revalidatePath(basePath);
       console.log(`✅ Revalidated: ${basePath}`);
     }
     
-    // Always revalidate homepage (shows featured content from multiple types)
     await revalidatePath('/');
     console.log('✅ Revalidated: /');
     
@@ -70,7 +64,6 @@ export async function POST(request: NextRequest) {
   }
 }
 
-// Only allow POST requests
 export async function GET() {
   return NextResponse.json({ 
     message: 'Revalidation endpoint. Use POST with Sanity webhook.' 

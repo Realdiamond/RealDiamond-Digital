@@ -16,16 +16,15 @@ export default function RootLayout({
 }) {
   const organizationSchema = generateOrganizationSchema({
     name: "RealDiamond Digital",
-    url: "https://realdiamond-digital.vercel.app",
-    logo: "https://realdiamond-digital.vercel.app/icons/logo.png",
+    url: "https://realdiamonddigital.studio",
+    logo: "https://realdiamonddigital.studio/icons/logo.png",
     description: "Strategic web design, development, SEO, and digital marketing agency",
     email: "realdiamonddigital@gmail.com",
     telephone: "+2348138462476",
     areaServed: "Worldwide",
     sameAs: [
-      "https://twitter.com/realdiamonddigital",
-      "https://linkedin.com/company/realdiamonddigital",
-      "https://instagram.com/realdiamonddigital",
+      "https://www.linkedin.com/in/oluwatimilehin0-akinsanmi1/",
+      "https://x.com/Iam_RealDiamond/",
     ],
   });
 

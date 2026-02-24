@@ -53,7 +53,6 @@ export default function ContactForm() {
       ...prev,
       [e.target.name]: e.target.value,
     }));
-    // Clear error when user starts typing
     if (error) setError("");
   };
 
@@ -68,7 +67,6 @@ export default function ContactForm() {
     });
   };
 
-  // Success State
   if (isSuccess) {
     return (
       <div className="text-center py-12 space-y-6">
@@ -96,13 +94,11 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      {/* Error Message */}
       {error && (
         <div className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
           <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
         </div>
       )}
-      {/* Name */}
       <div>
         <label htmlFor="name" className="block text-sm font-semibold text-foreground mb-2">
           Your Name *
@@ -119,7 +115,6 @@ export default function ContactForm() {
         />
       </div>
 
-      {/* Email */}
       <div>
         <label htmlFor="email" className="block text-sm font-semibold text-foreground mb-2">
           Email Address *
@@ -136,7 +131,6 @@ export default function ContactForm() {
         />
       </div>
 
-      {/* Company */}
       <div>
         <label htmlFor="company" className="block text-sm font-semibold text-foreground mb-2">
           Company Name
@@ -152,7 +146,6 @@ export default function ContactForm() {
         />
       </div>
 
-      {/* Service Interest */}
       <div>
         <label htmlFor="service" className="block text-sm font-semibold text-foreground mb-2">
           What service are you interested in?
@@ -173,7 +166,6 @@ export default function ContactForm() {
         </select>
       </div>
 
-      {/* Message */}
       <div>
         <label htmlFor="message" className="block text-sm font-semibold text-foreground mb-2">
           Tell us about your project *
@@ -190,7 +182,6 @@ export default function ContactForm() {
         />
       </div>
 
-      {/* Submit Button */}
       <Button
         type="submit"
         size="lg"

@@ -30,7 +30,6 @@ export default function ProjectsFilter({ projects, categories }: ProjectsFilterP
 
   return (
     <>
-      {/* Filter Tabs */}
       <section className="py-8 bg-background border-b border-border/50 sticky top-20 z-40 backdrop-blur-xl bg-background/80">
         <div className="container-wide">
           <div className="flex flex-wrap gap-2">
@@ -51,7 +50,6 @@ export default function ProjectsFilter({ projects, categories }: ProjectsFilterP
         </div>
       </section>
 
-      {/* Projects Grid - Masonry Style */}
       <section className="py-16 bg-background">
         <div className="container-wide">
           {filteredProjects.length === 0 ? (
@@ -63,7 +61,6 @@ export default function ProjectsFilter({ projects, categories }: ProjectsFilterP
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredProjects.map((project, index) => {
-                // Create varied card sizes for masonry effect
                 const isLarge = index % 5 === 0;
                 const isMedium = index % 3 === 1;
                 
@@ -75,7 +72,7 @@ export default function ProjectsFilter({ projects, categories }: ProjectsFilterP
                       isLarge ? "md:col-span-2 lg:col-span-2" : ""
                     }`}
                   >
-                    {/* Image */}
+
                     <div className={`relative overflow-hidden ${
                       isLarge ? "h-72" : isMedium ? "h-56" : "h-48"
                     }`}>
@@ -88,7 +85,6 @@ export default function ProjectsFilter({ projects, categories }: ProjectsFilterP
                       )}
                       <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent" />
                       
-                      {/* Category Badge */}
                       {project.tags && project.tags.length > 0 && (
                         <div className="absolute top-4 left-4">
                           <span className="px-3 py-1 glass-card text-xs font-medium text-accent">
@@ -97,13 +93,11 @@ export default function ProjectsFilter({ projects, categories }: ProjectsFilterP
                         </div>
                       )}
 
-                      {/* View Project Indicator */}
                       <div className="absolute bottom-4 right-4 w-10 h-10 glass-card flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0">
                         <ArrowRight className="w-4 h-4 text-accent" />
                       </div>
                     </div>
 
-                    {/* Content */}
                     <div className="p-6">
                       <h3 className="font-heading text-xl font-semibold text-foreground mb-2 group-hover:text-accent transition-colors">
                         {project.title}
@@ -112,7 +106,6 @@ export default function ProjectsFilter({ projects, categories }: ProjectsFilterP
                         {project.description}
                       </p>
                       
-                      {/* Meta */}
                       <div className="flex items-center gap-4 text-xs text-muted-foreground">
                         {project.year && <span>{project.year}</span>}
                         {project.duration && <span>•</span>}

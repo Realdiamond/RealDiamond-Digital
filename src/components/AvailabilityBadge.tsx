@@ -18,7 +18,7 @@ async function getSiteSettings(): Promise<SiteSettings | null> {
       query,
       {},
       {
-        next: { revalidate: 86400 } // 24 hours - site settings rarely change
+        next: { revalidate: 86400 }
       }
     );
     
@@ -40,7 +40,6 @@ async function getSiteSettings(): Promise<SiteSettings | null> {
 const AvailabilityBadge = async () => {
   const settings = await getSiteSettings();
 
-  // Don't render if disabled or no settings
   if (!settings || !settings.availabilityEnabled) {
     return null;
   }

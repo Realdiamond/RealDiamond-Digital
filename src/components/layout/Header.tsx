@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-// import Link from "next/link"; // Removed for full reload navigation
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
@@ -42,19 +41,17 @@ const Header = () => {
     >
       <div className="container-wide">
         <nav className="flex items-center justify-between h-20">
-          {/* Logo container*/}
           <a href="/" className="flex items-center justify-center group">
             <Image
-              src="/icons/logo-s.png"
-              alt="Ri ealDiamond Digital"
-              width={400}
-              height={160}
+              src="/icons/logo.png"
+              alt="RealDiamond Digital"
+              width={300}
+              height={120}
               className="h-16 w-auto object-contain transition-opacity duration-300 group-hover:opacity-80"
               priority
             />
           </a>
 
-          {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-8">
             {navLinks.map((link) => (
               <a
@@ -74,14 +71,12 @@ const Header = () => {
             ))}
           </div>
 
-          {/* CTA Button */}
           <div className="hidden lg:block">
             <Button className="bg-gradient-to-r from-accent to-accent-secondary hover:shadow-glow text-white font-semibold">
               <a href="/contact">Start Project</a>
             </Button>
           </div>
 
-          {/* Mobile Menu Button */}
           <button
             className="lg:hidden p-2 glass-card"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -95,7 +90,6 @@ const Header = () => {
           </button>
         </nav>
 
-        {/* Mobile Navigation */}
         {isMenuOpen && (
           <div className="lg:hidden py-6 border-t border-border/50 animate-fade-in bg-background/95 backdrop-blur-md">
             <div className="flex flex-col gap-2">

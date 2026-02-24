@@ -10,7 +10,7 @@ export const metadata = generateSEO({
   title: 'Blog',
   description: 'Expert insights on web development, SEO, digital marketing, and business growth strategies. Practical tips and tutorials to help your business succeed online.',
   keywords: ['web development blog', 'SEO tips', 'digital marketing insights', 'business growth', 'WordPress tutorials', 'Next.js guides'],
-  canonical: 'https://realdiamond-digital.vercel.app/blog',
+  canonical: 'https://realdiamonddigital.studio/blog',
 });
 
 async function getBlogPosts() {
@@ -29,7 +29,7 @@ async function getBlogPosts() {
     }`,
     {},
     {
-      next: { revalidate: 60 } // 1 minute - blog posts update frequently
+      next: { revalidate: 60 }
     }
   );
   return posts;
@@ -44,21 +44,19 @@ async function getCategories() {
     }`,
     {},
     {
-      next: { revalidate: 60 } // 1 minute - categories change with blog
+      next: { revalidate: 60 }
     }
   );
   return categories;
 }
 
-// Time-based ISR (60s) + on-demand revalidation via webhook
-export const revalidate = 60; // 1 minute - blog posts update frequently
+export const revalidate = 60;
 
 export default async function Blog() {
   const blogPosts = await getBlogPosts();
   const categories = await getCategories();
   return (
     <Layout>
-      {/* Hero */}
       <section className="pt-24 pb-16 bg-background relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
           <div className="bg-orb bg-orb-1 opacity-20" />

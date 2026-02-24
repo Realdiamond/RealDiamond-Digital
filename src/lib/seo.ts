@@ -19,11 +19,11 @@ export interface SEOProps {
 const siteConfig = {
   name: 'RealDiamond Digital',
   description: 'Strategic web design, development, SEO, and digital marketing that transforms your business. From strategy to execution, we deliver measurable growth.',
-  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://realdiamond-digital.vercel.app',
+  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://realdiamonddigital.studio',
   ogImage: '/og-image.png',
   links: {
-    twitter: 'https://twitter.com/realdiamonddigital',
-    linkedin: 'https://linkedin.com/company/realdiamonddigital',
+    twitter: 'https://x.com/Iam_RealDiamond/',
+    linkedin: 'https://www.linkedin.com/in/oluwatimilehin0-akinsanmi1/',
   },
 };
 
@@ -37,7 +37,6 @@ export function generateSEO({
   canonical,
   noindex = false,
 }: SEOProps = {}): Metadata {
-  // Ensure ogImage has a fallback value
   const finalOgImage = ogImage || siteConfig.ogImage;
   
   const fullTitle = title 

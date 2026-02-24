@@ -29,7 +29,6 @@ import {
   LucideIcon
 } from "lucide-react";
 
-// Icon mapping for dynamic rendering
 const iconMap: Record<string, LucideIcon> = {
   Globe,
   Search,
@@ -57,7 +56,7 @@ export const metadata = generateSEO({
   title: 'Our Services',
   description: 'Expert web design, development, SEO, and digital marketing services. We create custom solutions that drive growth and deliver measurable ROI for your business.',
   keywords: ['web design services', 'SEO services', 'digital marketing', 'web development', 'ecommerce solutions', 'custom websites'],
-  canonical: 'https://realdiamond-digital.vercel.app/services',
+  canonical: 'https://realdiamonddigital.studio/services',
 });
 
 interface SubService {
@@ -101,7 +100,7 @@ async function getServices(): Promise<Service[]> {
     }`,
     {},
     {
-      next: { revalidate: 1800 } // 30 minutes - services change rarely
+      next: { revalidate: 1800 }
     }
   );
   return services;
@@ -112,7 +111,6 @@ const Services = async () => {
 
   return (
     <Layout>
-      {/* Hero */}
       <section className="pt-24 pb-16 bg-background relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
           <div className="bg-orb bg-orb-1 opacity-20" />
@@ -137,12 +135,10 @@ const Services = async () => {
         </div>
       </section>
 
-      {/* Services List */}
       <section className="py-20 bg-background">
         <div className="container-wide">
           <div className="space-y-24">
             {services.map((service, index) => {
-              // Defensive icon lookup with trimming
               const iconKey = service.icon?.trim() || '';
               const ServiceIcon = iconMap[iconKey] || Globe;
               
@@ -154,7 +150,6 @@ const Services = async () => {
                   index % 2 === 1 ? "lg:flex-row-reverse" : ""
                 }`}
               >
-                {/* Content */}
                 <div className={index % 2 === 1 ? "lg:order-2" : ""}>
                   <div className={`w-16 h-16 bg-gradient-to-br ${service.gradient} rounded-2xl flex items-center justify-center mb-6`}>
                     <ServiceIcon className="w-8 h-8 text-accent-foreground" />
@@ -176,7 +171,6 @@ const Services = async () => {
                   </div>
                 </div>
 
-                {/* Benefits & Details */}
                 <div className={`glass-card p-8 ${index % 2 === 1 ? "lg:order-1" : ""}`}>
                   <h4 className="font-semibold text-foreground mb-4">What You Get</h4>
                   <ul className="space-y-3 mb-8">

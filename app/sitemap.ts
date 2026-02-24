@@ -2,9 +2,8 @@ import { MetadataRoute } from 'next';
 import { client } from '@/sanity/lib/client';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://realdiamond-digital.vercel.app';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://realdiamonddigital.studio';
 
-  // Get all blog posts
   const blogPosts = await client.fetch(
     `*[_type == "blog"] {
       "slug": slug.current,
@@ -17,7 +16,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   );
 
-  // Get all projects
   const projects = await client.fetch(
     `*[_type == "project"] {
       "slug": slug.current,
@@ -29,7 +27,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   );
 
-  // Static pages
   const staticPages = [
     {
       url: baseUrl,
@@ -75,7 +72,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
-  // Blog post pages
   const blogPages = blogPosts.map((post: any) => ({
     url: `${baseUrl}/blog/${post.slug}`,
     lastModified: new Date(post._updatedAt),
@@ -83,7 +79,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
-  // Project pages
   const projectPages = projects.map((project: any) => ({
     url: `${baseUrl}/projects/${project.slug}`,
     lastModified: new Date(project._updatedAt),

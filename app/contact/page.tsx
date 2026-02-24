@@ -19,13 +19,12 @@ export const metadata = generateSEO({
   title: 'Contact Us',
   description: 'Get in touch with RealDiamond Digital. Schedule a free consultation to discuss your web design, SEO, or digital marketing project. Available worldwide.',
   keywords: ['contact', 'free consultation', 'get quote', 'digital marketing consultation', 'web design inquiry'],
-  canonical: 'https://realdiamond-digital.vercel.app/contact',
+  canonical: 'https://realdiamonddigital.studio/contact',
 });
 
 const Contact = () => {
   return (
     <Layout>
-      {/* Hero */}
       <section className="pt-24 pb-16 bg-background relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
           <div className="bg-orb bg-orb-1 opacity-20" />
@@ -50,11 +49,9 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* Contact Section */}
       <section className="py-20 bg-background">
         <div className="container-wide">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-            {/* Contact Form */}
             <div>
               <h2 className="font-heading text-2xl font-bold text-foreground mb-6">
                 Send Us a Message
@@ -62,7 +59,6 @@ const Contact = () => {
               <ContactForm />
             </div>
 
-            {/* Contact Info */}
             <div>
               <div className="glass-card p-8 mb-8">
                 <h2 className="font-heading text-2xl font-bold text-foreground mb-6">
@@ -88,7 +84,6 @@ const Contact = () => {
                 </div>
               </div>
 
-              {/* Book a Call CTA */}
               <div id="consultation" className="glass-card p-8 relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-accent/10 to-accent-secondary/10" />
                 <div className="relative z-10">
@@ -117,7 +112,6 @@ const Contact = () => {
                 </div>
               </div>
 
-              {/* Trust Indicators */}
               <div className="mt-8 space-y-3">
                 {["No obligation consultation", "Honest assessment of your needs", "Clear pricing, no hidden fees"].map((text) => (
                   <div key={text} className="flex items-center gap-3 text-sm text-muted-foreground">
@@ -131,7 +125,6 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* FAQ Section */}
       <FAQ />
     </Layout>
   );

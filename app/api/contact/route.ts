@@ -7,7 +7,6 @@ export async function POST(req: Request) {
 
     console.log('Contact form submission received:', { name, email, company, service });
 
-    // Validate required fields
     if (!name || !email || !message) {
       return NextResponse.json(
         { error: 'Missing required fields' },
@@ -15,7 +14,6 @@ export async function POST(req: Request) {
       );
     }
 
-    // Using Brevo (formerly Sendinblue) for email delivery
     if (process.env.BREVO_API_KEY) {
       console.log('Attempting to send email via Brevo...');
       const response = await fetch('https://api.brevo.com/v3/smtp/email', {
@@ -122,7 +120,6 @@ export async function POST(req: Request) {
 
       console.log('Email sent successfully via Brevo');
     } else {
-      // Fallback: Log to console for development
       console.log('BREVO_API_KEY not found - Contact Form Submission:', {
         name,
         email,

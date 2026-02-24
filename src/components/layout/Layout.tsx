@@ -17,7 +17,6 @@ const Layout = ({ children }: LayoutProps) => {
       </main>
       <Footer />
       
-      {/* Fixed Components */}
       <AvailabilityBadge />
       <TawkToChat />
     </div>

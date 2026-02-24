@@ -14,7 +14,6 @@ const services = [
 const Hero = () => {
   return (
     <section className="relative min-h-[60vh] sm:h-[70vh] pt-8 sm:pt-12 pb-4 sm:pb-0 flex items-center justify-center overflow-hidden bg-secondary/10">
-      {/* Mesh Pattern */}
       <div 
         className="absolute inset-0 opacity-[0.015]"
         style={{
@@ -23,10 +22,8 @@ const Hero = () => {
         }}
       />
 
-      {/* Floating Cards - Left Side */}
       <div className="absolute left-16 top-1/2 -translate-y-1/2 hidden xl:block animate-fade-in" style={{ animationDelay: "0.5s" }}>
         <div className="space-y-10">
-          {/* Success Card */}
           <div className="w-64 glass-card p-5 animate-float">
             <div className="flex items-center gap-3 mb-2">
               <div className="w-10 h-10 rounded-full bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center">
@@ -42,7 +39,6 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Growth Card */}
           <div className="w-56 glass-card p-4 animate-float" style={{ animationDelay: "-3s" }}>
             <div className="flex items-center justify-between mb-2">
               <span className="text-sm font-medium text-muted-foreground">Lead Growth</span>
@@ -55,10 +51,8 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Floating Cards - Right Side */}
       <div className="absolute right-8 top-1/2 -translate-y-1/2 hidden xl:block animate-fade-in" style={{ animationDelay: "0.6s" }}>
         <div className="space-y-6">
-          {/* Stats Card */}
           <div className="w-60 glass-card p-5 animate-float" style={{ animationDelay: "-1s" }}>
             <div className="flex items-center gap-3">
               <div className="flex gap-0.5">
@@ -75,7 +69,6 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Traffic Card */}
           <div className="w-56 glass-card p-4 animate-float" style={{ animationDelay: "-4s" }}>
             <div className="flex items-center gap-2 mb-2">
               <TrendingUp className="w-4 h-4 text-accent" />
@@ -88,21 +81,17 @@ const Hero = () => {
       </div>
 
       <div className="container-wide relative z-10 text-center px-4">
-        {/* Main Content */}
         <div className="max-w-5xl mx-auto space-y-4 sm:space-y-6">
-          {/* Massive Headline */}
           <h1 className="font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold leading-[0.95] tracking-tighter animate-fade-in">
             More Calls.
             <br />
             <span className="text-gradient">More Revenue.</span>
           </h1>
 
-          {/* Punchy Subheadline */}
           <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-muted-foreground font-light max-w-3xl mx-auto animate-slide-up px-4" style={{ animationDelay: "0.1s" }}>
             We build high-converting websites and run local SEO for service businesses that want real results.
           </p>
 
-          {/* Two CTAs */}
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center animate-slide-up" style={{ animationDelay: "0.2s" }}>
             <Button 
               size="lg" 

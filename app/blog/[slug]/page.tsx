@@ -27,7 +27,7 @@ async function getBlogPost(slug: string) {
     }`,
     { slug },
     {
-      next: { revalidate: 60 } // 1 minute - blog posts update frequently
+      next: { revalidate: 60 }
     }
   );
   return post;
@@ -52,7 +52,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       author: post.author,
       tags: [post.category],
     },
-    canonical: `https://realdiamond-digital.vercel.app/blog/${slug}`,
+    canonical: `https://realdiamonddigital.studio/blog/${slug}`,
   });
 }
 
@@ -61,14 +61,13 @@ export async function generateStaticParams() {
     `*[_type == "blog"] { "slug": slug.current }`,
     {},
     {
-      next: { revalidate: 60 } // 1 minute
+      next: { revalidate: 60 }
     }
   );
   return posts.map((post: any) => ({ slug: post.slug }));
 }
 
-// Time-based ISR (60s) + on-demand revalidation via webhook
-export const revalidate = 60; // 1 minute - blog posts update frequently
+export const revalidate = 60;
 
 export default async function BlogPost({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -116,7 +115,6 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
 
   return (
     <Layout>
-      {/* Hero */}
       <section className="pt-24 pb-12 bg-background relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
           <div className="bg-orb bg-orb-1 opacity-15" />
@@ -151,7 +149,6 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
         </div>
       </section>
 
-      {/* Featured Image */}
       {post.image && (
         <section className="pb-12 bg-background">
           <div className="container-wide">
@@ -168,17 +165,14 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
         </section>
       )}
 
-      {/* Content */}
       <section className="pb-20 bg-background">
         <div className="container-wide">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-            {/* Main Content */}
             <article className="lg:col-span-8">
               <div className="prose prose-lg prose-invert max-w-none text-foreground prose-headings:font-heading prose-headings:text-foreground prose-p:text-muted-foreground prose-li:text-muted-foreground prose-a:text-accent prose-strong:text-foreground">
                 <PortableText value={post.content} components={portableTextComponents} />
               </div>
 
-              {/* Share */}
               <div className="mt-12 pt-8 border-t border-border/50">
                 <ShareButtons 
                   title={post.title}
@@ -187,7 +181,6 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
                 />
               </div>
 
-              {/* Author Box */}
               <div className="mt-8 glass-card p-6">
                 <div className="flex items-start gap-4">
                   <div className="w-16 h-16 bg-gradient-to-br from-accent to-accent-secondary rounded-full flex items-center justify-center flex-shrink-0">
@@ -207,10 +200,8 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
               </div>
             </article>
 
-            {/* Sidebar */}
             <aside className="lg:col-span-4">
               <div className="sticky top-24 space-y-8">
-                {/* CTA */}
                 <div className="glass-card p-6 relative overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-br from-accent/10 to-accent-secondary/10" />
                   <div className="relative z-10">

@@ -15,7 +15,6 @@ export const client = createClient({
 const builder = createImageUrlBuilder(client)
 
 export function urlFor(source: any) {
-  // Return null if source is invalid
   if (!source || !source.asset) {
     return null
   }

@@ -32,7 +32,6 @@ export default function BlogContent({ posts, categories }: BlogContentProps) {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState<string>("");
 
-  // Filter posts based on selected category and search query
   const filteredPosts = posts.filter(post => {
     const matchesCategory = selectedCategory === "all" || post.category === selectedCategory;
     const matchesSearch = searchQuery === "" || 
@@ -45,7 +44,6 @@ export default function BlogContent({ posts, categories }: BlogContentProps) {
 
   return (
     <>
-      {/* Search Bar */}
       <section className="py-8 bg-background">
         <div className="container-wide">
           <div className="max-w-2xl mx-auto">
@@ -63,7 +61,6 @@ export default function BlogContent({ posts, categories }: BlogContentProps) {
         </div>
       </section>
 
-      {/* Category Filter */}
       <section className="py-6 bg-secondary/30 border-y border-border/50">
         <div className="container-wide">
           <div className="flex flex-wrap gap-3">
@@ -94,7 +91,6 @@ export default function BlogContent({ posts, categories }: BlogContentProps) {
         </div>
       </section>
 
-      {/* Blog Posts */}
       <section className="py-20 bg-background">
         <div className="container-wide">
           {filteredPosts.length === 0 ? (
@@ -115,7 +111,6 @@ export default function BlogContent({ posts, categories }: BlogContentProps) {
                   key={post._id}
                   className="glass-card-hover overflow-hidden group"
                 >
-                  {/* Image */}
                   <div className="relative h-48 overflow-hidden">
                     {post.image && (
                       <img 

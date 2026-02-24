@@ -52,7 +52,6 @@ export function VideoTestimonialCarousel({ testimonials }: VideoTestimonialCarou
     setSelectedIndex(emblaApi.selectedScrollSnap());
   }, [emblaApi]);
 
-  // Set up selection listener
   useEffect(() => {
     if (emblaApi) {
       emblaApi.on('select', onSelect);
@@ -65,14 +64,12 @@ export function VideoTestimonialCarousel({ testimonials }: VideoTestimonialCarou
   };
 
   const getYouTubeEmbedUrl = (url: string) => {
-    // Handle various YouTube URL formats
     const videoId = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([^&?]+)/)?.[1];
     return videoId ? `https://www.youtube.com/embed/${videoId}?autoplay=1` : url;
   };
 
   return (
     <div className="relative">
-      {/* Carousel */}
       <div className="overflow-hidden" ref={emblaRef}>
         <div className="flex gap-6">
           {testimonials.map((testimonial) => {
@@ -88,7 +85,6 @@ export function VideoTestimonialCarousel({ testimonials }: VideoTestimonialCarou
                 className="flex-[0_0_100%] md:flex-[0_0_calc(50%-12px)] lg:flex-[0_0_calc(33.333%-16px)] min-w-0"
               >
                 <div className="glass-card overflow-hidden group">
-                  {/* Video Thumbnail or Player */}
                   <div className="relative aspect-video bg-secondary/30">
                     {!isPlaying ? (
                       <>
@@ -100,7 +96,6 @@ export function VideoTestimonialCarousel({ testimonials }: VideoTestimonialCarou
                           />
                         )}
                         
-                        {/* Play Button Overlay */}
                         <div 
                           className="absolute inset-0 flex items-center justify-center bg-black/40 group-hover:bg-black/50 transition-colors cursor-pointer"
                           onClick={() => handlePlayVideo(testimonial._id)}
@@ -110,7 +105,6 @@ export function VideoTestimonialCarousel({ testimonials }: VideoTestimonialCarou
                           </div>
                         </div>
 
-                        {/* Duration Badge */}
                         {testimonial.videoDuration && (
                           <div className="absolute bottom-3 right-3 px-2 py-1 bg-black/80 rounded text-white text-xs font-medium">
                             {testimonial.videoDuration}
@@ -138,7 +132,6 @@ export function VideoTestimonialCarousel({ testimonials }: VideoTestimonialCarou
                     )}
                   </div>
 
-                  {/* Testimonial Info */}
                   <div className="p-6">
                     <h3 className="font-heading text-lg font-semibold text-foreground mb-1">
                       {testimonial.author}
@@ -163,7 +156,6 @@ export function VideoTestimonialCarousel({ testimonials }: VideoTestimonialCarou
         </div>
       </div>
 
-      {/* Navigation Buttons */}
       {testimonials.length > 3 && (
         <>
           <Button
@@ -185,7 +177,6 @@ export function VideoTestimonialCarousel({ testimonials }: VideoTestimonialCarou
         </>
       )}
 
-      {/* Dots Indicator */}
       {testimonials.length > 1 && (
         <div className="flex justify-center gap-2 mt-6">
           {Array.from({ length: Math.ceil(testimonials.length / 3) }).map((_, index) => (

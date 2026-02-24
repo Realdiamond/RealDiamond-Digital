@@ -14,7 +14,7 @@ export default function ShareButtons({ title, url, description = '' }: ShareButt
   const [copied, setCopied] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
 
-  const shareUrl = url.startsWith('http') ? url : `https://realdiamond-digital.vercel.app${url}`;
+  const shareUrl = url.startsWith('http') ? url : `https://realdiamonddigital.studio${url}`;
   const encodedUrl = encodeURIComponent(shareUrl);
   const encodedTitle = encodeURIComponent(title);
   const encodedDescription = encodeURIComponent(description);
@@ -45,7 +45,6 @@ export default function ShareButtons({ title, url, description = '' }: ShareButt
           url: shareUrl,
         });
       } catch (err) {
-        // User cancelled or error - fallback to menu
         setShowMenu(true);
       }
     } else {
@@ -58,7 +57,6 @@ export default function ShareButtons({ title, url, description = '' }: ShareButt
       <div className="flex items-center gap-4">
         <span className="text-muted-foreground">Share this article:</span>
         
-        {/* Main share button */}
         <button 
           onClick={handleNativeShare}
           className="w-10 h-10 glass-card flex items-center justify-center hover:border-accent/50 transition-colors"
@@ -67,7 +65,6 @@ export default function ShareButtons({ title, url, description = '' }: ShareButt
           <Share2 className="w-4 h-4 text-foreground" />
         </button>
 
-        {/* Desktop share buttons */}
         <div className="hidden md:flex items-center gap-2">
           <a
             href={shareLinks.twitter}
@@ -123,7 +120,6 @@ export default function ShareButtons({ title, url, description = '' }: ShareButt
         </div>
       </div>
 
-      {/* Mobile dropdown menu */}
       {showMenu && (
         <div className="md:hidden absolute top-full left-0 mt-2 w-64 glass-card p-4 z-50 shadow-elevated">
           <div className="flex flex-col gap-2">

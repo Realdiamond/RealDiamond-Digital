@@ -94,7 +94,6 @@ export default async function TestimonialsPage() {
 
   return (
     <Layout>
-      {/* Hero Section */}
       <section className="pt-24 pb-16 bg-background relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
           <div className="bg-orb bg-orb-1 opacity-20" />
@@ -118,7 +117,6 @@ export default async function TestimonialsPage() {
         </div>
       </section>
 
-      {/* Video Testimonials Section */}
       {videoTestimonials && videoTestimonials.length > 0 && (
         <section className="py-20 bg-secondary/30 border-y border-border/50">
           <div className="container-wide">
@@ -136,7 +134,6 @@ export default async function TestimonialsPage() {
         </section>
       )}
 
-      {/* Text Testimonials Grid */}
       {textTestimonials && textTestimonials.length > 0 && (
         <section className="py-20">
           <div className="container-wide">
@@ -146,10 +143,8 @@ export default async function TestimonialsPage() {
                   key={testimonial._id}
                   className="glass-card-hover p-8 relative"
                 >
-                  {/* Quote Icon */}
                   <Quote className="w-10 h-10 text-accent/20 absolute top-6 right-6" />
 
-                  {/* Rating */}
                   {testimonial.rating && (
                     <div className="flex gap-1 mb-4">
                       {[...Array(testimonial.rating)].map((_, i) => (
@@ -161,12 +156,10 @@ export default async function TestimonialsPage() {
                     </div>
                   )}
 
-                  {/* Content */}
                   <p className="text-muted-foreground mb-6 relative z-10 leading-relaxed">
                     "{testimonial.quote}"
                   </p>
 
-                  {/* Author Info */}
                   <div className="flex items-center gap-4 pt-6 border-t border-border/50">
                     {testimonial.image?.asset?.url && (
                       <img
@@ -193,7 +186,6 @@ export default async function TestimonialsPage() {
         </section>
       )}
 
-      {/* Empty State */}
       {(!textTestimonials || textTestimonials.length === 0) && 
        (!videoTestimonials || videoTestimonials.length === 0) && (
         <section className="py-20">
@@ -205,7 +197,6 @@ export default async function TestimonialsPage() {
         </section>
       )}
 
-      {/* CTA Section */}
       <section className="py-20 bg-secondary/30 border-t border-border/50">
         <div className="container-wide">
           <div className="glass-card p-12 md:p-16 text-center relative overflow-hidden">

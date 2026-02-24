@@ -9,7 +9,6 @@ const imageBuilder = createImageUrlBuilder({
 })
 
 export const urlForImage = (source: Image | null | undefined) => {
-  // Return null if source is invalid - caller should handle this
   if (!source || !source.asset) {
     return null
   }

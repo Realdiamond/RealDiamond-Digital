@@ -36,13 +36,11 @@ const ProcessTimeline = () => {
 
   return (
     <section className="py-32 bg-gradient-to-b from-background to-secondary/20 relative overflow-hidden">
-      {/* Background Elements */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="bg-orb bg-orb-1 opacity-5" />
       </div>
 
       <div className="container-wide relative">
-        {/* Header */}
         <div className="max-w-2xl mx-auto text-center mb-20">
           <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
             How We Work With{" "}
@@ -53,7 +51,6 @@ const ProcessTimeline = () => {
           </p>
         </div>
 
-        {/* Timeline */}
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {steps.map((step, index) => (
@@ -61,24 +58,19 @@ const ProcessTimeline = () => {
                 key={step.title}
                 className="relative"
               >
-                {/* Connector Line (hidden on mobile, shown on larger screens) */}
                 {index < steps.length - 1 && (
                   <div className="hidden lg:block absolute top-16 left-full w-full h-0.5 bg-gradient-to-r from-accent/40 to-transparent z-0" />
                 )}
 
-                {/* Card */}
                 <div className="relative glass-card p-6 group hover:shadow-glow transition-all duration-500 hover:-translate-y-2 h-full">
-                  {/* Step Number */}
                   <div className="absolute -top-4 -left-4 w-10 h-10 rounded-full bg-gradient-to-br from-accent to-accent-secondary flex items-center justify-center text-white font-bold text-lg shadow-glow z-10">
                     {index + 1}
                   </div>
 
-                  {/* Icon */}
                   <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${step.color} flex items-center justify-center mb-4 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
                     <step.icon className="w-7 h-7 text-white" />
                   </div>
 
-                  {/* Content */}
                   <h3 className="font-heading text-xl font-bold text-foreground mb-3">
                     {step.title}
                   </h3>
@@ -86,7 +78,6 @@ const ProcessTimeline = () => {
                     {step.description}
                   </p>
 
-                  {/* Check Icon */}
                   <div className="absolute bottom-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <CheckCircle2 className="w-5 h-5 text-accent" />
                   </div>

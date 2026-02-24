@@ -8,7 +8,7 @@ export const metadata = generateSEO({
   title: 'Our Projects',
   description: 'Explore our portfolio of successful web design, SEO, and digital marketing projects. See how we have helped businesses achieve measurable growth and results.',
   keywords: ['portfolio', 'web design projects', 'SEO case studies', 'digital marketing results', 'client success stories'],
-  canonical: 'https://realdiamond-digital.vercel.app/projects',
+  canonical: 'https://realdiamonddigital.studio/projects',
 });
 
 async function getProjects() {
@@ -28,14 +28,13 @@ async function getProjects() {
     }`,
     {},
     {
-      next: { revalidate: 0 } // Disable cache - rely on webhook revalidation
+      next: { revalidate: 0 }
     }
   );
   return projects;
 }
 
-// Time-based ISR (60s) + on-demand revalidation via webhook
-export const revalidate = 60; // 1 minute - projects update occasionally
+export const revalidate = 60;
 
 const serviceCategories = [
   { id: "all", name: "All Projects" },
@@ -51,7 +50,6 @@ export default async function Projects() {
 
   return (
     <Layout>
-      {/* Hero Section */}
       <section className="pt-24 pb-12 bg-background relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
           <div className="bg-orb bg-orb-1 opacity-20" />

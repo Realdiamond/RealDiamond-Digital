@@ -17,7 +17,6 @@ const CTA = ({
 }: CTAProps) => {
   return (
     <section className="section-padding bg-background relative overflow-hidden">
-      {/* Background */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="bg-orb bg-orb-1 opacity-30" />
         <div className="bg-orb bg-orb-2 opacity-20" />
@@ -25,7 +24,6 @@ const CTA = ({
 
       <div className="container-wide relative">
         <div className="glass-card p-12 md:p-16 lg:p-20 text-center relative overflow-hidden">
-          {/* Inner gradient */}
           <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-accent-secondary/5" />
           
           <div className="relative z-10">

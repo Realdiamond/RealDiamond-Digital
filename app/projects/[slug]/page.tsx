@@ -38,7 +38,7 @@ async function getProject(slug: string) {
     }`,
     { slug },
     {
-      next: { revalidate: 0 } // Disable cache - rely on webhook revalidation
+      next: { revalidate: 0 }
     }
   );
   return project;
@@ -53,7 +53,7 @@ async function getAdjacentProjects(currentSlug: string) {
     }`,
     {},
     {
-      next: { revalidate: 0 } // Disable cache - rely on webhook revalidation
+      next: { revalidate: 0 }
     }
   );
   
@@ -64,8 +64,7 @@ async function getAdjacentProjects(currentSlug: string) {
   return { nextProject, prevProject };
 }
 
-// Time-based ISR (60s) + on-demand revalidation via webhook
-export const revalidate = 60; // 1 minute - projects update occasionally
+export const revalidate = 60;
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -89,7 +88,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     description: project.description,
     keywords: [...(project.tags || []), categoryName, 'case study', 'portfolio'],
     ogImage: project.image,
-    canonical: `https://realdiamond-digital.vercel.app/projects/${slug}`,
+    canonical: `https://realdiamonddigital.studio/projects/${slug}`,
   });
 }
 
@@ -116,7 +115,6 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
 
   return (
     <Layout>
-      {/* Hero Section */}
       <section className="pt-24 pb-12 bg-background relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
           <div className="bg-orb bg-orb-1 opacity-20" />
@@ -125,7 +123,6 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
         <div className="container-wide relative">
 
           <div className="grid lg:grid-cols-2 gap-12 items-start">
-            {/* Left: Content */}
             <div>
               <div className="flex flex-wrap items-center gap-2 mb-4">
                 <span className="px-3 py-1 glass-card text-xs font-medium text-accent">
@@ -147,7 +144,6 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
                 {project.description}
               </p>
 
-              {/* Quick Stats */}
               <div className="grid grid-cols-2 gap-4 mb-8">
                 <div className="glass-card p-4">
                   <div className="flex items-center gap-3">
@@ -187,7 +183,6 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
                 </div>
               </div>
 
-              {/* Results */}
               <div className="flex flex-wrap gap-3 mb-8">
                 {project.results.map((result) => (
                   <span
@@ -199,7 +194,6 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
                 ))}
               </div>
 
-              {/* Live Project Button - Conditional */}
               {project.projectUrl && (
                 <div>
                   <Button
@@ -221,7 +215,6 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
               )}
             </div>
 
-            {/* Right: Image */}
             <div className="relative">
               <div className="glass-card overflow-hidden">
                 <img
@@ -235,11 +228,9 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
         </div>
       </section>
 
-      {/* Challenge & Solution */}
       <section className="py-20 bg-secondary/30 border-t border-border/50">
         <div className="container-wide">
           <div className="grid lg:grid-cols-2 gap-12">
-            {/* Challenge */}
             <div className="glass-card p-8">
               <h2 className="font-heading text-2xl font-bold text-foreground mb-4">
                 The Challenge
@@ -249,7 +240,6 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
               </p>
             </div>
 
-            {/* Solution */}
             <div className="glass-card p-8">
               <h2 className="font-heading text-2xl font-bold text-foreground mb-4">
                 Our Solution
@@ -262,11 +252,9 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
         </div>
       </section>
 
-      {/* Strategy & Services */}
       <section className="py-20 bg-background">
         <div className="container-wide">
           <div className="grid lg:grid-cols-2 gap-12">
-            {/* Strategy */}
             <div>
               <h2 className="font-heading text-3xl font-bold text-foreground mb-6">
                 Our Strategy
@@ -283,7 +271,6 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
               </div>
             </div>
 
-            {/* Services Used */}
             <div>
               <h2 className="font-heading text-3xl font-bold text-foreground mb-6">
                 Services Provided
@@ -303,7 +290,6 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
         </div>
       </section>
 
-      {/* Gallery Section */}
       {project.gallery && project.gallery.length > 0 && (
         <section className="py-20 bg-secondary/30 border-t border-border/50">
           <div className="container-wide">
@@ -325,7 +311,6 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
         </section>
       )}
 
-      {/* Testimonial */}
       {project.testimonial && (
         <section className="py-20 bg-background border-t border-border/50">
           <div className="container-wide">
@@ -343,7 +328,6 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
         </section>
       )}
 
-      {/* Project Navigation */}
       <section className="py-12 bg-background border-t border-border/50">
         <div className="container-wide">
           <div className="flex justify-between items-center">
@@ -371,7 +355,6 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
         </div>
       </section>
 
-      {/* CTA Section */}
       <section className="py-20 bg-background border-t border-border/50">
         <div className="container-wide">
           <div className="glass-card p-12 md:p-16 text-center relative overflow-hidden">
