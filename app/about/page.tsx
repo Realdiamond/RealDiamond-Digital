@@ -25,7 +25,7 @@ async function getCEOData() {
       role,
       initials,
       bio,
-      "image": image.asset->{url},
+      "image": image.asset->url,
       linkedin,
       twitter,
       email
@@ -168,10 +168,10 @@ const About = async () => {
             {/* Image */}
             <div className="lg:order-2">
               <div className="glass-card overflow-hidden relative group h-[500px]">
-                {ceo?.image?.url ? (
+                {ceo?.image ? (
                   <>
                     <Image
-                      src={ceo.image.url}
+                      src={ceo.image}
                       alt={ceo.name || 'CEO'}
                       fill
                       className="object-cover"
