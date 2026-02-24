@@ -167,7 +167,7 @@ const About = async () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             {/* Image */}
             <div className="lg:order-2">
-              <div className="glass-card overflow-hidden relative group h-[500px]">
+              <div className="glass-card overflow-hidden relative group h-[650px] md:h-[700px]">
                 {ceo?.image ? (
                   <>
                     <Image
@@ -177,7 +177,7 @@ const About = async () => {
                       className="object-cover object-top"
                     />
                     {/* Gradient overlay for text readability */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 via-30% to-transparent" />
                     {/* Name at bottom */}
                     <div className="absolute bottom-0 left-0 right-0 p-8 text-left z-10">
                       <p className="text-gradient font-heading text-2xl md:text-3xl font-bold mb-2">
@@ -194,7 +194,7 @@ const About = async () => {
                       </span>
                     </div>
                     {/* Name at bottom */}
-                    <div className="absolute bottom-0 left-0 right-0 p-8 text-left z-10 bg-gradient-to-t from-background to-transparent">
+                    <div className="absolute bottom-0 left-0 right-0 p-8 text-left z-10 bg-gradient-to-t from-background via-background/50 via-30% to-transparent">
                       <p className="text-gradient font-heading text-2xl md:text-3xl font-bold mb-2">
                         {ceo?.name || 'Oluwatimilehin Akinsanmi'}
                       </p>
