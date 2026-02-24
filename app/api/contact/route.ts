@@ -32,6 +32,10 @@ export async function POST(req: Request) {
               name: 'RealDiamond Digital Team',
             },
           ],
+          replyTo: {
+            email: email,
+            name: name,
+          },
           subject: `New Contact Form Submission from ${name}`,
           htmlContent: `
             <h2>New Contact Form Submission</h2>
