@@ -5,6 +5,8 @@ export async function POST(req: Request) {
     const body = await req.json();
     const { name, email, company, service, message } = body;
 
+    console.log('Contact form submission received:', { name, email, company, service });
+
     // Validate required fields
     if (!name || !email || !message) {
       return NextResponse.json(
@@ -15,6 +17,7 @@ export async function POST(req: Request) {
 
     // Using Brevo (formerly Sendinblue) for email delivery
     if (process.env.BREVO_API_KEY) {
+      console.log('Attempting to send email via Brevo...');
       const response = await fetch('https://api.brevo.com/v3/smtp/email', {
         method: 'POST',
         headers: {
@@ -53,12 +56,21 @@ export async function POST(req: Request) {
 
       if (!response.ok) {
         const errorData = await response.json();
-        console.error('Brevo API error:', errorData);
-        throw new Error('Failed to send email');
+        console.error('Brevo API error:', {
+          status: response.status,
+          statusText: response.statusText,
+          error: errorData
+        });
+        return NextResponse.json(
+          { error: `Email service error: ${errorData.message || 'Unknown error'}` },
+          { status: 500 }
+        );
       }
+
+      console.log('Email sent successfully via Brevo');
     } else {
       // Fallback: Log to console for development
-      console.log('Contact Form Submission:', {
+      console.log('BREVO_API_KEY not found - Contact Form Submission:', {
         name,
         email,
         company,
@@ -66,6 +78,10 @@ export async function POST(req: Request) {
         message,
         timestamp: new Date().toISOString(),
       });
+      return NextResponse.json(
+        { error: 'Email service not configured. Please contact support.' },
+        { status: 500 }
+      );
     }
 
     return NextResponse.json(
