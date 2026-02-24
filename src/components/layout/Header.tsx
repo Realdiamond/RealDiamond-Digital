@@ -46,7 +46,7 @@ const Header = () => {
           <a href="/" className="flex items-center justify-center group">
             <Image
               src="/icons/logo-s.png"
-              alt="RealDiamond Digital"
+              alt="Ri ealDiamond Digital"
               width={400}
               height={160}
               className="h-16 w-auto object-contain transition-opacity duration-300 group-hover:opacity-80"
