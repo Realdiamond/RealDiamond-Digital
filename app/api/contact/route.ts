@@ -28,7 +28,7 @@ export async function POST(req: Request) {
           },
           to: [
             {
-              email: process.env.CONTACT_EMAIL || 'oluwatimilehinakinsanmi@gmail.com',
+              email: process.env.CONTACT_EMAIL || 'realdiamonddigital@gmail.com',
               name: 'RealDiamond Digital Team',
             },
           ],
