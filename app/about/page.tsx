@@ -174,16 +174,16 @@ const About = async () => {
                       src={ceo.image}
                       alt={ceo.name || 'CEO'}
                       fill
-                      className="object-cover"
+                      className="object-cover object-top"
                     />
                     {/* Gradient overlay for text readability */}
                     <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
                     {/* Name at bottom */}
                     <div className="absolute bottom-0 left-0 right-0 p-8 text-left z-10">
-                      <p className="text-foreground font-heading text-2xl md:text-3xl font-bold mb-2">
+                      <p className="text-gradient font-heading text-2xl md:text-3xl font-bold mb-2">
                         {ceo?.name || 'Oluwatimilehin Akinsanmi'}
                       </p>
-                      <p className="text-muted-foreground text-lg">{ceo?.role || 'CEO & Lead Strategist'}</p>
+                      <p className="text-accent text-lg font-medium">{ceo?.role || 'CEO & Lead Strategist'}</p>
                     </div>
                   </>
                 ) : (
@@ -195,10 +195,10 @@ const About = async () => {
                     </div>
                     {/* Name at bottom */}
                     <div className="absolute bottom-0 left-0 right-0 p-8 text-left z-10 bg-gradient-to-t from-background to-transparent">
-                      <p className="text-foreground font-heading text-2xl md:text-3xl font-bold mb-2">
+                      <p className="text-gradient font-heading text-2xl md:text-3xl font-bold mb-2">
                         {ceo?.name || 'Oluwatimilehin Akinsanmi'}
                       </p>
-                      <p className="text-muted-foreground text-lg">{ceo?.role || 'CEO & Lead Strategist'}</p>
+                      <p className="text-accent text-lg font-medium">{ceo?.role || 'CEO & Lead Strategist'}</p>
                     </div>
                   </>
                 )}
