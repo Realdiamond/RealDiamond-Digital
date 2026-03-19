@@ -15,7 +15,7 @@ export const metadata = generateSEO({
 });
 
 // Time-based ISR (60s) + on-demand revalidation via webhook
-export const revalidate = CMS_REVALIDATE.testimonial;
+export const revalidate = 1800;
 
 // Define types
 interface TestimonialData {

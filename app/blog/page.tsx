@@ -57,7 +57,7 @@ async function getCategories() {
   return categories;
 }
 
-export const revalidate = CMS_REVALIDATE.blog;
+export const revalidate = 60;
 
 export default async function Blog() {
   const blogPosts = await getBlogPosts();

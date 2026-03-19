@@ -16,7 +16,7 @@ export const metadata = generateSEO({
 });
 
 // Time-based ISR
-export const revalidate = CMS_REVALIDATE.teamMember;
+export const revalidate = 3600;
 
 // Fetch CEO/team data
 async function getCEOData() {

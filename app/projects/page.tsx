@@ -38,7 +38,7 @@ async function getProjects() {
   return projects;
 }
 
-export const revalidate = CMS_REVALIDATE.project;
+export const revalidate = 60;
 
 const serviceCategories = [
   { id: "all", name: "All Projects" },

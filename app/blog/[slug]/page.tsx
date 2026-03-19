@@ -74,7 +74,7 @@ export async function generateStaticParams() {
   return posts.map((post: any) => ({ slug: post.slug }));
 }
 
-export const revalidate = CMS_REVALIDATE.blog;
+export const revalidate = 60;
 
 export default async function BlogPost({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
