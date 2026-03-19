@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight, Clock, MapPin, Users, Calendar, CheckCircle2, Quote, ExternalLink } from "lucide-react";
 import { client } from "@/sanity/lib/client";
 import { generateSEO } from '@/lib/seo';
+import { CMS_REVALIDATE, docTag, entryTag, listTag } from '@/lib/cms-cache';
 
 async function getProject(slug: string) {
   const project = await client.fetch(
@@ -38,7 +39,10 @@ async function getProject(slug: string) {
     }`,
     { slug },
     {
-      next: { revalidate: 0 }
+      next: {
+        revalidate: CMS_REVALIDATE.project,
+        tags: [docTag('project'), entryTag('project', slug)],
+      }
     }
   );
   return project;
@@ -53,7 +57,10 @@ async function getAdjacentProjects(currentSlug: string) {
     }`,
     {},
     {
-      next: { revalidate: 0 }
+      next: {
+        revalidate: CMS_REVALIDATE.project,
+        tags: [docTag('project'), listTag('project')],
+      }
     }
   );
   
@@ -64,7 +71,7 @@ async function getAdjacentProjects(currentSlug: string) {
   return { nextProject, prevProject };
 }
 
-export const revalidate = 60;
+export const revalidate = CMS_REVALIDATE.project;
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -97,7 +104,10 @@ export async function generateStaticParams() {
     `*[_type == "project"] { "slug": slug.current }`,
     {},
     {
-      next: { revalidate: 0 } // Disable cache - rely on webhook revalidation
+      next: {
+        revalidate: CMS_REVALIDATE.project,
+        tags: [docTag('project'), listTag('project')],
+      }
     }
   );
   return projects.map((project: any) => ({ slug: project.slug }));

@@ -171,7 +171,7 @@ export const blogPost = defineType({
       title: 'title',
       author: 'author',
       media: 'image',
-      category: 'category',
+      category: 'category.title',
     },
     prepare(selection) {
       const { title, author, category } = selection

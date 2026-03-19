@@ -10,12 +10,14 @@ export default function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState("");
+  const [formStartedAt, setFormStartedAt] = useState(() => Date.now());
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     company: "",
     service: "",
     message: "",
+    website: "",
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -29,17 +31,34 @@ export default function ContactForm() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          formStartedAt,
+        }),
       });
 
-      const data = await response.json();
+      const data = await response.json().catch(() => ({} as Record<string, unknown>));
 
       if (response.ok) {
         setIsSuccess(true);
       } else {
-        setError(data.error || "Failed to send message. Please try again.");
+        if (response.status === 429) {
+          const retryAfter = typeof data.retryAfter === "number" ? data.retryAfter : undefined;
+          setError(
+            retryAfter
+              ? `Too many requests. Please wait ${retryAfter} seconds and try again.`
+              : "Too many requests. Please wait a moment and try again."
+          );
+          return;
+        }
+
+        setError(
+          typeof data.error === "string"
+            ? data.error
+            : "Failed to send message. Please try again."
+        );
       }
-    } catch (error) {
+    } catch {
       setError("Network error. Please check your connection and try again.");
     } finally {
       setIsSubmitting(false);
@@ -64,7 +83,9 @@ export default function ContactForm() {
       company: "",
       service: "",
       message: "",
+      website: "",
     });
+    setFormStartedAt(Date.now());
   };
 
   if (isSuccess) {
@@ -99,6 +120,23 @@ export default function ContactForm() {
           <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
         </div>
       )}
+      <div>
+        <label htmlFor="website" className="sr-only">
+          Leave this field empty
+        </label>
+        <Input
+          id="website"
+          name="website"
+          type="text"
+          value={formData.website}
+          onChange={handleChange}
+          autoComplete="off"
+          tabIndex={-1}
+          className="hidden"
+          aria-hidden="true"
+        />
+      </div>
+
       <div>
         <label htmlFor="name" className="block text-sm font-semibold text-foreground mb-2">
           Your Name *

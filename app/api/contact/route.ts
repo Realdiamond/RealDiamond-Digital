@@ -1,36 +1,140 @@
-import { NextResponse } from 'next/server';
+import { NextResponse } from "next/server";
+import { contactSchema, escapeHtml } from "@/lib/contact";
+
+const RATE_LIMIT_WINDOW_MS = 15 * 60 * 1000;
+const RATE_LIMIT_MAX_REQUESTS = 5;
+const MIN_HUMAN_SUBMIT_MS = 2500;
+
+type RateLimitEntry = {
+  count: number;
+  resetAt: number;
+};
+
+const rateLimitStore = new Map<string, RateLimitEntry>();
+
+function getClientKey(req: Request): string {
+  const forwardedFor = req.headers.get("x-forwarded-for");
+  const ip = forwardedFor?.split(",")[0]?.trim() || "unknown";
+  const userAgent = req.headers.get("user-agent") || "unknown";
+  return `${ip}:${userAgent.slice(0, 80)}`;
+}
+
+function checkRateLimit(key: string): { allowed: boolean; retryAfter: number } {
+  const now = Date.now();
+
+  for (const [entryKey, entry] of rateLimitStore.entries()) {
+    if (entry.resetAt <= now) {
+      rateLimitStore.delete(entryKey);
+    }
+  }
+
+  const current = rateLimitStore.get(key);
+
+  if (!current) {
+    rateLimitStore.set(key, {
+      count: 1,
+      resetAt: now + RATE_LIMIT_WINDOW_MS,
+    });
+    return { allowed: true, retryAfter: 0 };
+  }
+
+  if (current.count >= RATE_LIMIT_MAX_REQUESTS) {
+    const retryAfter = Math.max(1, Math.ceil((current.resetAt - now) / 1000));
+    return { allowed: false, retryAfter };
+  }
+
+  current.count += 1;
+  return { allowed: true, retryAfter: 0 };
+}
 
 export async function POST(req: Request) {
+  const requestId = crypto.randomUUID();
+
   try {
     const body = await req.json();
-    const { name, email, company, service, message } = body;
 
-    console.log('Contact form submission received:', { name, email, company, service });
+    const parsed = contactSchema.safeParse(body);
 
-    if (!name || !email || !message) {
+    if (!parsed.success) {
       return NextResponse.json(
-        { error: 'Missing required fields' },
+        {
+          error: "Please check your input and try again.",
+          details: parsed.error.flatten().fieldErrors,
+        },
         { status: 400 }
       );
     }
 
-    if (process.env.BREVO_API_KEY) {
-      console.log('Attempting to send email via Brevo...');
-      const response = await fetch('https://api.brevo.com/v3/smtp/email', {
-        method: 'POST',
-        headers: {
-          'api-key': process.env.BREVO_API_KEY,
-          'Content-Type': 'application/json',
+    const { name, email, company, service, message, website, formStartedAt } = parsed.data;
+
+    if (website) {
+      return NextResponse.json(
+        {
+          success: true,
+          message: "Your message has been sent successfully!",
         },
+        { status: 200 }
+      );
+    }
+
+    if (formStartedAt && Date.now() - formStartedAt < MIN_HUMAN_SUBMIT_MS) {
+      return NextResponse.json(
+        { error: "Submission was too fast. Please try again." },
+        { status: 400 }
+      );
+    }
+
+    const clientKey = getClientKey(req);
+    const limit = checkRateLimit(clientKey);
+
+    if (!limit.allowed) {
+      return NextResponse.json(
+        {
+          error: "Too many requests. Please wait before trying again.",
+          retryAfter: limit.retryAfter,
+        },
+        {
+          status: 429,
+          headers: {
+            "Retry-After": String(limit.retryAfter),
+          },
+        }
+      );
+    }
+
+    const safeName = escapeHtml(name);
+    const safeEmail = escapeHtml(email);
+    const safeCompany = escapeHtml(company || "Not provided");
+    const safeService = escapeHtml(service || "Not specified");
+    const safeMessage = escapeHtml(message);
+
+    console.log("Contact form submission received", {
+      requestId,
+      name,
+      email,
+      service,
+    });
+
+    if (process.env.BREVO_API_KEY) {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 10_000);
+
+      const response = await fetch("https://api.brevo.com/v3/smtp/email", {
+        method: "POST",
+        headers: {
+          "api-key": process.env.BREVO_API_KEY,
+          "Content-Type": "application/json",
+        },
+        signal: controller.signal,
         body: JSON.stringify({
           sender: {
-            name: 'RealDiamond Digital',
-            email: 'contact@realdiamonddigital.studio',
+            name: "RealDiamond Digital",
+            email: "contact@realdiamonddigital.studio",
           },
           to: [
             {
-              email: process.env.CONTACT_EMAIL || 'realdiamonddigital@gmail.com',
-              name: 'RealDiamond Digital Team',
+              email: process.env.CONTACT_EMAIL || "realdiamonddigital@gmail.com",
+              name: "RealDiamond Digital Team",
             },
           ],
           replyTo: {
@@ -70,27 +174,27 @@ export async function POST(req: Request) {
 
                   <div class="info-row">
                     <span class="label">Name:</span>
-                    <span class="value">${name}</span>
+                    <span class="value">${safeName}</span>
                   </div>
 
                   <div class="info-row">
                     <span class="label">Email:</span>
-                    <span class="value"><a href="mailto:${email}" style="color: #667eea;">${email}</a></span>
+                    <span class="value"><a href="mailto:${safeEmail}" style="color: #667eea;">${safeEmail}</a></span>
                   </div>
 
                   <div class="info-row">
                     <span class="label">Company:</span>
-                    <span class="value">${company || 'Not provided'}</span>
+                    <span class="value">${safeCompany}</span>
                   </div>
 
                   <div class="info-row">
                     <span class="label">Service Interest:</span>
-                    <span class="value">${service || 'Not specified'}</span>
+                    <span class="value">${safeService}</span>
                   </div>
 
                   <div class="info-row">
                     <span class="label">Message:</span>
-                    <div class="value" style="margin-top: 8px; white-space: pre-wrap;">${message}</div>
+                    <div class="value" style="margin-top: 8px; white-space: pre-wrap;">${safeMessage}</div>
                   </div>
 
                   <div class="footer">
@@ -105,22 +209,26 @@ export async function POST(req: Request) {
         }),
       });
 
+      clearTimeout(timeout);
+
       if (!response.ok) {
-        const errorData = await response.json();
-        console.error('Brevo API error:', {
+        const errorData = await response.json().catch(() => ({}));
+        console.error("Brevo API error", {
+          requestId,
           status: response.status,
           statusText: response.statusText,
-          error: errorData
+          error: errorData,
         });
         return NextResponse.json(
-          { error: `Email service error: ${errorData.message || 'Unknown error'}` },
+          { error: "Message delivery failed. Please try again shortly." },
           { status: 500 }
         );
       }
 
-      console.log('Email sent successfully via Brevo');
+      console.log("Email sent successfully via Brevo", { requestId });
     } else {
-      console.log('BREVO_API_KEY not found - Contact Form Submission:', {
+      console.error("BREVO_API_KEY not configured", {
+        requestId,
         name,
         email,
         company,
@@ -129,23 +237,35 @@ export async function POST(req: Request) {
         timestamp: new Date().toISOString(),
       });
       return NextResponse.json(
-        { error: 'Email service not configured. Please contact support.' },
+        { error: "Email service is temporarily unavailable. Please try again later." },
         { status: 500 }
       );
     }
 
     return NextResponse.json(
-      { 
-        success: true, 
-        message: 'Your message has been sent successfully!' 
+      {
+        success: true,
+        message: "Your message has been sent successfully!",
       },
       { status: 200 }
     );
   } catch (error) {
-    console.error('Contact form error:', error);
+    const isAbort = error instanceof DOMException && error.name === "AbortError";
+
+    console.error("Contact form error", {
+      requestId,
+      error,
+    });
+
     return NextResponse.json(
-      { error: 'Failed to send message. Please try again.' },
-      { status: 500 }
+      {
+        error: isAbort
+          ? "Message service timed out. Please try again."
+          : "Failed to send message. Please try again.",
+      },
+      {
+        status: 500,
+      }
     );
   }
 }

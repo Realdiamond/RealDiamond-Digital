@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next';
 import { client } from '@/sanity/lib/client';
+import { CMS_REVALIDATE, docTag, listTag } from '@/lib/cms-cache';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://realdiamonddigital.studio';
@@ -12,7 +13,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }`,
     {},
     {
-      next: { revalidate: 60 }
+      next: {
+        revalidate: CMS_REVALIDATE.sitemap,
+        tags: [docTag('blog'), listTag('blog')],
+      }
     }
   );
 
@@ -23,7 +27,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }`,
     {},
     {
-      next: { revalidate: 60 }
+      next: {
+        revalidate: CMS_REVALIDATE.sitemap,
+        tags: [docTag('project'), listTag('project')],
+      }
     }
   );
 

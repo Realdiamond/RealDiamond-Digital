@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import CTA from "@/components/sections/CTA";
 import { generateSEO } from '@/lib/seo';
 import { client } from "@/sanity/lib/client";
+import { CMS_REVALIDATE, docTag, listTag } from '@/lib/cms-cache';
 import { 
   ArrowRight, 
   Globe, 
@@ -100,7 +101,10 @@ async function getServices(): Promise<Service[]> {
     }`,
     {},
     {
-      next: { revalidate: 1800 }
+      next: {
+        revalidate: CMS_REVALIDATE.service,
+        tags: [docTag('service'), listTag('service')],
+      }
     }
   );
   return services;

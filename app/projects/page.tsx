@@ -3,6 +3,7 @@ import Layout from "@/components/layout/Layout";
 import { Sparkles } from "lucide-react";
 import ProjectsFilter from "@/components/ProjectsFilter";
 import { generateSEO } from '@/lib/seo';
+import { CMS_REVALIDATE, docTag, listTag } from '@/lib/cms-cache';
 
 export const metadata = generateSEO({
   title: 'Our Projects',
@@ -28,13 +29,16 @@ async function getProjects() {
     }`,
     {},
     {
-      next: { revalidate: 0 }
+      next: {
+        revalidate: CMS_REVALIDATE.project,
+        tags: [docTag('project'), listTag('project')],
+      }
     }
   );
   return projects;
 }
 
-export const revalidate = 60;
+export const revalidate = CMS_REVALIDATE.project;
 
 const serviceCategories = [
   { id: "all", name: "All Projects" },

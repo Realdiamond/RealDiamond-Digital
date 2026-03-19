@@ -5,6 +5,7 @@ import { ArrowRight, Clock, User, Sparkles } from "lucide-react";
 import { client } from "@/sanity/lib/client";
 import BlogContent from "@/components/blog/BlogContent";
 import { generateSEO } from '@/lib/seo';
+import { CMS_REVALIDATE, docTag, listTag } from '@/lib/cms-cache';
 
 export const metadata = generateSEO({
   title: 'Blog',
@@ -29,7 +30,10 @@ async function getBlogPosts() {
     }`,
     {},
     {
-      next: { revalidate: 60 }
+      next: {
+        revalidate: CMS_REVALIDATE.blog,
+        tags: [docTag('blog'), listTag('blog')],
+      }
     }
   );
   return posts;
@@ -44,13 +48,16 @@ async function getCategories() {
     }`,
     {},
     {
-      next: { revalidate: 60 }
+      next: {
+        revalidate: CMS_REVALIDATE.blog,
+        tags: [docTag('category'), listTag('category')],
+      }
     }
   );
   return categories;
 }
 
-export const revalidate = 60;
+export const revalidate = CMS_REVALIDATE.blog;
 
 export default async function Blog() {
   const blogPosts = await getBlogPosts();

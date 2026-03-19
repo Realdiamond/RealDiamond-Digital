@@ -27,6 +27,18 @@ const siteConfig = {
   },
 };
 
+function toAbsoluteUrl(url: string): string {
+  if (url.startsWith('http://') || url.startsWith('https://')) {
+    return url;
+  }
+
+  if (url.startsWith('/')) {
+    return `${siteConfig.url}${url}`;
+  }
+
+  return `${siteConfig.url}/${url}`;
+}
+
 export function generateSEO({
   title,
   description = siteConfig.description,
@@ -37,7 +49,8 @@ export function generateSEO({
   canonical,
   noindex = false,
 }: SEOProps = {}): Metadata {
-  const finalOgImage = ogImage || siteConfig.ogImage;
+  const finalOgImage = toAbsoluteUrl(ogImage || siteConfig.ogImage);
+  const canonicalUrl = canonical ? toAbsoluteUrl(canonical) : siteConfig.url;
   
   const fullTitle = title 
     ? `${title} | ${siteConfig.name}`
@@ -59,21 +72,22 @@ export function generateSEO({
   const allKeywords = [...new Set([...keywords, ...defaultKeywords])];
 
   return {
+    metadataBase: new URL(siteConfig.url),
     title: fullTitle,
     description,
     keywords: allKeywords,
     robots: noindex ? 'noindex,nofollow' : 'index,follow',
-    ...(canonical && { alternates: { canonical } }),
+    alternates: { canonical: canonicalUrl },
     openGraph: {
       type: ogType,
       locale: 'en_US',
-      url: canonical || siteConfig.url,
+      url: canonicalUrl,
       siteName: siteConfig.name,
       title: fullTitle,
       description,
       images: [
         {
-          url: finalOgImage.startsWith('http') ? finalOgImage : `${siteConfig.url}${finalOgImage}`,
+          url: finalOgImage,
           width: 1200,
           height: 630,
           alt: title || siteConfig.name,
@@ -92,7 +106,7 @@ export function generateSEO({
       card: 'summary_large_image',
       title: fullTitle,
       description,
-      images: [finalOgImage.startsWith('http') ? finalOgImage : `${siteConfig.url}${finalOgImage}`],
+      images: [finalOgImage],
       creator: '@realdiamonddigital',
     },
     other: {

@@ -6,6 +6,7 @@ import { ArrowRight, Target, Users, Lightbulb, Award, Clock, Heart, Sparkles, Di
 import { generateSEO } from '@/lib/seo';
 import { client } from '@/sanity/lib/client';
 import Image from 'next/image';
+import { CMS_REVALIDATE, docTag, listTag } from '@/lib/cms-cache';
 
 export const metadata = generateSEO({
   title: 'About Us',
@@ -15,7 +16,7 @@ export const metadata = generateSEO({
 });
 
 // Time-based ISR
-export const revalidate = 3600; // 1 hour
+export const revalidate = CMS_REVALIDATE.teamMember;
 
 // Fetch CEO/team data
 async function getCEOData() {
@@ -32,7 +33,10 @@ async function getCEOData() {
     }`,
     {},
     {
-      next: { revalidate: 3600 }
+      next: {
+        revalidate: CMS_REVALIDATE.teamMember,
+        tags: [docTag('teamMember'), listTag('teamMember')],
+      }
     }
   );
   return ceo;

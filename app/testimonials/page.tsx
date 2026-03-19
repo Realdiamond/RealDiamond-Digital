@@ -1,18 +1,21 @@
-import { Metadata } from 'next';
 import { Star, Quote, Sparkles, ArrowRight } from 'lucide-react';
 import { client } from '@/sanity/lib/client';
 import { VideoTestimonialCarousel } from '@/components/VideoTestimonialCarousel';
 import Layout from '@/components/layout/Layout';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { generateSEO } from '@/lib/seo';
+import { CMS_REVALIDATE, docTag, listTag } from '@/lib/cms-cache';
 
-export const metadata: Metadata = {
-  title: 'Client Testimonials | RealDiamond Digital',
-  description: 'Hear from our satisfied clients. Real results, real testimonials from businesses we\'ve helped grow.',
-};
+export const metadata = generateSEO({
+  title: 'Client Testimonials',
+  description: 'Hear from our satisfied clients. Real results and testimonials from businesses we have helped grow.',
+  keywords: ['client testimonials', 'reviews', 'case results', 'digital agency feedback'],
+  canonical: 'https://realdiamonddigital.studio/testimonials',
+});
 
 // Time-based ISR (60s) + on-demand revalidation via webhook
-export const revalidate = 1800; // 30 minutes - testimonials change rarely
+export const revalidate = CMS_REVALIDATE.testimonial;
 
 // Define types
 interface TestimonialData {
@@ -61,7 +64,10 @@ async function getTestimonials() {
     }`,
     {},
     {
-      next: { revalidate: 1800 } // 30 minutes - testimonials change rarely
+      next: {
+        revalidate: CMS_REVALIDATE.testimonial,
+        tags: [docTag('testimonial'), listTag('testimonial')],
+      }
     }
   );
 
@@ -82,7 +88,10 @@ async function getTestimonials() {
     }`,
     {},
     {
-      next: { revalidate: 1800 } // 30 minutes - testimonials change rarely
+      next: {
+        revalidate: CMS_REVALIDATE.testimonial,
+        tags: [docTag('testimonial'), listTag('testimonial')],
+      }
     }
   );
 

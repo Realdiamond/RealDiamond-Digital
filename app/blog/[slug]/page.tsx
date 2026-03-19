@@ -9,6 +9,7 @@ import { PortableText } from "@portabletext/react";
 import { generateSEO } from '@/lib/seo';
 import { calculateReadTime } from '@/lib/readtime';
 import ShareButtons from '@/components/ShareButtons';
+import { CMS_REVALIDATE, docTag, entryTag, listTag } from '@/lib/cms-cache';
 
 async function getBlogPost(slug: string) {
   const post = await client.fetch(
@@ -27,7 +28,10 @@ async function getBlogPost(slug: string) {
     }`,
     { slug },
     {
-      next: { revalidate: 60 }
+      next: {
+        revalidate: CMS_REVALIDATE.blog,
+        tags: [docTag('blog'), entryTag('blog', slug)],
+      }
     }
   );
   return post;
@@ -61,13 +65,16 @@ export async function generateStaticParams() {
     `*[_type == "blog"] { "slug": slug.current }`,
     {},
     {
-      next: { revalidate: 60 }
+      next: {
+        revalidate: CMS_REVALIDATE.blog,
+        tags: [docTag('blog'), listTag('blog')],
+      }
     }
   );
   return posts.map((post: any) => ({ slug: post.slug }));
 }
 
-export const revalidate = 60;
+export const revalidate = CMS_REVALIDATE.blog;
 
 export default async function BlogPost({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
