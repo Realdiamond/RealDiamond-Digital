@@ -2,22 +2,21 @@
 
 import Script from "next/script";
 import { useEffect } from "react";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { GA_MEASUREMENT_ID, pageView } from "@/lib/analytics";
 
 export default function GoogleAnalytics() {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
 
   useEffect(() => {
     if (!GA_MEASUREMENT_ID) {
       return;
     }
 
-    const query = searchParams.toString();
-    const url = query ? `${pathname}?${query}` : pathname;
+    const query = window.location.search;
+    const url = query ? `${pathname}${query}` : pathname;
     pageView(url);
-  }, [pathname, searchParams]);
+  }, [pathname]);
 
   if (!GA_MEASUREMENT_ID) {
     return null;
