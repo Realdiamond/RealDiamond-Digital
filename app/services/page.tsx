@@ -1,79 +1,25 @@
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import Layout from "@/components/layout/Layout";
+import PageHeader from "@/components/layout/PageHeader";
 import { Button } from "@/components/ui/button";
 import CTA from "@/components/sections/CTA";
-import { generateSEO } from '@/lib/seo';
+import { generateSEO } from "@/lib/seo";
 import { client } from "@/sanity/lib/client";
-import { CMS_REVALIDATE, docTag, listTag } from '@/lib/cms-cache';
-import { 
-  ArrowRight, 
-  Globe, 
-  Search, 
-  Palette, 
-  TrendingUp,
-  CheckCircle,
-  Code,
-  FileCode,
-  BarChart3,
-  MapPin,
-  Settings,
-  Zap,
-  Sparkles,
-  Target,
-  Rocket,
-  Lightbulb,
-  Smartphone,
-  Monitor,
-  ShoppingCart,
-  Mail,
-  Lock,
-  PenTool,
-  Layers,
-  MousePointerClick,
-  LayoutTemplate,
-  Users,
-  LucideIcon
-} from "lucide-react";
-
-const iconMap: Record<string, LucideIcon> = {
-  Globe,
-  Search,
-  Palette,
-  TrendingUp,
-  Code,
-  FileCode,
-  BarChart3,
-  MapPin,
-  Settings,
-  Zap,
-  Sparkles,
-  CheckCircle,
-  Target,
-  Rocket,
-  Lightbulb,
-  Smartphone,
-  Monitor,
-  ShoppingCart,
-  Mail,
-  Lock,
-  PenTool,
-  Layers,
-  MousePointerClick,
-  LayoutTemplate,
-  Users,
-};
+import { CMS_REVALIDATE, docTag, listTag } from "@/lib/cms-cache";
+import { getServiceTag } from "@/lib/service-tags";
 
 export const metadata = generateSEO({
-  title: 'Our Services',
-  description: 'Expert web design, UI/UX design, development, SEO, and digital marketing services. We create custom solutions that drive growth and deliver measurable ROI for your business.',
-  keywords: ['web design services', 'UI/UX design services', 'SEO services', 'digital marketing', 'web development', 'ecommerce solutions', 'custom websites'],
-  canonical: 'https://realdiamonddigital.studio/services',
+  title: "Our Services",
+  description:
+    "Expert web design, UI/UX design, development, SEO, and digital marketing services. We create custom solutions that drive growth and deliver measurable ROI for your business.",
+  keywords: ["web design services", "UI/UX design services", "SEO services", "digital marketing", "web development", "ecommerce solutions", "custom websites"],
+  canonical: "https://realdiamonddigital.studio/services",
 });
 
 interface SubService {
   _key: string;
   name: string;
-  icon: string;
 }
 
 interface Service {
@@ -83,41 +29,34 @@ interface Service {
   };
   title: string;
   tagline: string;
-  icon: string;
   problem: string;
   solution: string;
   benefits: string[];
   bestFor: string;
   subServices: SubService[];
-  gradient: string;
-  order: number;
 }
 
 async function getServices(): Promise<Service[]> {
-  const services = await client.fetch<Service[]>(
+  return client.fetch<Service[]>(
     `*[_type == "service"] | order(order asc) {
       _id,
       id,
       title,
       tagline,
-      icon,
       problem,
       solution,
       benefits,
       bestFor,
-      subServices,
-      gradient,
-      order
+      subServices[]{ _key, name }
     }`,
     {},
     {
       next: {
         revalidate: CMS_REVALIDATE.service,
-        tags: [docTag('service'), listTag('service')],
-      }
+        tags: [docTag("service"), listTag("service")],
+      },
     }
   );
-  return services;
 }
 
 const Services = async () => {
@@ -125,117 +64,101 @@ const Services = async () => {
 
   return (
     <Layout>
-      <section className="pt-24 pb-16 bg-background relative overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="bg-orb bg-orb-1 opacity-20" />
-          <div className="bg-orb bg-orb-2 opacity-15" />
-        </div>
+      <PageHeader
+        eyebrow="Services"
+        title="Everything a website needs, from structure to search."
+        note={`${services.length} services · one team from first sketch to launch`}
+        description="I plan, design, build and grow websites for organisations that want visitors to understand them at first glance. Pick one service or combine them into a single project."
+      >
+        <nav aria-label="Services on this page" className="flex flex-wrap gap-2 mt-10">
+          {services.map((service) => (
+            <a
+              key={service._id}
+              href={`#${service.id.current}`}
+              className="font-mono text-xs border border-border bg-card px-3 py-2 hover:border-accent hover:text-accent transition-colors"
+            >
+              {getServiceTag(service.title)} · {service.title}
+            </a>
+          ))}
+        </nav>
+      </PageHeader>
 
-        <div className="container-wide relative">
-          <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-4 py-2 glass-card mb-6">
-              <Sparkles className="w-4 h-4 text-accent" />
-              <span className="text-sm font-medium text-muted-foreground">Our Services</span>
-            </div>
-            <h1 className="font-heading text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6">
-              Digital Solutions for{" "}
-              <span className="text-gradient">Business Growth</span>
-            </h1>
-            <p className="text-xl text-muted-foreground leading-relaxed">
-              We offer comprehensive digital services designed to help your business attract more customers, 
-              build credibility, and grow sustainably. Every solution is tailored to your specific goals.
-            </p>
-          </div>
-        </div>
-      </section>
+      <section className="pb-8">
+        <div className="container-wide space-y-8">
+          {services.map((service) => (
+            <article key={service._id} id={service.id.current} className="bp-panel scroll-mt-28">
+              <header className="px-6 sm:px-8 py-6 sm:py-8 border-b border-border">
+                <p className="bp-label mb-3">{getServiceTag(service.title)}</p>
+                <h2 className="text-3xl sm:text-4xl font-bold">{service.title}</h2>
+                {service.tagline && <p className="text-lg text-accent mt-2">{service.tagline}</p>}
+              </header>
 
-      <section className="py-20 bg-background">
-        <div className="container-wide">
-          <div className="space-y-24">
-            {services.map((service, index) => {
-              const iconKey = service.icon?.trim() || '';
-              const ServiceIcon = iconMap[iconKey] || Globe;
-              
-              return (
-              <div
-                key={service.id.current}
-                id={service.id.current}
-                className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-start scroll-mt-24 ${
-                  index % 2 === 1 ? "lg:flex-row-reverse" : ""
-                }`}
-              >
-                <div className={index % 2 === 1 ? "lg:order-2" : ""}>
-                  <div className={`w-16 h-16 bg-gradient-to-br ${service.gradient} rounded-2xl flex items-center justify-center mb-6`}>
-                    <ServiceIcon className="w-8 h-8 text-accent-foreground" />
-                  </div>
-                  <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-3">
-                    {service.title}
-                  </h2>
-                  <p className="text-xl text-accent mb-6">{service.tagline}</p>
-
-                  <div className="space-y-6">
-                    <div className="glass-card p-6">
-                      <h4 className="font-semibold text-foreground mb-2">The Problem</h4>
-                      <p className="text-muted-foreground">{service.problem}</p>
+              <div className="grid lg:grid-cols-2">
+                <div className="p-6 sm:p-8 space-y-8 border-b lg:border-b-0 lg:border-r border-border">
+                  {service.problem && (
+                    <div>
+                      <p className="bp-label mb-3">The problem</p>
+                      <p className="text-muted-foreground leading-relaxed">{service.problem}</p>
                     </div>
-                    <div className="glass-card p-6">
-                      <h4 className="font-semibold text-foreground mb-2">Our Solution</h4>
-                      <p className="text-muted-foreground">{service.solution}</p>
+                  )}
+                  {service.solution && (
+                    <div>
+                      <p className="bp-label mb-3">The solution</p>
+                      <p className="text-foreground leading-relaxed">{service.solution}</p>
                     </div>
-                  </div>
+                  )}
+                  {service.bestFor && (
+                    <p className="bp-note text-xs leading-relaxed border-l border-annotation pl-3">
+                      Best for: {service.bestFor}
+                    </p>
+                  )}
                 </div>
 
-                <div className={`glass-card p-8 ${index % 2 === 1 ? "lg:order-1" : ""}`}>
-                  <h4 className="font-semibold text-foreground mb-4">What You Get</h4>
-                  <ul className="space-y-3 mb-8">
-                    {service.benefits.map((benefit) => (
-                      <li key={benefit} className="flex items-start gap-3">
-                        <CheckCircle className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                        <span className="text-muted-foreground">{benefit}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <div className="mb-8">
-                    <h4 className="font-semibold text-foreground mb-3">Includes</h4>
-                    <div className="flex flex-wrap gap-3">
-                      {service.subServices.map((sub) => {
-                        const subIconKey = sub.icon?.trim() || '';
-                        const SubIcon = iconMap[subIconKey] || Code;
-                        return (
-                          <div key={sub._key} className="flex items-center gap-2 bg-secondary px-3 py-2 rounded-xl text-sm border border-border/50">
-                            <SubIcon className="w-4 h-4 text-accent" />
-                            <span className="text-foreground">{sub.name}</span>
-                          </div>
-                        );
-                      })}
+                <div className="p-6 sm:p-8 flex flex-col gap-8">
+                  {service.benefits?.length > 0 && (
+                    <div>
+                      <p className="bp-label mb-4">What you get</p>
+                      <ul className="space-y-3">
+                        {service.benefits.map((benefit) => (
+                          <li key={benefit} className="flex items-start gap-3">
+                            <span className="mt-2 w-1.5 h-1.5 bg-accent shrink-0" aria-hidden="true" />
+                            <span>{benefit}</span>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
+                  )}
+                  {service.subServices?.length > 0 && (
+                    <div>
+                      <p className="bp-label mb-3">Includes</p>
+                      <ul className="flex flex-wrap gap-2">
+                        {service.subServices.map((sub) => (
+                          <li key={sub._key} className="font-mono text-xs border border-border px-2.5 py-1.5">
+                            {sub.name}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                  <div className="mt-auto">
+                    <Button variant="accent" asChild>
+                      <Link href="/contact">
+                        Discuss this service
+                        <ArrowRight />
+                      </Link>
+                    </Button>
                   </div>
-
-                  <div className="bg-secondary/50 p-4 rounded-xl mb-6 border border-border/50">
-                    <p className="text-sm text-muted-foreground">
-                      <strong className="text-foreground">Best for:</strong> {service.bestFor}
-                    </p>
-                  </div>
-
-                  <Button variant="accent" className="w-full" asChild>
-                    <Link href="/contact">
-                      Discuss This Service
-                      <ArrowRight className="w-4 h-4" />
-                    </Link>
-                  </Button>
                 </div>
               </div>
-              );
-            })}
-          </div>
+            </article>
+          ))}
         </div>
       </section>
 
-      <CTA 
-        title="Not Sure Which Service You Need?"
-        description="Let's have a conversation about your goals. We'll help you identify the right solution for your business."
-        buttonText="Schedule a Free Consultation"
+      <CTA
+        title="Not sure which service you need?"
+        description="Tell me about your goals and I'll recommend the smallest project that gets you there."
+        buttonText="Book a free call"
       />
     </Layout>
   );

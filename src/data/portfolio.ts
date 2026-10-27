@@ -62,7 +62,7 @@ export const skillGroups = [
   },
   {
     title: "Systems & Accessibility",
-    items: ["Design systems & tokens", "Responsive, mobile-first design", "Accessible contrast & focus states", "Light & dark themes"],
+    items: ["Design systems & tokens", "Responsive, mobile-first design", "Accessible contrast & focus states", "Grid-based layout & spacing"],
   },
   {
     title: "Front-end",

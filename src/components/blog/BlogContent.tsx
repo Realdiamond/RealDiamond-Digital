@@ -44,9 +44,9 @@ export default function BlogContent({ posts, categories }: BlogContentProps) {
 
   return (
     <>
-      <section className="py-8 bg-background">
+      <section className="pb-8">
         <div className="container-wide">
-          <div className="max-w-2xl mx-auto">
+          <div className="max-w-2xl">
             <div className="relative">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
               <input
@@ -54,22 +54,22 @@ export default function BlogContent({ posts, categories }: BlogContentProps) {
                 placeholder="Search articles by title, category, or keyword..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-12 pr-4 py-3 glass-card text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-accent/50 transition-colors"
+                className="w-full pl-12 pr-4 py-3 bp-panel text-foreground placeholder:text-muted-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               />
             </div>
           </div>
         </div>
       </section>
 
-      <section className="py-6 bg-secondary/30 border-y border-border/50">
+      <section className="py-3 border-y border-border">
         <div className="container-wide">
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-2">
             <button
               onClick={() => setSelectedCategory("all")}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+              className={`font-mono text-xs px-3 py-2 border transition-colors ${
                 selectedCategory === "all"
-                  ? "bg-gradient-to-r from-accent to-accent-secondary text-accent-foreground shadow-glow"
-                  : "glass-card text-muted-foreground hover:text-foreground hover:border-accent/50"
+                  ? "bg-foreground text-background border-foreground"
+                  : "bg-card text-muted-foreground border-border hover:text-foreground hover:border-foreground"
               }`}
             >
               All
@@ -78,10 +78,10 @@ export default function BlogContent({ posts, categories }: BlogContentProps) {
               <button
                 key={category._id}
                 onClick={() => setSelectedCategory(category.title)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                className={`font-mono text-xs px-3 py-2 border transition-colors ${
                   selectedCategory === category.title
-                    ? "bg-gradient-to-r from-accent to-accent-secondary text-accent-foreground shadow-glow"
-                    : "glass-card text-muted-foreground hover:text-foreground hover:border-accent/50"
+                    ? "bg-foreground text-background border-foreground"
+                    : "bg-card text-muted-foreground border-border hover:text-foreground hover:border-foreground"
                 }`}
               >
                 {category.title}
@@ -91,7 +91,7 @@ export default function BlogContent({ posts, categories }: BlogContentProps) {
         </div>
       </section>
 
-      <section className="py-20 bg-background">
+      <section className="py-12 lg:py-16">
         <div className="container-wide">
           {filteredPosts.length === 0 ? (
             <div className="text-center py-16">
@@ -109,22 +109,21 @@ export default function BlogContent({ posts, categories }: BlogContentProps) {
               {filteredPosts.map((post) => (
                 <article
                   key={post._id}
-                  className="glass-card-hover overflow-hidden group"
+                  className="bp-panel overflow-hidden group hover:border-accent transition-colors"
                 >
-                  <div className="relative h-48 overflow-hidden">
+                  <div className="relative aspect-[16/10] overflow-hidden border-b border-border bg-secondary">
                     {post.image && (
                       <img 
                         src={post.image} 
                         alt={post.title}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                       />
                     )}
-                    <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
                   </div>
 
                   <div className="p-6">
                     <div className="flex items-center gap-3 mb-4">
-                      <span className="px-3 py-1 bg-accent/20 text-accent text-xs font-medium rounded-full">
+                      <span className="bp-label text-accent">
                         {post.category}
                       </span>
                     </div>
@@ -139,7 +138,7 @@ export default function BlogContent({ posts, categories }: BlogContentProps) {
                       {post.excerpt}
                     </p>
 
-                    <div className="flex items-center justify-between text-xs text-muted-foreground pt-4 border-t border-border/50">
+                    <div className="flex items-center justify-between font-mono text-xs text-muted-foreground pt-4 border-t border-border">
                       <div className="flex items-center gap-4">
                         <span className="flex items-center gap-1">
                           <User className="w-3 h-3" />

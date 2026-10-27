@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
@@ -23,100 +23,80 @@ interface ProjectsFilterProps {
 
 export default function ProjectsFilter({ projects, categories }: ProjectsFilterProps) {
   const [activeCategory, setActiveCategory] = useState("all");
-  
-  const filteredProjects = activeCategory === "all" 
-    ? projects 
-    : projects.filter(p => p.category === activeCategory);
+
+  // Only offer filters that have at least one project behind them
+  const availableCategories = useMemo(
+    () =>
+      categories
+        .map((category) => ({
+          ...category,
+          count: category.id === "all" ? projects.length : projects.filter((p) => p.category === category.id).length,
+        }))
+        .filter((category) => category.count > 0),
+    [categories, projects]
+  );
+
+  const categoryName = (id: string) => categories.find((c) => c.id === id)?.name || id;
+
+  const filteredProjects =
+    activeCategory === "all" ? projects : projects.filter((p) => p.category === activeCategory);
 
   return (
     <>
-      <section className="py-8 bg-background border-b border-border/50 sticky top-20 z-40 backdrop-blur-xl bg-background/80">
-        <div className="container-wide">
-          <div className="flex flex-wrap gap-2">
-            {categories.map((category) => (
+      <div className="sticky top-20 z-30 bg-background/95 backdrop-blur-sm border-y border-border">
+        <div className="container-wide py-3 overflow-x-auto">
+          <div className="flex gap-2 w-max" role="group" aria-label="Filter projects by category">
+            {availableCategories.map((category) => (
               <button
                 key={category.id}
+                type="button"
                 onClick={() => setActiveCategory(category.id)}
-                className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
+                aria-pressed={activeCategory === category.id}
+                className={`font-mono text-xs px-3 py-2 border transition-colors whitespace-nowrap ${
                   activeCategory === category.id
-                    ? "bg-accent text-accent-foreground shadow-glow"
-                    : "bg-secondary text-muted-foreground hover:bg-secondary/80 hover:text-foreground"
+                    ? "bg-foreground text-background border-foreground"
+                    : "bg-card text-muted-foreground border-border hover:text-foreground hover:border-foreground"
                 }`}
               >
-                {category.name}
+                {category.name} <span className="opacity-60">({category.count})</span>
               </button>
             ))}
           </div>
         </div>
-      </section>
+      </div>
 
-      <section className="py-16 bg-background">
+      <section className="py-12 lg:py-16">
         <div className="container-wide">
-          {filteredProjects.length === 0 ? (
-            <div className="text-center py-16">
-              <p className="text-xl text-muted-foreground">
-                No projects found in this category.
-              </p>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredProjects.map((project, index) => {
-                const isLarge = index % 5 === 0;
-                const isMedium = index % 3 === 1;
-                
-                return (
-                  <Link
-                    key={project._id}
-                    href={`/projects/${project.slug}`}
-                    className={`glass-card-hover overflow-hidden group ${
-                      isLarge ? "md:col-span-2 lg:col-span-2" : ""
-                    }`}
-                  >
-
-                    <div className={`relative overflow-hidden ${
-                      isLarge ? "h-72" : isMedium ? "h-56" : "h-48"
-                    }`}>
-                      {project.image && (
-                        <img
-                          src={project.image}
-                          alt={project.title}
-                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                        />
-                      )}
-                      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent" />
-                      
-                      {project.tags && project.tags.length > 0 && (
-                        <div className="absolute top-4 left-4">
-                          <span className="px-3 py-1 glass-card text-xs font-medium text-accent">
-                            {project.tags[0]}
-                          </span>
-                        </div>
-                      )}
-
-                      <div className="absolute bottom-4 right-4 w-10 h-10 glass-card flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0">
-                        <ArrowRight className="w-4 h-4 text-accent" />
-                      </div>
-                    </div>
-
-                    <div className="p-6">
-                      <h3 className="font-heading text-xl font-semibold text-foreground mb-2 group-hover:text-accent transition-colors">
-                        {project.title}
-                      </h3>
-                      <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
-                        {project.description}
-                      </p>
-                      
-                      <div className="flex items-center gap-4 text-xs text-muted-foreground">
-                        {project.year && <span>{project.year}</span>}
-                        {project.duration && <span>•</span>}
-                        {project.duration && <span>{project.duration}</span>}
-                      </div>
-                    </div>
-                  </Link>
-                );
-              })}
-            </div>
-          )}
+          <div className="grid md:grid-cols-2 gap-px bg-border border border-border">
+            {filteredProjects.map((project) => (
+              <Link key={project._id} href={`/projects/${project.slug}`} className="group bg-card flex flex-col">
+                <div className="aspect-[16/10] overflow-hidden border-b border-border bg-secondary">
+                  {project.image && (
+                    <img
+                      src={`${project.image}?w=1200&auto=format`}
+                      alt={`${project.title} website`}
+                      loading="lazy"
+                      className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
+                    />
+                  )}
+                </div>
+                <div className="p-6 sm:p-7 flex flex-col flex-1">
+                  <p className="bp-label mb-3 flex flex-wrap gap-x-3 gap-y-1">
+                    <span className="text-accent">{categoryName(project.category)}</span>
+                    {project.year && <span>{project.year}</span>}
+                    {project.duration && <span>{project.duration}</span>}
+                  </p>
+                  <h2 className="text-2xl font-semibold mb-2 group-hover:text-accent transition-colors">{project.title}</h2>
+                  <p className="text-muted-foreground leading-relaxed line-clamp-3 mb-6">{project.description}</p>
+                  <span className="mt-auto inline-flex items-center gap-2 font-semibold text-accent text-sm">
+                    View project
+                    <ArrowRight className="w-4 h-4" />
+                  </span>
+                </div>
+              </Link>
+            ))}
+            {filteredProjects.length % 2 === 1 && <div className="hidden md:block bg-card" aria-hidden="true" />}
+          </div>
         </div>
       </section>
     </>

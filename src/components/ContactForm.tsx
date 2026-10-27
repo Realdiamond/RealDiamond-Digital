@@ -99,7 +99,7 @@ export default function ContactForm() {
         <div className="space-y-3">
           <h3 className="text-2xl font-bold text-foreground">Message Sent Successfully!</h3>
           <p className="text-muted-foreground max-w-md mx-auto">
-            Thank you for reaching out! We've received your message and will get back to you within 24 hours.
+            Thanks for reaching out! I've received your message and will get back to you within 24 hours.
           </p>
         </div>
         <Button
@@ -149,7 +149,7 @@ export default function ContactForm() {
           value={formData.name}
           onChange={handleChange}
           placeholder="John Smith"
-          className="bg-background/50"
+          className="bg-card"
         />
       </div>
 
@@ -165,7 +165,7 @@ export default function ContactForm() {
           value={formData.email}
           onChange={handleChange}
           placeholder="john@example.com"
-          className="bg-background/50"
+          className="bg-card"
         />
       </div>
 
@@ -180,7 +180,7 @@ export default function ContactForm() {
           value={formData.company}
           onChange={handleChange}
           placeholder="Your Company"
-          className="bg-background/50"
+          className="bg-card"
         />
       </div>
 
@@ -193,7 +193,7 @@ export default function ContactForm() {
           name="service"
           value={formData.service}
           onChange={handleChange as any}
-          className="flex h-11 w-full rounded-md border border-input bg-background/50 px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+          className="flex h-11 w-full rounded-md border border-input bg-card px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
         >
           <option value="">Select a service</option>
           <option value="web-design">Web Design & Development</option>
@@ -207,7 +207,7 @@ export default function ContactForm() {
 
       <div>
         <label htmlFor="message" className="block text-sm font-semibold text-foreground mb-2">
-          Tell us about your project *
+          Tell me about your project *
         </label>
         <Textarea
           id="message"
@@ -217,7 +217,7 @@ export default function ContactForm() {
           onChange={handleChange}
           placeholder="I'm looking for help with..."
           rows={6}
-          className="bg-background/50 resize-none"
+          className="bg-card resize-none"
         />
       </div>
 
@@ -225,14 +225,15 @@ export default function ContactForm() {
         type="submit"
         size="lg"
         disabled={isSubmitting}
-        className="w-full bg-gradient-to-r from-accent to-accent-secondary hover:shadow-glow"
+        variant="accent"
+        className="w-full"
       >
         {isSubmitting ? "Sending..." : "Send Message"}
         <Send className="w-4 h-4" />
       </Button>
 
       <p className="text-sm text-muted-foreground text-center">
-        We'll respond within 24 hours. Usually much faster!
+        I reply within 24 business hours, usually much faster.
       </p>
     </form>
   );

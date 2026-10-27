@@ -1,6 +1,8 @@
 import { client } from "@/sanity/lib/client";
 import Layout from "@/components/layout/Layout";
-import { Sparkles } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+import PageHeader from "@/components/layout/PageHeader";
 import ProjectsFilter from "@/components/ProjectsFilter";
 import { generateSEO } from '@/lib/seo';
 import { CMS_REVALIDATE, docTag, listTag } from '@/lib/cms-cache';
@@ -41,7 +43,7 @@ async function getProjects() {
 export const revalidate = 60;
 
 const serviceCategories = [
-  { id: "all", name: "All Projects" },
+  { id: "all", name: "All" },
   { id: "web", name: "Web Design" },
   { id: "webdev", name: "Web Development" },
   { id: "uiux", name: "UI/UX Design" },
@@ -55,29 +57,20 @@ export default async function Projects() {
 
   return (
     <Layout>
-      <section className="pt-24 pb-12 bg-background relative overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="bg-orb bg-orb-1 opacity-20" />
-          <div className="bg-orb bg-orb-2 opacity-15" />
-        </div>
-
-        <div className="container-wide relative">
-          <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-4 py-2 glass-card mb-6">
-              <Sparkles className="w-4 h-4 text-accent" />
-              <span className="text-sm font-medium text-muted-foreground">Our Work</span>
-            </div>
-            <h1 className="font-heading text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6">
-              Projects That{" "}
-              <span className="text-gradient">Deliver Results</span>
-            </h1>
-            <p className="text-xl text-muted-foreground leading-relaxed">
-              Explore our successful projects. Each one represents a unique challenge 
-              we solved and a business we helped grow.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHeader
+        eyebrow="Projects"
+        title="Every website, from first sketch to launch."
+        note={`${allProjects.length} projects · 2023 to today`}
+        description="The full archive of client websites I've designed and built. For the thinking behind the work, read the detailed case studies."
+      >
+        <Link
+          href="/portfolio"
+          className="inline-flex items-center gap-2 mt-8 font-semibold text-accent hover:gap-3 transition-all"
+        >
+          Read the case studies
+          <ArrowRight className="w-4 h-4" />
+        </Link>
+      </PageHeader>
 
       <ProjectsFilter projects={allProjects} categories={serviceCategories} />
     </Layout>

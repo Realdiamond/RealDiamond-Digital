@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { client } from "@/sanity/lib/client";
 import { CMS_REVALIDATE, docTag, listTag } from "@/lib/cms-cache";
+import { getServiceTag } from "@/lib/service-tags";
 
 interface FeaturedService {
   _id: string;
@@ -32,15 +33,6 @@ async function getServices() {
   );
 }
 
-// Short mono tags shown above each service title
-const serviceTags: Record<string, string> = {
-  "Web Design & Development": "DEV",
-  "UI/UX Design": "UX",
-  "SEO & Online Visibility": "SEO",
-  "Brand & Visual Design": "BRAND",
-  "Growth & Optimization": "CARE",
-};
-
 export default async function ServicesGrid() {
   const services = await getServices();
 
@@ -61,7 +53,7 @@ export default async function ServicesGrid() {
               href={`/services#${service.id?.current || service._id}`}
               className="group p-6 sm:p-7 bg-card hover:bg-secondary transition-colors"
             >
-              <p className="bp-label">{serviceTags[service.title] || "SERVICE"}</p>
+              <p className="bp-label">{getServiceTag(service.title)}</p>
               <h3 className="text-xl font-semibold mt-3 mb-2 group-hover:text-accent transition-colors">{service.title}</h3>
               <p className="text-muted-foreground leading-relaxed">{service.tagline || service.solution}</p>
               {service.subServices && service.subServices.length > 0 && (

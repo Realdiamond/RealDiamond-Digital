@@ -2,160 +2,201 @@ import Link from "next/link";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { generateSEO } from "@/lib/seo";
-import { ArrowLeft, ArrowRight, Sparkles, Globe, PenTool, Layers, Code } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
 export const metadata = generateSEO({
   title: "Design System – UI/UX Case Study",
   description:
-    "The tokens, type scale, and components behind realdiamonddigital.studio, built in Tailwind CSS and React with light and dark themes.",
+    "The Blueprint design system behind realdiamonddigital.studio: tokens, type, an annotation kit and components, built in Tailwind CSS and React.",
   keywords: ["design system", "design tokens", "component library", "UI/UX case study"],
   canonical: "https://realdiamonddigital.studio/portfolio/design-system",
 });
 
 const colorTokens = [
-  { name: "Primary", token: "--primary", value: "hsl(220 50% 15%)", role: "Deep navy for default buttons and dark surfaces" },
-  { name: "Accent", token: "--accent", value: "hsl(210 95% 55%)", role: "Electric blue for primary actions, links, and focus rings" },
-  { name: "Accent secondary", token: "--accent-secondary", value: "hsl(265 85% 60%)", role: "Royal purple, used only in gradients" },
-  { name: "Foreground", token: "--foreground", value: "hsl(220 60% 10%)", role: "Headings and body text" },
-  { name: "Muted foreground", token: "--muted-foreground", value: "hsl(220 20% 40%)", role: "Supporting text and captions" },
-  { name: "Secondary", token: "--secondary", value: "hsl(220 10% 95%)", role: "Chips, subtle fills, and alternating sections" },
-  { name: "Border", token: "--border", value: "hsl(220 20% 88%)", role: "Dividers and component outlines" },
-  { name: "Destructive", token: "--destructive", value: "hsl(0 84% 60%)", role: "Errors and destructive actions" },
+  { name: "Ink", token: "--foreground", value: "hsl(221 43% 11%)", role: "Headings, body text and dark panels" },
+  { name: "Paper", token: "--background", value: "hsl(217 50% 97%)", role: "Page background under the grid" },
+  { name: "Grid", token: "--grid", value: "hsl(218 38% 92%)", role: "32px grid-paper lines" },
+  { name: "Blueprint blue", token: "--accent", value: "hsl(224 75% 48%)", role: "The one colour for actions, links and focus" },
+  { name: "Redline", token: "--annotation", value: "hsl(9 100% 62%)", role: "Annotation lines, frames and markers" },
+  { name: "Redline ink", token: "--annotation-ink", value: "hsl(9 75% 45%)", role: "Readable annotation text" },
+  { name: "Muted text", token: "--muted-foreground", value: "hsl(218 14% 41%)", role: "Supporting text and captions" },
+  { name: "Hairline", token: "--border", value: "hsl(217 32% 86%)", role: "Panel borders and dividers" },
 ];
 
 const typeScale = [
-  { label: "Display", className: "text-6xl md:text-7xl font-bold tracking-tighter leading-[0.95]", sample: "More Calls." },
-  { label: "Heading 1", className: "text-5xl font-bold", sample: "Digital Solutions" },
-  { label: "Heading 2", className: "text-4xl font-bold", sample: "Selected case studies" },
-  { label: "Heading 3", className: "text-2xl font-bold", sample: "UI/UX Design" },
-  { label: "Body large", className: "text-xl text-muted-foreground", sample: "Intuitive experiences that turn visitors into customers." },
-  { label: "Body", className: "text-base text-muted-foreground", sample: "Every solution is tailored to your specific goals." },
-  { label: "Caption", className: "text-sm text-muted-foreground", sample: "Supporting details, labels, and metadata." },
+  { label: "Display · 88/86", className: "text-5xl sm:text-6xl lg:text-[88px] lg:leading-[0.98] font-bold tracking-[-0.03em]", sample: "Structure first." },
+  { label: "H1 · 72", className: "text-5xl lg:text-7xl font-bold tracking-[-0.03em]", sample: "Services" },
+  { label: "H2 · 48", className: "text-4xl md:text-5xl font-bold", sample: "Selected work" },
+  { label: "H3 · 24", className: "text-2xl font-semibold", sample: "UI/UX Design" },
+  { label: "Body large · 20", className: "text-xl text-muted-foreground", sample: "Websites people understand at first glance." },
+  { label: "Body · 16", className: "text-base text-muted-foreground", sample: "Every solution is tailored to your goals." },
+  { label: "Label · Mono 12", className: "bp-label", sample: "Ceramics studio · Canada · 2025" },
 ];
 
-const buttonVariants = ["default", "accent", "hero", "outline", "secondary", "ghost", "glass", "link"] as const;
+const buttonVariants = ["accent", "default", "outline", "secondary", "ghost", "link"] as const;
 const buttonSizes = ["sm", "default", "lg", "xl"] as const;
 
 const principles = [
   {
-    title: "Tokens, not hard-coded values",
+    title: "Show the thinking",
     description:
-      "Every colour is an HSL CSS variable consumed through Tailwind (bg-accent, text-muted-foreground), so a change in one place updates every screen.",
-  },
-  {
-    title: "Light and dark themes",
-    description: "The same tokens are redefined under a .dark class, so every component supports both themes without extra code.",
+      "Redline annotations, spacing markers and wireframe views put the structure of each layout on the page, so visitors see how the design works.",
   },
   {
     title: "One colour for action",
-    description: "Electric blue is reserved for actions and links. Purple appears only inside gradients, so it never competes with a call-to-action.",
+    description: "Blueprint blue is reserved for actions, links and focus. Redline is only for annotations, so the two never compete.",
+  },
+  {
+    title: "Tokens, not hard-coded values",
+    description:
+      "Every colour is an HSL CSS variable consumed through Tailwind (bg-accent, text-muted-foreground), so one change updates every screen.",
   },
   {
     title: "Accessible by default",
     description:
-      "Interactive components share a visible focus ring for keyboard users and a consistent disabled state, defined once in the base button styles.",
+      "Text colours meet WCAG AA contrast on paper, and every interactive component shares one visible focus ring for keyboard users.",
   },
 ];
 
 export default function DesignSystemPage() {
   return (
     <Layout hideAgencyWidgets>
-      <section className="pt-24 pb-12 bg-background relative overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="bg-orb bg-orb-1 opacity-20" />
-          <div className="bg-orb bg-orb-2 opacity-15" />
-        </div>
-        <div className="container-wide relative">
+      <section className="pt-10 pb-12 lg:pt-14 lg:pb-16">
+        <div className="container-wide">
           <Link
             href="/portfolio"
-            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-accent transition-colors mb-8"
+            className="inline-flex items-center gap-2 font-mono text-xs text-muted-foreground hover:text-accent transition-colors mb-10"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to portfolio
           </Link>
-          <div className="max-w-3xl">
-            <p className="text-sm font-medium text-accent mb-3">Design System Case Study</p>
-            <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
-              The RealDiamond Digital design system
+          <div className="max-w-4xl">
+            <p className="bp-label mb-6">Design system case study</p>
+            <h1 className="text-[44px] leading-[1.02] sm:text-6xl lg:text-7xl font-bold tracking-[-0.03em]">
+              The Blueprint design system
             </h1>
-            <p className="text-xl text-muted-foreground leading-relaxed mb-4">
-              realdiamonddigital.studio runs on a small, token-based design system I built with Tailwind CSS and React. Every
-              page, from services to this portfolio, is assembled from the same colours, type scale, and components.
-            </p>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              Everything on this page is rendered live from the production code, not from static images.
+            <p className="bp-note mt-4">rendered live from the production code, not from static images</p>
+            <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed mt-6 max-w-3xl">
+              realdiamonddigital.studio runs on a small token-based design system I built with Tailwind CSS and React. It
+              treats every page like a designer&apos;s canvas: grid paper, ink type, one blue for action and redline
+              annotations that show how each layout is put together.
             </p>
           </div>
         </div>
       </section>
 
-      <section className="py-16 bg-secondary/30">
+      <section className="py-12 lg:py-16">
         <div className="container-wide">
-          <h2 className="font-heading text-3xl font-bold text-foreground mb-8">Principles</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="bp-heading mb-8">
+            <h2 className="text-3xl sm:text-4xl font-bold">Principles</h2>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-border border border-border">
             {principles.map((principle) => (
-              <div key={principle.title} className="glass-card p-6">
-                <h3 className="font-semibold text-foreground mb-2">{principle.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{principle.description}</p>
+              <div key={principle.title} className="bg-card p-6">
+                <h3 className="font-semibold text-lg mb-2">{principle.title}</h3>
+                <p className="text-muted-foreground leading-relaxed">{principle.description}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="py-16 bg-background">
+      <section className="py-12 lg:py-16">
         <div className="container-wide">
-          <h2 className="font-heading text-3xl font-bold text-foreground mb-2">Colour tokens</h2>
-          <p className="text-muted-foreground mb-8">Light theme values. Each token is redefined for the dark theme.</p>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="bp-heading mb-8">
+            <h2 className="text-3xl sm:text-4xl font-bold">Colour tokens</h2>
+            <span className="bp-note">{colorTokens.length} tokens</span>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-border border border-border">
             {colorTokens.map((color) => (
-              <div key={color.token} className="glass-card overflow-hidden">
+              <div key={color.token} className="bg-card">
                 <div className="h-24 border-b border-border" style={{ background: `hsl(var(${color.token}))` }} />
                 <div className="p-4">
-                  <p className="font-semibold text-foreground">{color.name}</p>
-                  <p className="text-xs font-mono text-muted-foreground mt-1">{color.token}</p>
-                  <p className="text-xs font-mono text-muted-foreground">{color.value}</p>
+                  <p className="font-semibold">{color.name}</p>
+                  <p className="font-mono text-xs text-muted-foreground mt-1">{color.token}</p>
+                  <p className="font-mono text-xs text-muted-foreground">{color.value}</p>
                   <p className="text-sm text-muted-foreground mt-2">{color.role}</p>
                 </div>
               </div>
             ))}
           </div>
-          <div className="mt-6 glass-card overflow-hidden">
-            <div className="h-20 bg-gradient-to-r from-accent to-accent-secondary" />
-            <div className="p-4">
-              <p className="font-semibold text-foreground">Brand gradient</p>
-              <p className="text-sm text-muted-foreground">Accent to accent secondary, used for hero buttons and highlighted words.</p>
-            </div>
-          </div>
         </div>
       </section>
 
-      <section className="py-16 bg-secondary/30">
+      <section className="py-12 lg:py-16">
         <div className="container-wide">
-          <h2 className="font-heading text-3xl font-bold text-foreground mb-8">Typography</h2>
-          <div className="glass-card divide-y divide-border">
+          <div className="bp-heading mb-8">
+            <h2 className="text-3xl sm:text-4xl font-bold">Typography</h2>
+            <span className="bp-note">Familjen Grotesk · JetBrains Mono</span>
+          </div>
+          <div className="bp-panel divide-y divide-border">
             {typeScale.map((type) => (
-              <div key={type.label} className="grid md:grid-cols-[180px_1fr] gap-2 md:gap-6 items-baseline p-6">
-                <p className="text-sm font-medium text-muted-foreground">{type.label}</p>
-                <p className={`font-heading text-foreground ${type.className}`}>{type.sample}</p>
+              <div key={type.label} className="grid md:grid-cols-[200px_minmax(0,1fr)] gap-2 md:gap-6 items-baseline p-5 sm:p-6">
+                <p className="bp-label">{type.label}</p>
+                <p className={`${type.className} min-w-0 break-words`}>{type.sample}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="py-16 bg-background">
+      <section className="py-12 lg:py-16">
         <div className="container-wide">
-          <h2 className="font-heading text-3xl font-bold text-foreground mb-2">Buttons</h2>
-          <p className="text-muted-foreground mb-8">
-            One component with {buttonVariants.length} visual variants and {buttonSizes.length} sizes, built with
-            class-variance-authority.
-          </p>
-          <div className="glass-card p-6 md:p-8 space-y-8">
+          <div className="bp-heading mb-8">
+            <h2 className="text-3xl sm:text-4xl font-bold">Annotation kit</h2>
+            <span className="bp-note">the pieces that make the Blueprint look</span>
+          </div>
+          <div className="grid lg:grid-cols-2 gap-px bg-border border border-border">
+            <div className="bg-card p-8 sm:p-10">
+              <p className="bp-label mb-10">Frame + note · .bp-frame .bp-note</p>
+              <div className="relative bp-frame">
+                <span className="bp-note absolute -top-8 left-0">H2 · 48/52</span>
+                <p className="text-4xl font-bold">Annotated heading</p>
+              </div>
+              <div className="bp-spacer my-4" data-size="24" aria-hidden="true" />
+              <p className="text-muted-foreground">Spacing marker · .bp-spacer</p>
+            </div>
+            <div className="bg-card p-8 sm:p-10 flex flex-col gap-8">
+              <div>
+                <p className="bp-label mb-4">Result tag · .bp-result</p>
+                <span className="bp-result">+75% traffic in month one</span>
+              </div>
+              <div>
+                <p className="bp-label mb-4">Highlight · .bp-highlight</p>
+                <p className="text-3xl font-bold">
+                  Design the <span className="bp-highlight">structure</span>
+                </p>
+              </div>
+              <div>
+                <p className="bp-label mb-5">Crop marks · .bp-crop</p>
+                <div className="bp-crop bp-panel p-4 w-48">
+                  <i aria-hidden="true" />
+                  <i aria-hidden="true" />
+                  <i aria-hidden="true" />
+                  <i aria-hidden="true" />
+                  <div className="aspect-[4/3] bg-secondary flex items-center justify-center font-mono text-xs text-muted-foreground">
+                    4:3
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-12 lg:py-16">
+        <div className="container-wide">
+          <div className="bp-heading mb-8">
+            <h2 className="text-3xl sm:text-4xl font-bold">Buttons</h2>
+            <span className="bp-note">
+              one component · {buttonVariants.length} variants · {buttonSizes.length} sizes
+            </span>
+          </div>
+          <div className="bp-panel p-6 sm:p-8 space-y-8">
             <div className="flex flex-wrap gap-4 items-center">
               {buttonVariants.map((variant) => (
                 <Button key={variant} variant={variant}>
-                  {variant === "default" ? "Default" : variant.charAt(0).toUpperCase() + variant.slice(1)}
+                  {variant.charAt(0).toUpperCase() + variant.slice(1)}
                 </Button>
               ))}
             </div>
@@ -163,7 +204,7 @@ export default function DesignSystemPage() {
               {buttonSizes.map((size) => (
                 <Button key={size} variant="accent" size={size}>
                   {size === "default" ? "Default" : size.toUpperCase()}
-                  <ArrowRight className="w-4 h-4" />
+                  <ArrowRight />
                 </Button>
               ))}
             </div>
@@ -171,78 +212,41 @@ export default function DesignSystemPage() {
               <Button variant="accent" disabled>
                 Disabled
               </Button>
-              <p className="text-sm text-muted-foreground">Press Tab to see the shared focus ring.</p>
+              <p className="text-muted-foreground">Press Tab to see the shared focus ring.</p>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="py-16 bg-secondary/30">
+      <section className="py-12 lg:py-16">
         <div className="container-wide">
-          <h2 className="font-heading text-3xl font-bold text-foreground mb-8">Components</h2>
-          <div className="grid lg:grid-cols-2 gap-6">
-            <div className="glass-card p-8">
-              <div className="w-16 h-16 rounded-2xl flex items-center justify-center mb-6 shadow-lg bg-gradient-to-br from-indigo-500 to-violet-500">
-                <PenTool className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="font-heading text-2xl font-bold text-foreground mb-3">Service card</h3>
-              <p className="text-muted-foreground mb-6">Icon tile, title, summary, and up to four sub-service chips.</p>
-              <div className="flex flex-wrap gap-2">
-                {[
-                  { icon: Globe, label: "Chip" },
-                  { icon: Layers, label: "With icon" },
-                  { icon: Code, label: "Consistent" },
-                ].map((chip) => (
-                  <span
-                    key={chip.label}
-                    className="flex items-center gap-1.5 px-3 py-1.5 bg-secondary text-foreground text-xs font-medium rounded-lg border border-border/50"
-                  >
-                    <chip.icon className="w-3.5 h-3.5 text-accent" />
-                    {chip.label}
-                  </span>
-                ))}
-              </div>
+          <div className="bp-heading mb-8">
+            <h2 className="text-3xl sm:text-4xl font-bold">Panels</h2>
+            <span className="bp-note">flat sheets on grid paper, no shadows or gradients</span>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="bp-panel p-6">
+              <p className="bp-label mb-3">Panel</p>
+              <p className="text-muted-foreground">White sheet with a 1px hairline. Used for most content.</p>
             </div>
-
-            <div className="space-y-6">
-              <div className="glass-card p-6">
-                <div className="inline-flex items-center gap-2 px-4 py-2 glass-card mb-4">
-                  <Sparkles className="w-4 h-4 text-accent" />
-                  <span className="text-sm font-medium text-muted-foreground">Section label</span>
+            <div className="grid grid-cols-2 gap-px bg-border border border-border">
+              {["Hairline", "grid", "for", "groups"].map((cell) => (
+                <div key={cell} className="bg-card p-4 font-mono text-xs text-muted-foreground">
+                  {cell}
                 </div>
-                <p className="text-sm text-muted-foreground">
-                  Glass surfaces combine a translucent background, a 24px backdrop blur, and a soft border token.
-                </p>
-              </div>
-              <div className="grid grid-cols-3 gap-4">
-                {[
-                  { label: "Glass", className: "shadow-glass" },
-                  { label: "Elevated", className: "shadow-elevated" },
-                  { label: "Glow", className: "shadow-glow" },
-                ].map((shadow) => (
-                  <div key={shadow.label} className={`bg-card rounded-2xl p-4 h-24 flex items-end ${shadow.className}`}>
-                    <span className="text-sm font-medium text-foreground">{shadow.label}</span>
-                  </div>
-                ))}
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                {[
-                  { label: "Buttons · 12px radius", className: "rounded-xl" },
-                  { label: "Cards & chips · 16px radius", className: "rounded-2xl" },
-                ].map((radius) => (
-                  <div key={radius.label} className={`border-2 border-accent/60 bg-accent/5 h-20 p-3 flex items-end ${radius.className}`}>
-                    <span className="text-sm font-medium text-foreground">{radius.label}</span>
-                  </div>
-                ))}
-              </div>
+              ))}
+            </div>
+            <div className="bg-foreground text-background p-6">
+              <p className="font-mono text-xs uppercase tracking-wider text-background/60 mb-3">Ink panel</p>
+              <p className="text-background/80">For the one moment per page that needs the most attention.</p>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="py-16 bg-background">
-        <div className="container-wide flex justify-between items-center">
-          <Link href="/portfolio" className="inline-flex items-center gap-2 text-accent font-semibold">
+      <section className="pt-8 pb-20 lg:pb-24">
+        <div className="container-wide">
+          <Link href="/portfolio" className="inline-flex items-center gap-2 font-semibold text-accent hover:gap-3 transition-all">
             <ArrowLeft className="w-4 h-4" />
             All case studies
           </Link>

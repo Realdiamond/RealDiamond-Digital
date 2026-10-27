@@ -24,6 +24,12 @@ async function getRecentPosts() {
   return posts;
 }
 
+const columnClasses: Record<number, string> = {
+  1: "md:grid-cols-1",
+  2: "md:grid-cols-2",
+  3: "md:grid-cols-3",
+};
+
 export default async function BlogSection() {
   const posts = await getRecentPosts();
 
@@ -49,7 +55,7 @@ export default async function BlogSection() {
           </Button>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-px bg-border border border-border">
+        <div className={`grid ${columnClasses[Math.min(posts.length, 3)]} gap-px bg-border border border-border`}>
           {posts.map((post: any) => (
             <Link key={post._id} href={`/blog/${post.slug}`} className="group bg-card flex flex-col">
               {post.image && (
