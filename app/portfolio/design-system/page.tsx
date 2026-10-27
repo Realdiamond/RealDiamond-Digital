@@ -59,7 +59,7 @@ const principles = [
 
 export default function DesignSystemPage() {
   return (
-    <Layout>
+    <Layout hideAgencyWidgets>
       <section className="pt-24 pb-12 bg-background relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
           <div className="bg-orb bg-orb-1 opacity-20" />

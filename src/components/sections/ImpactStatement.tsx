@@ -28,19 +28,19 @@ const ImpactStatement = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-12">
             {[
               {
-                metric: "$200k+",
-                label: "Revenue Generated",
-                desc: "For our clients in 2025"
+                metric: "10+",
+                label: "Client Websites Launched",
+                desc: "Since 2023"
               },
               {
-                metric: "156%",
-                label: "Avg. Traffic Increase",
-                desc: "Within first 6 months"
+                metric: "4",
+                label: "Countries Served",
+                desc: "Nigeria, USA, Canada and New Zealand"
               },
               {
-                metric: "4.2x",
-                label: "ROI Average",
-                desc: "Return on investment"
+                metric: "75%",
+                label: "Traffic Increase",
+                desc: "Pottery by Tolu, first month after launch"
               }
             ].map((item, index) => (
               <div 

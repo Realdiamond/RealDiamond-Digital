@@ -33,7 +33,7 @@ async function getProject(slug: string) {
       "gallery": gallery[].asset->url,
       duration,
       year,
-      projectUrl,
+      "projectUrl": select(liveSiteOffline == true => null, projectUrl),
       featured,
       order
     }`,

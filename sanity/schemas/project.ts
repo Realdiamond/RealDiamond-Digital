@@ -197,6 +197,13 @@ export const project = defineType({
       }),
     }),
     defineField({
+      name: 'liveSiteOffline',
+      title: 'Live site is offline',
+      type: 'boolean',
+      description: 'Turn on while the client website is down to hide the "View Live Project" link. Turn it off once the site is back.',
+      initialValue: false,
+    }),
+    defineField({
       name: 'order',
       title: 'Display Order',
       type: 'number',

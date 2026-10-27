@@ -128,8 +128,8 @@ const About = async () => {
                       <TrendingUp className="w-8 h-8 text-accent-foreground" />
                     </div>
                     <div>
-                      <p className="text-3xl font-heading font-bold text-foreground">50+</p>
-                      <p className="text-sm text-muted-foreground">Projects Delivered</p>
+                      <p className="text-3xl font-heading font-bold text-foreground">10+</p>
+                      <p className="text-sm text-muted-foreground">Client Websites Launched</p>
                     </div>
                   </div>
                   
@@ -138,8 +138,8 @@ const About = async () => {
                       <Star className="w-8 h-8 text-accent-foreground" />
                     </div>
                     <div>
-                      <p className="text-3xl font-heading font-bold text-foreground">4.9/5</p>
-                      <p className="text-sm text-muted-foreground">Client Satisfaction</p>
+                      <p className="text-3xl font-heading font-bold text-foreground">5.0/5</p>
+                      <p className="text-sm text-muted-foreground">Average Client Rating</p>
                     </div>
                   </div>
                   
