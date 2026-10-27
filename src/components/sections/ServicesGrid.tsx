@@ -21,6 +21,11 @@ import {
   Monitor,
   Mail,
   Lock,
+  PenTool,
+  Layers,
+  MousePointerClick,
+  LayoutTemplate,
+  Users,
   LucideIcon
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -71,11 +76,17 @@ const iconMap: Record<string, LucideIcon> = {
   Monitor,
   Mail,
   Lock,
+  PenTool,
+  Layers,
+  MousePointerClick,
+  LayoutTemplate,
+  Users,
 };
 
 // Fallback gradients for services
 const gradientMap: any = {
   "Web Design & Development": "from-blue-500 to-cyan-500",
+  "UI/UX Design": "from-indigo-500 to-violet-500",
   "Search Engine Optimization": "from-green-500 to-emerald-500",
   "Brand & Visual Design": "from-purple-500 to-pink-500",
   "E-commerce Solutions": "from-orange-500 to-red-500",
@@ -101,7 +112,7 @@ export default async function ServicesGrid() {
             <span className="text-gradient">Dominate Your Local Market</span>
           </h2>
           <p className="text-lg text-muted-foreground">
-            Websites, SEO, and lead systems built specifically for service businesses. Get more calls, fill your schedule, and grow your revenue.
+            Websites, UI/UX design, SEO, and lead systems built specifically for service businesses. Get more calls, fill your schedule, and grow your revenue.
           </p>
         </div>
 
@@ -115,7 +126,7 @@ export default async function ServicesGrid() {
               <Link
                 key={service._id}
                 href={`/services#${service.id?.current || service._id}`}
-                className="group relative glass-card p-8 hover:shadow-elevated transition-all duration-500 hover:-translate-y-2 overflow-hidden block cursor-pointer"
+                className="group relative glass-card p-8 md:last:odd:col-span-2 hover:shadow-elevated transition-all duration-500 hover:-translate-y-2 overflow-hidden block cursor-pointer"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <div className={`absolute inset-0 bg-gradient-to-br ${serviceGradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />

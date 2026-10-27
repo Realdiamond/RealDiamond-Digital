@@ -27,6 +27,11 @@ import {
   ShoppingCart,
   Mail,
   Lock,
+  PenTool,
+  Layers,
+  MousePointerClick,
+  LayoutTemplate,
+  Users,
   LucideIcon
 } from "lucide-react";
 
@@ -51,12 +56,17 @@ const iconMap: Record<string, LucideIcon> = {
   ShoppingCart,
   Mail,
   Lock,
+  PenTool,
+  Layers,
+  MousePointerClick,
+  LayoutTemplate,
+  Users,
 };
 
 export const metadata = generateSEO({
   title: 'Our Services',
-  description: 'Expert web design, development, SEO, and digital marketing services. We create custom solutions that drive growth and deliver measurable ROI for your business.',
-  keywords: ['web design services', 'SEO services', 'digital marketing', 'web development', 'ecommerce solutions', 'custom websites'],
+  description: 'Expert web design, UI/UX design, development, SEO, and digital marketing services. We create custom solutions that drive growth and deliver measurable ROI for your business.',
+  keywords: ['web design services', 'UI/UX design services', 'SEO services', 'digital marketing', 'web development', 'ecommerce solutions', 'custom websites'],
   canonical: 'https://realdiamonddigital.studio/services',
 });
 

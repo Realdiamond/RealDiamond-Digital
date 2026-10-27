@@ -36,6 +36,7 @@ export const project = defineType({
         list: [
           { title: 'Web Design', value: 'web' },
           { title: 'Web Development', value: 'webdev' },
+          { title: 'UI/UX Design', value: 'uiux' },
           { title: 'SEO', value: 'seo' },
           { title: 'Branding', value: 'branding' },
           { title: 'E-commerce', value: 'ecommerce' },
