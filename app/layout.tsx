@@ -6,7 +6,7 @@ import { generateSEO } from "@/lib/seo";
 import { generateOrganizationSchema } from "@/lib/schema";
 import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata: Metadata = generateSEO();
 
@@ -32,7 +32,7 @@ export default function RootLayout({
   });
 
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className={inter.variable} suppressHydrationWarning>
       <head>
         <link rel="icon" href="/favicon.png" type="image/png" />
         <link rel="apple-touch-icon" href="/favicon.png" />
