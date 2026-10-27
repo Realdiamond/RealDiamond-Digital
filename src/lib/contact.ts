@@ -2,6 +2,7 @@ import { z } from "zod";
 
 export const contactServiceOptions = [
   "web-design",
+  "ui-ux",
   "seo",
   "branding",
   "growth",

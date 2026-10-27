@@ -44,6 +44,7 @@ const serviceCategories = [
   { id: "all", name: "All Projects" },
   { id: "web", name: "Web Design" },
   { id: "webdev", name: "Web Development" },
+  { id: "uiux", name: "UI/UX Design" },
   { id: "seo", name: "SEO" },
   { id: "branding", name: "Branding" },
   { id: "ecommerce", name: "E-Commerce" },

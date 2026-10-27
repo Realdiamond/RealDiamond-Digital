@@ -197,6 +197,7 @@ export default function ContactForm() {
         >
           <option value="">Select a service</option>
           <option value="web-design">Web Design & Development</option>
+          <option value="ui-ux">UI/UX Design</option>
           <option value="seo">SEO & Online Visibility</option>
           <option value="branding">Brand & Visual Design</option>
           <option value="growth">Growth & Optimization</option>

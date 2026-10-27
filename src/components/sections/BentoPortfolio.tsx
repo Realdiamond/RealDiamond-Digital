@@ -29,6 +29,7 @@ const BentoPortfolio = ({ projects }: BentoPortfolioProps) => {
     const categoryMap: Record<string, string> = {
       web: 'Web Design',
       webdev: 'Web Development',
+      uiux: 'UI/UX Design',
       seo: 'SEO',
       branding: 'Branding',
       ecommerce: 'E-commerce',

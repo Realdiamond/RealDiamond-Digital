@@ -21,7 +21,7 @@ export default function RootLayout({
     name: "RealDiamond Digital",
     url: "https://realdiamonddigital.studio",
     logo: "https://realdiamonddigital.studio/icons/logo.png",
-    description: "Strategic web design, development, SEO, and digital marketing agency",
+    description: "Strategic web design, UI/UX design, development, SEO, and digital marketing agency",
     email: "realdiamonddigital@gmail.com",
     telephone: "+2348138462476",
     areaServed: "Worldwide",

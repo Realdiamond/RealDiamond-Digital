@@ -18,7 +18,7 @@ export interface SEOProps {
 
 const siteConfig = {
   name: 'RealDiamond Digital',
-  description: 'Strategic web design, development, SEO, and digital marketing that transforms your business. From strategy to execution, we deliver measurable growth.',
+  description: 'Strategic web design, UI/UX design, development, SEO, and digital marketing that transforms your business. From strategy to execution, we deliver measurable growth.',
   url: process.env.NEXT_PUBLIC_SITE_URL || 'https://realdiamonddigital.studio',
   ogImage: '/og-image.png',
   links: {
@@ -58,6 +58,7 @@ export function generateSEO({
 
   const defaultKeywords = [
     'web design',
+    'UI/UX design',
     'web development',
     'SEO',
     'digital marketing',

@@ -83,6 +83,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
   const categoryMap: Record<string, string> = {
     web: 'Web Design',
+    webdev: 'Web Development',
+    uiux: 'UI/UX Design',
     seo: 'SEO',
     branding: 'Branding',
     ecommerce: 'E-commerce',
@@ -138,6 +140,7 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
                 <span className="px-3 py-1 glass-card text-xs font-medium text-accent">
                   {project.category === 'web' ? 'Web Design' :
                    project.category === 'webdev' ? 'Web Development' :
+                   project.category === 'uiux' ? 'UI/UX Design' :
                    project.category === 'seo' ? 'SEO' :
                    project.category === 'branding' ? 'Branding' :
                    project.category === 'ecommerce' ? 'E-commerce' : project.category}

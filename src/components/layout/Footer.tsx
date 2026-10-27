@@ -23,7 +23,7 @@ const Footer = () => {
               />
             </Link>
             <p className="text-muted-foreground text-sm leading-relaxed">
-              Strategic web design, development & SEO that transforms visitors into customers and grows revenue.
+              Strategic web design, UI/UX, development & SEO that transforms visitors into customers and grows revenue.
             </p>
             <div className="flex gap-3">
               {[
@@ -55,7 +55,7 @@ const Footer = () => {
           <div className="space-y-6">
             <h4 className="font-heading font-semibold text-lg text-foreground">Services</h4>
             <ul className="space-y-3">
-              {["Web Design & Development", "SEO & Online Visibility", "Brand & Visual Design", "Growth & Optimization"].map((service) => (
+              {["Web Design & Development", "UI/UX Design", "SEO & Online Visibility", "Brand & Visual Design", "Growth & Optimization"].map((service) => (
                 <li key={service}>
                   <Link href="/services" className="text-muted-foreground hover:text-accent text-sm transition-colors">
                     {service}

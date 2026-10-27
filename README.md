@@ -13,6 +13,14 @@ We build stunning, conversion-focused websites that represent your brand and dri
 - **Conversion-Focused** - Designed to turn visitors into customers
 - **Scalable** - Ready to grow with your business
 
+### UI/UX Design
+We design intuitive, user-centered interfaces that make every visit effortless and every click count:
+- User research and journey mapping
+- Wireframes and interactive prototypes
+- High-fidelity interface design
+- Design systems and component libraries
+- Usability testing and conversion-focused UX audits
+
 ### SEO & Online Visibility
 Get found by customers actively searching for your services. Our SEO strategies include:
 - Keyword research and optimization
@@ -86,6 +94,7 @@ Ready to grow your business online? Let's talk.
 ## 💼 Services Available
 
 - Custom Website Design & Development
+- UI/UX Design & Prototyping
 - E-commerce Solutions
 - SEO & Digital Marketing
 - Brand Identity & Design

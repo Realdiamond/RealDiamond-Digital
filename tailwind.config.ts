@@ -14,6 +14,8 @@ export default {
     'to-amber-400',
     'from-green-400',
     'to-emerald-400',
+    'from-indigo-400',
+    'to-violet-400',
     // Ensure all gradient combinations work
     'bg-gradient-to-br',
     'bg-gradient-to-r',

@@ -11,7 +11,7 @@ import { CMS_REVALIDATE, docTag, listTag } from '@/lib/cms-cache';
 export const metadata = generateSEO({
   title: 'About Us',
   description: 'Meet the team behind RealDiamond Digital. We combine strategic thinking with creative execution to deliver measurable results for businesses worldwide.',
-  keywords: ['about us', 'digital agency team', 'web design experts', 'SEO specialists', 'digital marketing professionals'],
+  keywords: ['about us', 'digital agency team', 'web design experts', 'UI/UX designers', 'SEO specialists', 'digital marketing professionals'],
   canonical: 'https://realdiamonddigital.studio/about',
 });
 
@@ -218,7 +218,7 @@ const About = async () => {
                       hands-on attention from day one.
                     </p>
                     <p>
-                      Backed by a dedicated team of 3-5 specialists in design, development, and SEO, we deliver the 
+                      Backed by a dedicated team of 3-5 specialists in UI/UX design, development, and SEO, we deliver the 
                       capabilities of a full-service agency with the personal commitment of a trusted partner.
                     </p>
                   </>
