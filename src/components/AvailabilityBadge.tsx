@@ -51,14 +51,10 @@ const AvailabilityBadge = async () => {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-40 animate-in slide-in-from-bottom-5 duration-500">
-      <div className="glass-card px-4 py-3 shadow-glow hover:shadow-glow-lg transition-all duration-300 hover:scale-105">
-        <div className="flex items-center gap-2">
-          <div className={`w-2.5 h-2.5 rounded-full ${colorClasses[settings.availabilityColor]} animate-pulse`} />
-          <span className="text-sm font-semibold text-foreground whitespace-nowrap">
-            {settings.availabilityMessage}
-          </span>
-        </div>
+    <div className="fixed bottom-5 left-5 z-40 hidden md:block animate-fade-in">
+      <div className="bp-panel flex items-center gap-2.5 px-3.5 py-2.5 shadow-elevated">
+        <span className={`w-2 h-2 rounded-full ${colorClasses[settings.availabilityColor]}`} aria-hidden="true" />
+        <span className="font-mono text-xs text-foreground whitespace-nowrap">{settings.availabilityMessage}</span>
       </div>
     </div>
   );

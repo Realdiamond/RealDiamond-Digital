@@ -34,6 +34,8 @@ export interface CaseStudy {
     hero: PortfolioImage;
     mobile: PortfolioImage;
     wireframe: PortfolioImage;
+    /** Wireframe view cropped to the same area as `hero`, for side-by-side comparisons */
+    structure: PortfolioImage;
     page?: PortfolioImage;
   };
 }
@@ -156,6 +158,12 @@ export const caseStudies: CaseStudy[] = [
         height: 2417,
         alt: "Wireframe view of the BTO Global Foundation homepage layout",
       },
+      structure: {
+        src: "/portfolio/bto-global-foundation/wireframe.jpg",
+        width: 1200,
+        height: 2417,
+        alt: "Wireframe view of the BTO Global Foundation homepage",
+      },
     },
   },
   {
@@ -225,6 +233,12 @@ export const caseStudies: CaseStudy[] = [
         width: 1200,
         height: 2458,
         alt: "Wireframe view of the SmitBridge Global Ventures homepage layout",
+      },
+      structure: {
+        src: "/portfolio/smitbridge-global-ventures/wireframe.jpg",
+        width: 1200,
+        height: 2458,
+        alt: "Wireframe view of the SmitBridge Global Ventures homepage",
       },
       page: {
         src: "/portfolio/smitbridge-global-ventures/page.jpg",
@@ -302,6 +316,12 @@ export const caseStudies: CaseStudy[] = [
         width: 1200,
         height: 2317,
         alt: "Wireframe view of the Pottery by Tolu homepage layout",
+      },
+      structure: {
+        src: "/portfolio/pottery-by-tolu/wireframe-section.jpg",
+        width: 1200,
+        height: 1400,
+        alt: "Wireframe view of the Pottery by Tolu “Four ways” section",
       },
     },
   },

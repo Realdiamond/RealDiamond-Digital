@@ -1,81 +1,42 @@
-"use client";
-
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Sparkles } from "lucide-react";
+
+const promises = ["Free first call", "No obligation", "Reply within 24 hours"];
 
 const FinalCTA = () => {
   return (
-    <section className="py-32 relative overflow-hidden bg-gradient-to-br from-background via-accent/[0.02] to-accent-secondary/[0.02]">
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-gradient-to-r from-accent/5 to-accent-secondary/5 blur-[140px] opacity-50" />
-      </div>
-
-      <div 
-        className="absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundImage: `radial-gradient(circle, hsl(var(--accent)) 1px, transparent 1px)`,
-          backgroundSize: '40px 40px',
-        }}
-      />
-
-      <div className="container-wide relative z-10">
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-accent/10 border border-accent/20 backdrop-blur-sm mb-8 animate-fade-in">
-            <Sparkles className="w-4 h-4 text-accent" />
-            <span className="text-sm font-semibold text-foreground">
-              Let's Build Something Amazing
-            </span>
+    <section className="pt-8 pb-20 lg:pb-24" aria-labelledby="final-cta-title">
+      <div className="container-wide">
+        <div className="bg-foreground text-background p-8 sm:p-12 lg:p-16 grid lg:grid-cols-[1fr_auto] gap-10 items-end">
+          <div>
+            <p className="font-mono text-xs uppercase tracking-wider text-background/60 mb-6">Start a project</p>
+            <h2 id="final-cta-title" className="text-4xl sm:text-5xl lg:text-7xl font-bold leading-[1.02] tracking-[-0.03em]">
+              Let&apos;s draw up your next website.
+            </h2>
+            <ul className="flex flex-wrap gap-x-6 gap-y-2 mt-8 font-mono text-xs text-background/70">
+              {promises.map((promise) => (
+                <li key={promise} className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 bg-annotation" aria-hidden="true" />
+                  {promise}
+                </li>
+              ))}
+            </ul>
           </div>
-
-          <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-8 leading-[1.1]">
-            Ready to Get More
-            <br />
-            <span className="text-gradient">Qualified Leads?</span>
-          </h2>
-
-          <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-2xl mx-auto leading-relaxed">
-            Let's talk about your business and build a website that fills your schedule with ready-to-buy customers.
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-            <Button 
-              size="xl" 
-              asChild 
-              className="group bg-gradient-to-r from-accent to-accent-secondary hover:shadow-glow text-white font-bold text-lg px-8"
-            >
+          <div className="flex flex-col sm:flex-row lg:flex-col gap-3">
+            <Button variant="accent" size="lg" asChild>
               <Link href="/contact">
-                Start Your Project
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                Book a free call
+                <ArrowRight />
               </Link>
             </Button>
-            <Button 
-              variant="outline" 
-              size="xl" 
-              asChild 
-              className="group border-2 font-semibold text-lg px-8"
+            <Button
+              size="lg"
+              asChild
+              className="bg-transparent border border-background/30 text-background hover:bg-background/10"
             >
-              <Link href="/projects">
-                View Our Work
-              </Link>
+              <Link href="/portfolio">See the case studies</Link>
             </Button>
-          </div>
-
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 text-sm text-muted-foreground">
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-green-500" />
-              <span>Free consultation</span>
-            </div>
-            <div className="hidden sm:block w-1 h-1 rounded-full bg-muted-foreground/30" />
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-green-500" />
-              <span>No obligations</span>
-            </div>
-            <div className="hidden sm:block w-1 h-1 rounded-full bg-muted-foreground/30" />
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-green-500" />
-              <span>Response within 24h</span>
-            </div>
           </div>
         </div>
       </div>
