@@ -10,16 +10,24 @@ const outcomes: Record<string, string> = {
   "pottery-by-tolu": "+75% traffic in month one",
 };
 
-export default function WorkSection() {
+interface WorkSectionProps {
+  title?: string;
+  note?: string;
+}
+
+export default function WorkSection({
+  title = "Structure and finished design",
+  note = "the layout behind each site",
+}: WorkSectionProps) {
   return (
     <section className="py-16 lg:py-24" aria-labelledby="work-title">
       <div className="container-wide">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
           <div className="bp-heading">
             <h2 id="work-title" className="text-4xl md:text-5xl font-bold">
-              Structure and finished design
+              {title}
             </h2>
-            <span className="bp-note">the layout behind each site</span>
+            <span className="bp-note">{note}</span>
           </div>
           <Button variant="outline" asChild>
             <Link href="/projects">

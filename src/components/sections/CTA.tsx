@@ -10,7 +10,7 @@ interface CTAProps {
 }
 
 const CTA = ({
-  title = "Let's draw up your next website.",
+  title = "Let's build your next website.",
   description = "Tell me what you're trying to achieve. I reply to every enquiry within 24 hours.",
   buttonText = "Book a free call",
   buttonLink = "/contact",

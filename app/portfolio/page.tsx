@@ -4,15 +4,16 @@ import { ArrowRight, Mail, Linkedin } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import WorkSection from "@/components/sections/WorkSection";
+import DevProjects from "@/components/sections/DevProjects";
 import { generateSEO } from "@/lib/seo";
 import { client } from "@/sanity/lib/client";
 import { CMS_REVALIDATE, docTag, listTag } from "@/lib/cms-cache";
 import { profile, skillGroups, processSteps } from "@/data/portfolio";
 
 export const metadata = generateSEO({
-  title: `${profile.name} – UI/UX Portfolio`,
-  description: `${profile.name}, ${profile.title}. Selected case studies in UI/UX design, design systems, and responsive web design.`,
-  keywords: ["UI/UX designer portfolio", "UI designer", "UX designer", "design systems", "front-end developer"],
+  title: `${profile.name} – Developer Portfolio`,
+  description: `${profile.name}, ${profile.title}. Selected web apps, mobile apps and client websites built with React, Next.js and TypeScript.`,
+  keywords: ["front-end developer portfolio", "React developer", "Next.js developer", "TypeScript", "web developer"],
   canonical: "https://realdiamonddigital.studio/portfolio",
 });
 
@@ -37,7 +38,7 @@ export default async function PortfolioPage() {
       <section className="pt-14 pb-16 lg:pt-20 lg:pb-20">
         <div className="container-wide grid lg:grid-cols-[minmax(0,1fr)_320px] gap-14 lg:gap-20 items-center">
           <div className="min-w-0">
-            <p className="bp-label mb-8">UI/UX Portfolio</p>
+            <p className="bp-label mb-8">Developer portfolio</p>
             <h1 className="text-[44px] leading-[1.02] sm:text-6xl lg:text-7xl font-bold tracking-[-0.03em]">{profile.name}</h1>
             <p className="text-2xl sm:text-3xl font-semibold text-accent mt-4">{profile.title}</p>
             <div className="bp-spacer my-4" data-size="32" aria-hidden="true" />
@@ -46,7 +47,7 @@ export default async function PortfolioPage() {
             <div className="flex flex-col sm:flex-row gap-3 mt-8">
               <Button variant="accent" size="lg" asChild>
                 <Link href="#work">
-                  View case studies
+                  View my work
                   <ArrowRight />
                 </Link>
               </Button>
@@ -75,7 +76,7 @@ export default async function PortfolioPage() {
                 priority
               />
               <figcaption className="flex justify-between gap-4 mt-3 font-mono text-xs text-muted-foreground">
-                <span>Designer &amp; developer</span>
+                <span>Front-end developer</span>
                 <span>Nigeria</span>
               </figcaption>
             </figure>
@@ -84,7 +85,8 @@ export default async function PortfolioPage() {
       </section>
 
       <div id="work" className="scroll-mt-20">
-        <WorkSection />
+        <DevProjects />
+        <WorkSection title="Client websites" note="structure on the left, shipped site on the right" />
       </div>
 
       <section className="pb-16 lg:pb-24">
@@ -96,7 +98,7 @@ export default async function PortfolioPage() {
             <div>
               <p className="bp-label mb-3">Design system case study</p>
               <h2 className="text-2xl sm:text-3xl font-bold group-hover:text-accent transition-colors">
-                The Blueprint design system
+                The Source design system
               </h2>
               <p className="text-muted-foreground leading-relaxed mt-2 max-w-3xl">
                 The tokens, type, annotation kit and components behind realdiamonddigital.studio, built in Tailwind CSS
@@ -159,7 +161,7 @@ export default async function PortfolioPage() {
               <p className="font-mono text-xs uppercase tracking-wider text-background/60 mb-6">Get in touch</p>
               <h2 className="text-4xl sm:text-5xl font-bold leading-[1.05] tracking-[-0.03em]">Let&apos;s work together.</h2>
               <p className="text-lg text-background/75 leading-relaxed mt-5 max-w-xl">
-                I&apos;m open to UI/UX design roles and collaborations. I&apos;d love to hear about your team and product.
+                I&apos;m open to front-end developer roles and freelance projects. I&apos;d love to hear about your team and product.
               </p>
             </div>
             <div className="flex flex-col sm:flex-row lg:flex-col gap-3">

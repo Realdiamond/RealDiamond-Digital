@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Linkedin, Twitter } from "lucide-react";
+import { Github, Linkedin, Twitter } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 
 const columns = [
@@ -25,6 +25,7 @@ const columns = [
 ];
 
 const socials = [
+  { label: "GitHub", href: "https://github.com/Realdiamond", Icon: Github },
   { label: "LinkedIn", href: "https://www.linkedin.com/in/oluwatimilehin0-akinsanmi1/", Icon: Linkedin },
   { label: "X (Twitter)", href: "https://x.com/Iam_RealDiamond/", Icon: Twitter },
   { label: "WhatsApp", href: "https://wa.me/2348138462476", Icon: FaWhatsapp },
@@ -42,12 +43,12 @@ const Footer = () => {
                 alt="RealDiamond Digital"
                 width={300}
                 height={68}
-                className="h-9 w-auto object-contain"
+                className="h-9 w-auto object-contain logo-on-dark"
               />
             </Link>
             <p className="text-muted-foreground leading-relaxed max-w-xs">
-              A small design and development studio led by Oluwatimilehin Akinsanmi. UI/UX design, websites and SEO
-              for organisations that want to be understood at first glance.
+              A small development studio led by Oluwatimilehin Akinsanmi, front-end developer. Websites and web apps
+              built with React, Next.js and WordPress.
             </p>
             <div className="flex gap-2">
               {socials.map(({ label, href, Icon }) => (
@@ -102,7 +103,7 @@ const Footer = () => {
           <p className="font-mono text-xs text-muted-foreground">
             © {new Date().getFullYear()} RealDiamond Digital
           </p>
-          <p className="font-mono text-xs text-muted-foreground">Designed and built in-house on an 8pt grid</p>
+          <p className="font-mono text-xs text-muted-foreground">Built with Next.js, TypeScript and Tailwind CSS</p>
         </div>
       </div>
     </footer>

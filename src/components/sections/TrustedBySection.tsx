@@ -27,9 +27,9 @@ const TrustedBySection = async () => {
   return (
     <section className="pt-8" aria-label="Clients">
       <div className="container-wide">
-        <div className="bp-panel flex flex-col md:flex-row md:items-center overflow-hidden">
-          <p className="bp-label px-6 pt-5 md:py-0 md:w-48 shrink-0">Clients I&apos;ve worked with</p>
-          <div className="relative flex-1 overflow-hidden md:border-l border-border">
+        <div className="bg-foreground text-background border border-border flex flex-col md:flex-row md:items-center overflow-hidden">
+          <p className="bp-label text-background/70 px-6 pt-5 md:py-0 md:w-48 shrink-0">Clients I&apos;ve worked with</p>
+          <div className="relative flex-1 overflow-hidden md:border-l border-background/15">
             <div className="flex w-max animate-marquee">
               {doubledClients.map((client: any, index: number) => {
                 const imageUrl = client.logo ? urlForImage(client.logo)?.width(400).url() : null;

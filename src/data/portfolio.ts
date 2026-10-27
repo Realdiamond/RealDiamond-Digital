@@ -42,31 +42,31 @@ export interface CaseStudy {
 
 export const profile = {
   name: "Oluwatimilehin Akinsanmi",
-  title: "UI/UX Designer & Front-end Developer",
+  title: "Front-end Developer & UI/UX Designer",
   intro:
-    "I design and build websites that are clear, accessible, and easy to use, taking every project from the first layout to the live site. Since 2023 I've shipped websites for non-profits, consulting firms, churches, financial services, and small businesses in Nigeria, Canada, and the United States.",
+    "I build fast, accessible websites and web apps with React, Next.js and TypeScript. Since 2023 I've shipped client websites for non-profits, consulting firms, churches, financial services and small businesses, plus an AI-powered web app, a role-based booking platform and an offline-first mobile app.",
   about:
-    "Because I also write the front-end code, I design with real constraints in mind: responsive layouts, reusable components, and states that developers can build without guesswork. I'm the founder of RealDiamond Digital, where I lead design and development on every project.",
+    "Because I also design, I care about the details that make an interface feel right: clear hierarchy, consistent components and states that work on every screen. I'm the founder of RealDiamond Digital, where I lead development on every project.",
   email: "realdiamonddigital@gmail.com",
   linkedin: "https://www.linkedin.com/in/oluwatimilehin0-akinsanmi1/",
 };
 
 export const skillGroups = [
   {
-    title: "UI Design",
-    items: ["Visual hierarchy & layout", "Typography & colour", "Component design", "Pixel-perfect handoff"],
-  },
-  {
-    title: "UX Design",
-    items: ["User flows & journeys", "Information architecture", "Calls-to-action & conversion", "Content structure"],
-  },
-  {
-    title: "Systems & Accessibility",
-    items: ["Design systems & tokens", "Responsive, mobile-first design", "Accessible contrast & focus states", "Grid-based layout & spacing"],
-  },
-  {
     title: "Front-end",
-    items: ["HTML, CSS & Tailwind CSS", "React & Next.js", "WordPress & ACF", "Headless CMS (Sanity)"],
+    items: ["React & Next.js 14 (App Router)", "TypeScript & JavaScript (ES6+)", "React Native", "HTML, CSS & Tailwind CSS"],
+  },
+  {
+    title: "Data & Auth",
+    items: ["REST API integration with Axios", "JWT auth & role-based routing", "React Hook Form & Zod", "Offline-first storage (SQLite)"],
+  },
+  {
+    title: "CMS & Delivery",
+    items: ["Headless CMS (Sanity)", "WordPress & ACF", "Git, GitHub & Vercel", "Agile/Scrum teams"],
+  },
+  {
+    title: "UI/UX",
+    items: ["Responsive, mobile-first design", "Design systems & tokens", "Accessible contrast & focus states", "Google UX Design certificate"],
   },
 ];
 

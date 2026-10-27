@@ -4,7 +4,7 @@ interface PageHeaderProps {
   eyebrow: string;
   title: ReactNode;
   description?: ReactNode;
-  /** Small redline annotation shown under the title */
+  /** Small annotation shown under the title */
   note?: string;
   children?: ReactNode;
 }

@@ -68,7 +68,9 @@ const About = async () => {
   const name = founder?.name || "Oluwatimilehin Akinsanmi";
 
   const facts = [
-    { label: "Role", value: "Founder, UI/UX designer & front-end developer" },
+    { label: "Role", value: "Founder, front-end developer & UI/UX designer" },
+    { label: "Stack", value: "React · Next.js · TypeScript · React Native · Tailwind CSS · WordPress" },
+    { label: "Training", value: "HNG Internship, Frontend track (2025)" },
     { label: "Education", value: "B.Tech Information Technology, Federal University of Technology, Akure" },
     { label: "Certification", value: "Google UX Design Professional Certificate" },
     { label: "Clients in", value: "Nigeria · USA · Canada · New Zealand" },
@@ -78,7 +80,7 @@ const About = async () => {
     <Layout>
       <PageHeader
         eyebrow="About"
-        title="A small studio, led by the person who designs your site."
+        title="A small studio, led by the developer who builds your site."
         description={`RealDiamond Digital is the studio of ${name}. Since 2023 I've designed and built websites for non-profits, churches, consultancies, financial services and small businesses.`}
       />
 
@@ -113,13 +115,14 @@ const About = async () => {
               ) : (
                 <>
                   <p>
-                    I&apos;m a UI/UX designer and front-end developer. I started RealDiamond Digital to give organisations
-                    a website that is clear, fast and easy to manage, without the layers of a large agency.
+                    I&apos;m a front-end developer and UI/UX designer. I build websites and web apps with React, Next.js
+                    and TypeScript, and I started RealDiamond Digital to give organisations software that is fast,
+                    accessible and easy to manage, without the layers of a large agency.
                   </p>
                   <p>
-                    Because I also write the code, I design with real constraints in mind: responsive layouts, reusable
-                    components, and pages your team can update themselves. When a project needs more hands, I work with a
-                    small group of trusted collaborators, and you keep one point of contact: me.
+                    I&apos;ve shipped client websites, a booking platform with role-based access, an AI-powered web app
+                    and an offline-first mobile app. When a project needs more hands, I work with a small group of trusted
+                    collaborators, and you keep one point of contact: me.
                   </p>
                 </>
               )}
@@ -142,7 +145,7 @@ const About = async () => {
                 </Link>
               </Button>
               <Button variant="outline" size="lg" asChild>
-                <Link href="/portfolio">See my case studies</Link>
+                <a href="https://github.com/Realdiamond" target="_blank" rel="noopener noreferrer">GitHub</a>
               </Button>
             </div>
           </div>

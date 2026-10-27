@@ -3,6 +3,7 @@ import Hero from "@/components/sections/Hero";
 import ProofBar from "@/components/sections/ProofBar";
 import TrustedBySection from "@/components/sections/TrustedBySection";
 import WorkSection from "@/components/sections/WorkSection";
+import DevProjects from "@/components/sections/DevProjects";
 import ServicesGrid from "@/components/sections/ServicesGrid";
 import ProcessTimeline from "@/components/sections/ProcessTimeline";
 import TestimonialsShowcaseWrapper from "@/components/sections/TestimonialsShowcaseWrapper";
@@ -17,7 +18,8 @@ export default function Home() {
       <Hero />
       <ProofBar />
       <TrustedBySection />
-      <WorkSection />
+      <DevProjects />
+      <WorkSection title="Client websites" note="structure on the left, shipped site on the right" />
       <ServicesGrid />
       <ProcessTimeline />
       <TestimonialsShowcaseWrapper />

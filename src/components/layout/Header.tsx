@@ -49,7 +49,7 @@ const Header = () => {
               alt="RealDiamond Digital"
               width={300}
               height={68}
-              className="h-9 w-auto object-contain"
+              className="h-9 w-auto object-contain logo-on-dark"
               priority
             />
           </Link>

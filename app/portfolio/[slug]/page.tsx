@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   }
 
   return generateSEO({
-    title: `${study.title} – UI/UX Case Study`,
+    title: `${study.title} – Case Study`,
     description: study.summary,
     keywords: [...study.tags, "UI/UX case study", "portfolio"],
     ogImage: study.images.hero.src,
@@ -61,7 +61,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           </Link>
 
           <div className="max-w-4xl">
-            <p className="bp-label mb-6">UI/UX case study · {study.year}</p>
+            <p className="bp-label mb-6">Case study · {study.year}</p>
             <h1 className="text-[44px] leading-[1.02] sm:text-6xl lg:text-7xl font-bold tracking-[-0.03em]">{study.title}</h1>
             <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed mt-6 max-w-3xl">{study.summary}</p>
           </div>

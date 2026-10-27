@@ -2,102 +2,74 @@
 @tailwind components;
 @tailwind utilities;
 
-/* RealDiamond Digital Design System: "Blueprint"
-   A designer's canvas: grid paper, ink type, one blue for action and
-   redline annotations that show how each layout is put together.
+/* RealDiamond Digital Design System: "Source" (developer edition)
+   A dark code-editor canvas: a faint grid, light type, one blue for
+   action and code-comment annotations in string-literal amber.
 */
 
 @layer base {
   :root {
-    /* Ink and paper */
-    --background: 217 50% 97%;
-    --foreground: 221 43% 11%;
-    --grid: 218 38% 92%;
+    /* "Source": a dark code-editor palette for the developer edition */
+    color-scheme: dark;
 
-    --card: 0 0% 100%;
-    --card-foreground: 221 43% 11%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 221 43% 11%;
+    --background: 220 27% 6%;
+    --foreground: 216 33% 92%;
+    --grid: 220 22% 9.5%;
 
-    /* Primary = ink, used for solid dark buttons and panels */
-    --primary: 221 43% 11%;
-    --primary-foreground: 0 0% 100%;
+    --card: 220 24% 9%;
+    --card-foreground: 216 33% 92%;
+    --popover: 220 24% 9%;
+    --popover-foreground: 216 33% 92%;
 
-    /* Secondary = light blueprint fill for chips and quiet sections */
-    --secondary: 217 42% 94%;
-    --secondary-foreground: 221 43% 11%;
+    /* Primary = light ink, so "ink panels" invert to light on dark */
+    --primary: 216 33% 92%;
+    --primary-foreground: 220 27% 6%;
 
-    --muted: 217 35% 92%;
-    --muted-foreground: 218 14% 41%;
+    --secondary: 220 20% 13%;
+    --secondary-foreground: 216 33% 92%;
 
-    /* Accent = blueprint blue, the one colour for actions and links */
-    --accent: 224 75% 48%;
-    --accent-foreground: 0 0% 100%;
+    --muted: 220 18% 16%;
+    --muted-foreground: 218 16% 68%;
 
-    /* Annotation = redline marks; -ink is the readable text version */
-    --accent-secondary: 9 100% 62%;
-    --accent-secondary-foreground: 0 0% 100%;
-    --annotation: 9 100% 62%;
-    --annotation-ink: 9 75% 45%;
+    /* Accent = brand blue, tuned for dark backgrounds */
+    --accent: 222 100% 68%;
+    --accent-foreground: 220 27% 6%;
 
-    --destructive: 0 72% 51%;
-    --destructive-foreground: 0 0% 100%;
+    /* Annotation = string-literal amber, used for code-comment notes */
+    --accent-secondary: 38 92% 62%;
+    --accent-secondary-foreground: 220 27% 6%;
+    --annotation: 38 92% 62%;
+    --annotation-ink: 38 92% 68%;
 
-    --border: 217 32% 86%;
-    --input: 217 32% 86%;
-    --ring: 224 75% 48%;
+    --destructive: 0 80% 62%;
+    --destructive-foreground: 220 27% 6%;
+
+    --border: 220 18% 19%;
+    --input: 220 18% 19%;
+    --ring: 222 100% 68%;
 
     --radius: 0.5rem;
 
-    /* Legacy tokens kept so older components render in the new style */
-    --glass-bg: hsl(0 0% 100%);
-    --glass-border: hsl(217 32% 86%);
+    --glass-bg: hsl(220 24% 9%);
+    --glass-border: hsl(220 18% 19%);
     --glass-blur: 0px;
-    --gradient-primary: linear-gradient(hsl(224 75% 48%), hsl(224 75% 48%));
+    --gradient-primary: linear-gradient(hsl(222 100% 68%), hsl(222 100% 68%));
     --gradient-glow: none;
     --gradient-hero: none;
 
     --shadow-glow: 0 0 0 0 transparent;
     --shadow-glow-purple: 0 0 0 0 transparent;
-    --shadow-glass: 0 1px 2px hsl(221 43% 11% / 0.04);
-    --shadow-elevated: 0 18px 40px -24px hsl(221 43% 11% / 0.35);
+    --shadow-glass: 0 1px 2px hsl(0 0% 0% / 0.3);
+    --shadow-elevated: 0 18px 40px -20px hsl(0 0% 0% / 0.7);
 
-    --sidebar-background: 217 50% 97%;
-    --sidebar-foreground: 221 43% 11%;
-    --sidebar-primary: 224 75% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 217 42% 94%;
-    --sidebar-accent-foreground: 221 43% 11%;
-    --sidebar-border: 217 32% 86%;
-    --sidebar-ring: 224 75% 48%;
-  }
-
-  .dark {
-    /* Night blueprint (the site currently ships light only) */
-    --background: 222 47% 8%;
-    --foreground: 216 33% 94%;
-    --grid: 222 35% 14%;
-    --card: 222 40% 11%;
-    --card-foreground: 216 33% 94%;
-    --popover: 222 40% 11%;
-    --popover-foreground: 216 33% 94%;
-    --primary: 216 33% 94%;
-    --primary-foreground: 222 47% 8%;
-    --secondary: 222 35% 15%;
-    --secondary-foreground: 216 33% 94%;
-    --muted: 222 30% 18%;
-    --muted-foreground: 218 16% 68%;
-    --accent: 222 90% 66%;
-    --accent-foreground: 222 47% 8%;
-    --accent-secondary: 9 100% 66%;
-    --accent-secondary-foreground: 222 47% 8%;
-    --annotation: 9 100% 66%;
-    --annotation-ink: 9 100% 72%;
-    --border: 222 28% 22%;
-    --input: 222 28% 22%;
-    --ring: 222 90% 66%;
-    --glass-bg: hsl(222 40% 11%);
-    --glass-border: hsl(222 28% 22%);
+    --sidebar-background: 220 27% 6%;
+    --sidebar-foreground: 216 33% 92%;
+    --sidebar-primary: 222 100% 68%;
+    --sidebar-primary-foreground: 220 27% 6%;
+    --sidebar-accent: 220 20% 13%;
+    --sidebar-accent-foreground: 216 33% 92%;
+    --sidebar-border: 220 18% 19%;
+    --sidebar-ring: 222 100% 68%;
   }
 }
 
@@ -127,7 +99,7 @@
   }
 
   ::selection {
-    background: hsl(224 75% 48% / 0.18);
+    background: hsl(222 100% 68% / 0.3);
     color: hsl(var(--foreground));
   }
 
@@ -198,7 +170,12 @@
     display: none;
   }
 
-  /* --- Blueprint annotation kit --- */
+  /* The brand logo has dark text; flip its lightness (keeping hues) for the dark canvas */
+  .logo-on-dark {
+    filter: invert(1) hue-rotate(180deg) saturate(1.15);
+  }
+
+  /* --- Annotation kit --- */
 
   /* Small monospace label, e.g. "CERAMICS STUDIO · CANADA · 2025" */
   .bp-label {
@@ -209,7 +186,12 @@
     color: hsl(var(--muted-foreground));
   }
 
-  /* Redline note, e.g. "H1 · 86/84" */
+  /* Code-comment note, rendered as "// note" */
+  .bp-note::before {
+    content: "// ";
+    opacity: 0.7;
+  }
+
   .bp-note {
     font-family: var(--font-mono), ui-monospace, monospace;
     font-size: 0.6875rem;
@@ -234,7 +216,14 @@
     background: linear-gradient(transparent 62%, hsl(var(--accent) / 0.18) 62%);
   }
 
-  /* Result tag in redline style */
+  /* Result tag, rendered like a string literal */
+  .bp-result::before,
+  .bp-result::after {
+    content: '"';
+    opacity: 0.6;
+  }
+
+  /* Result tag in annotation style */
   .bp-result {
     display: inline-flex;
     align-items: center;

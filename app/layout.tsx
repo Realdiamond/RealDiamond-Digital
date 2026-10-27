@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
-import { Familjen_Grotesk, JetBrains_Mono } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
 import { generateSEO } from "@/lib/seo";
 import { generateOrganizationSchema } from "@/lib/schema";
 import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
 
-const display = Familjen_Grotesk({ subsets: ["latin"], variable: "--font-display", display: "swap" });
-const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono", display: "swap" });
+const display = Geist({ subsets: ["latin"], variable: "--font-display", display: "swap" });
+const mono = Geist_Mono({ subsets: ["latin"], variable: "--font-mono", display: "swap" });
 
 export const metadata: Metadata = generateSEO();
 

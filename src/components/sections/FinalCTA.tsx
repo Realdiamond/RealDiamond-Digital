@@ -12,7 +12,7 @@ const FinalCTA = () => {
           <div>
             <p className="font-mono text-xs uppercase tracking-wider text-background/60 mb-6">Start a project</p>
             <h2 id="final-cta-title" className="text-4xl sm:text-5xl lg:text-7xl font-bold leading-[1.02] tracking-[-0.03em]">
-              Let&apos;s draw up your next website.
+              Let&apos;s build your next website.
             </h2>
             <ul className="flex flex-wrap gap-x-6 gap-y-2 mt-8 font-mono text-xs text-background/70">
               {promises.map((promise) => (

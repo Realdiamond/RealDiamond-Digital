@@ -7,20 +7,20 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 export const metadata = generateSEO({
   title: "Design System – UI/UX Case Study",
   description:
-    "The Blueprint design system behind realdiamonddigital.studio: tokens, type, an annotation kit and components, built in Tailwind CSS and React.",
+    "The Source design system behind realdiamonddigital.studio: tokens, type, an annotation kit and components, built in Tailwind CSS and React.",
   keywords: ["design system", "design tokens", "component library", "UI/UX case study"],
   canonical: "https://realdiamonddigital.studio/portfolio/design-system",
 });
 
 const colorTokens = [
-  { name: "Ink", token: "--foreground", value: "hsl(221 43% 11%)", role: "Headings, body text and dark panels" },
-  { name: "Paper", token: "--background", value: "hsl(217 50% 97%)", role: "Page background under the grid" },
-  { name: "Grid", token: "--grid", value: "hsl(218 38% 92%)", role: "32px grid-paper lines" },
-  { name: "Blueprint blue", token: "--accent", value: "hsl(224 75% 48%)", role: "The one colour for actions, links and focus" },
-  { name: "Redline", token: "--annotation", value: "hsl(9 100% 62%)", role: "Annotation lines, frames and markers" },
-  { name: "Redline ink", token: "--annotation-ink", value: "hsl(9 75% 45%)", role: "Readable annotation text" },
-  { name: "Muted text", token: "--muted-foreground", value: "hsl(218 14% 41%)", role: "Supporting text and captions" },
-  { name: "Hairline", token: "--border", value: "hsl(217 32% 86%)", role: "Panel borders and dividers" },
+  { name: "Ink", token: "--foreground", value: "hsl(216 33% 92%)", role: "Headings, body text and light panels" },
+  { name: "Canvas", token: "--background", value: "hsl(220 27% 6%)", role: "Page background under the grid" },
+  { name: "Grid", token: "--grid", value: "hsl(220 22% 9.5%)", role: "Faint 32px grid lines" },
+  { name: "Brand blue", token: "--accent", value: "hsl(222 100% 68%)", role: "The one colour for actions, links and focus" },
+  { name: "String amber", token: "--annotation", value: "hsl(38 92% 62%)", role: "Annotation lines, frames and markers" },
+  { name: "Amber ink", token: "--annotation-ink", value: "hsl(38 92% 68%)", role: "Code comments and stack tags" },
+  { name: "Muted text", token: "--muted-foreground", value: "hsl(218 16% 68%)", role: "Supporting text and captions" },
+  { name: "Hairline", token: "--border", value: "hsl(220 18% 19%)", role: "Panel borders and dividers" },
 ];
 
 const typeScale = [
@@ -38,13 +38,13 @@ const buttonSizes = ["sm", "default", "lg", "xl"] as const;
 
 const principles = [
   {
-    title: "Show the thinking",
+    title: "Speak the language of the work",
     description:
-      "Redline annotations, spacing markers and wireframe views put the structure of each layout on the page, so visitors see how the design works.",
+      "Notes read like code comments and results like string literals, so the interface uses the same vocabulary as the code behind it.",
   },
   {
     title: "One colour for action",
-    description: "Blueprint blue is reserved for actions, links and focus. Redline is only for annotations, so the two never compete.",
+    description: "Brand blue is reserved for actions, links and focus. Amber is only for annotations and stack tags, so the two never compete.",
   },
   {
     title: "Tokens, not hard-coded values",
@@ -54,7 +54,7 @@ const principles = [
   {
     title: "Accessible by default",
     description:
-      "Text colours meet WCAG AA contrast on paper, and every interactive component shares one visible focus ring for keyboard users.",
+      "Text colours meet WCAG AA contrast on the dark canvas, and every interactive component shares one visible focus ring for keyboard users.",
   },
 ];
 
@@ -73,13 +73,13 @@ export default function DesignSystemPage() {
           <div className="max-w-4xl">
             <p className="bp-label mb-6">Design system case study</p>
             <h1 className="text-[44px] leading-[1.02] sm:text-6xl lg:text-7xl font-bold tracking-[-0.03em]">
-              The Blueprint design system
+              The Source design system
             </h1>
             <p className="bp-note mt-4">rendered live from the production code, not from static images</p>
             <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed mt-6 max-w-3xl">
               realdiamonddigital.studio runs on a small token-based design system I built with Tailwind CSS and React. It
-              treats every page like a designer&apos;s canvas: grid paper, ink type, one blue for action and redline
-              annotations that show how each layout is put together.
+              treats every page like a code editor: a dark canvas with a faint grid, light type, one blue for action and
+              code-comment annotations in string-literal amber.
             </p>
           </div>
         </div>
@@ -127,7 +127,7 @@ export default function DesignSystemPage() {
         <div className="container-wide">
           <div className="bp-heading mb-8">
             <h2 className="text-3xl sm:text-4xl font-bold">Typography</h2>
-            <span className="bp-note">Familjen Grotesk · JetBrains Mono</span>
+            <span className="bp-note">Geist · Geist Mono</span>
           </div>
           <div className="bp-panel divide-y divide-border">
             {typeScale.map((type) => (
@@ -144,7 +144,7 @@ export default function DesignSystemPage() {
         <div className="container-wide">
           <div className="bp-heading mb-8">
             <h2 className="text-3xl sm:text-4xl font-bold">Annotation kit</h2>
-            <span className="bp-note">the pieces that make the Blueprint look</span>
+            <span className="bp-note">the pieces that make the Source look</span>
           </div>
           <div className="grid lg:grid-cols-2 gap-px bg-border border border-border">
             <div className="bg-card p-8 sm:p-10">
@@ -222,12 +222,12 @@ export default function DesignSystemPage() {
         <div className="container-wide">
           <div className="bp-heading mb-8">
             <h2 className="text-3xl sm:text-4xl font-bold">Panels</h2>
-            <span className="bp-note">flat sheets on grid paper, no shadows or gradients</span>
+            <span className="bp-note">flat panels on a dark grid, no glows or gradients</span>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             <div className="bp-panel p-6">
               <p className="bp-label mb-3">Panel</p>
-              <p className="text-muted-foreground">White sheet with a 1px hairline. Used for most content.</p>
+              <p className="text-muted-foreground">Card surface with a 1px hairline. Used for most content.</p>
             </div>
             <div className="grid grid-cols-2 gap-px bg-border border border-border">
               {["Hairline", "grid", "for", "groups"].map((cell) => (
@@ -237,7 +237,7 @@ export default function DesignSystemPage() {
               ))}
             </div>
             <div className="bg-foreground text-background p-6">
-              <p className="font-mono text-xs uppercase tracking-wider text-background/60 mb-3">Ink panel</p>
+              <p className="font-mono text-xs uppercase tracking-wider text-background/60 mb-3">Light panel</p>
               <p className="text-background/80">For the one moment per page that needs the most attention.</p>
             </div>
           </div>

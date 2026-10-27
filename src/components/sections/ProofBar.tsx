@@ -21,12 +21,12 @@ export default async function ProofBar() {
   const { reviewCount, averageRating } = await getReviewStats();
 
   const items = [
+    { value: "95+", label: "Production deployments" },
+    { value: "3+", label: "Platforms launched in 12 months" },
     { value: "10+", label: "Client websites since 2023" },
-    { value: "4", label: "Countries · NG US CA NZ" },
     ...(averageRating
       ? [{ value: averageRating.toFixed(1), label: `Average · ${reviewCount} client reviews` }]
       : []),
-    { value: "+75%", label: "Traffic · Pottery by Tolu" },
   ];
 
   return (
