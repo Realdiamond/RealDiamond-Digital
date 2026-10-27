@@ -6,9 +6,11 @@ import TawkToChat from "@/components/TawkToChat";
 
 interface LayoutProps {
   children: ReactNode;
+  /** Hide the agency availability badge and live chat (used on personal portfolio pages). */
+  hideAgencyWidgets?: boolean;
 }
 
-const Layout = ({ children }: LayoutProps) => {
+const Layout = ({ children, hideAgencyWidgets = false }: LayoutProps) => {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
@@ -17,8 +19,12 @@ const Layout = ({ children }: LayoutProps) => {
       </main>
       <Footer />
       
-      <AvailabilityBadge />
-      <TawkToChat />
+      {!hideAgencyWidgets && (
+        <>
+          <AvailabilityBadge />
+          <TawkToChat />
+        </>
+      )}
     </div>
   );
 };

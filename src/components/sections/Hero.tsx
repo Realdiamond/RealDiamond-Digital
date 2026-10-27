@@ -31,21 +31,21 @@ const Hero = () => {
               </div>
               <div>
                 <div className="font-semibold text-foreground text-sm">Project Success</div>
-                <div className="text-xs text-muted-foreground">HVAC Pro Inc.</div>
+                <div className="text-xs text-muted-foreground">Pottery by Tolu</div>
               </div>
             </div>
             <div className="text-sm text-muted-foreground">
-              250% increase in booked calls
+              75% more website traffic in the first month
             </div>
           </div>
 
           <div className="w-56 glass-card p-4 animate-float" style={{ animationDelay: "-3s" }}>
             <div className="flex items-center justify-between mb-2">
-              <span className="text-sm font-medium text-muted-foreground">Lead Growth</span>
-              <span className="text-xs text-accent font-semibold">+320%</span>
+              <span className="text-sm font-medium text-muted-foreground">Clients worldwide</span>
+              <span className="text-xs text-accent font-semibold">4 countries</span>
             </div>
-            <div className="h-2 bg-secondary rounded-full overflow-hidden">
-              <div className="h-full bg-gradient-to-r from-accent to-accent-secondary w-4/5 rounded-full animate-pulse" />
+            <div className="text-xs text-muted-foreground">
+              Nigeria · USA · Canada · New Zealand
             </div>
           </div>
         </div>
@@ -63,8 +63,8 @@ const Hero = () => {
                 ))}
               </div>
               <div>
-                <div className="text-2xl font-bold text-foreground">98%</div>
-                <div className="text-xs text-muted-foreground">Client Retention</div>
+                <div className="text-2xl font-bold text-foreground">5.0</div>
+                <div className="text-xs text-muted-foreground">Average client rating</div>
               </div>
             </div>
           </div>
@@ -72,10 +72,10 @@ const Hero = () => {
           <div className="w-56 glass-card p-4 animate-float" style={{ animationDelay: "-4s" }}>
             <div className="flex items-center gap-2 mb-2">
               <TrendingUp className="w-4 h-4 text-accent" />
-              <span className="text-sm font-medium text-foreground">Traffic Boost</span>
+              <span className="text-sm font-medium text-foreground">Websites launched</span>
             </div>
-            <div className="text-2xl font-bold text-foreground">3.5x</div>
-            <div className="text-xs text-muted-foreground">Average increase</div>
+            <div className="text-2xl font-bold text-foreground">10+</div>
+            <div className="text-xs text-muted-foreground">Since 2023</div>
           </div>
         </div>
       </div>

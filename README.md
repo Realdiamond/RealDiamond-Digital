@@ -60,11 +60,10 @@ Launch and scale your online store with custom e-commerce solutions:
 
 ## 📊 Client Success
 
-We've helped businesses across various industries achieve:
-- **200%+ increase** in organic traffic
-- **150%+ boost** in conversion rates
-- **300%+ growth** in qualified leads
-- **ROI-positive results** within 6 months
+- **10+ client websites** launched since 2023
+- **Clients in 4 countries**: Nigeria, the USA, Canada, and New Zealand
+- **5.0 average rating** across client reviews
+- **75% traffic increase** in the first month for Pottery by Tolu
 
 ## 📍 Industries We Serve
 

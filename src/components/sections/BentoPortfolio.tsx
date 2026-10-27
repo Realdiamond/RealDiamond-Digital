@@ -172,10 +172,10 @@ const BentoPortfolio = ({ projects }: BentoPortfolioProps) => {
           <div className="md:col-span-6 lg:col-span-12 rounded-3xl overflow-hidden glass-card p-12 bg-gradient-to-br from-accent/5 via-accent-secondary/5 to-transparent border-2 border-accent/20 hover:border-accent/40 transition-all duration-500 group cursor-pointer">
             <div className="max-w-2xl">
               <h3 className="font-heading text-3xl md:text-4xl font-bold mb-4">
-                Want to see more? We've helped 50+ service businesses grow.
+                Want to see more of our work?
               </h3>
               <p className="text-muted-foreground text-lg mb-6">
-                From HVAC companies to roofing contractors, see how we've driven real leads and revenue for businesses like yours.
+                From non-profits and churches to consulting firms and small studios, see how we've helped organisations grow online.
               </p>
               <Link 
                 href="/projects"
