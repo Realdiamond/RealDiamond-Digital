@@ -77,8 +77,8 @@ export default {
         },
       },
       fontFamily: {
-        sans: ['Space Grotesk', 'system-ui', 'sans-serif'],
-        heading: ['Syne', 'Space Grotesk', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
+        heading: ['var(--font-inter)', 'system-ui', 'sans-serif'],
       },
       // keyframes: marquee removed (duplicate)
       // animation: marquee removed (duplicate)
