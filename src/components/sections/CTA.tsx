@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 interface CTAProps {
   title?: string;
@@ -10,58 +10,34 @@ interface CTAProps {
 }
 
 const CTA = ({
-  title = "Let's Build Something Extraordinary",
-  description = "Ready to transform your digital presence? Let's discuss how RealDiamond Digital can help you achieve your business goals.",
-  buttonText = "Start Your Project",
+  title = "Let's draw up your next website.",
+  description = "Tell me what you're trying to achieve. I reply to every enquiry within 24 hours.",
+  buttonText = "Book a free call",
   buttonLink = "/contact",
 }: CTAProps) => {
   return (
-    <section className="section-padding bg-background relative overflow-hidden">
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="bg-orb bg-orb-1 opacity-30" />
-        <div className="bg-orb bg-orb-2 opacity-20" />
-      </div>
-
-      <div className="container-wide relative">
-        <div className="glass-card p-12 md:p-16 lg:p-20 text-center relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-accent-secondary/5" />
-          
-          <div className="relative z-10">
-            <div className="inline-flex items-center gap-2 px-4 py-2 glass-card mb-8">
-              <Sparkles className="w-4 h-4 text-accent" />
-              <span className="text-sm font-medium text-muted-foreground">
-                Ready to Grow?
-              </span>
-            </div>
-
-            <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 max-w-3xl mx-auto">
-              {title.includes("Extraordinary") ? (
-                <>
-                  Let's Build Something{" "}
-                  <span className="text-gradient">Extraordinary</span>
-                </>
-              ) : (
-                title
-              )}
-            </h2>
-            
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
-              {description}
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button variant="hero" size="xl" asChild>
-                <Link href={buttonLink}>
-                  {buttonText}
-                  <ArrowRight className="w-5 h-5" />
-                </Link>
-              </Button>
-              <Button variant="hero-outline" size="xl" asChild>
-                <Link href="/projects">
-                  View Our Work
-                </Link>
-              </Button>
-            </div>
+    <section className="py-16 lg:py-24">
+      <div className="container-wide">
+        <div className="bg-foreground text-background p-8 sm:p-12 lg:p-16 grid lg:grid-cols-[1fr_auto] gap-10 items-end">
+          <div className="max-w-3xl">
+            <p className="font-mono text-xs uppercase tracking-wider text-background/60 mb-6">Next step</p>
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.05] tracking-[-0.03em]">{title}</h2>
+            <p className="text-lg text-background/75 leading-relaxed mt-6 max-w-2xl">{description}</p>
+          </div>
+          <div className="flex flex-col sm:flex-row lg:flex-col gap-3">
+            <Button variant="accent" size="lg" asChild>
+              <Link href={buttonLink}>
+                {buttonText}
+                <ArrowRight />
+              </Link>
+            </Button>
+            <Button
+              size="lg"
+              asChild
+              className="bg-transparent border border-background/30 text-background hover:bg-background/10"
+            >
+              <Link href="/portfolio">See the case studies</Link>
+            </Button>
           </div>
         </div>
       </div>

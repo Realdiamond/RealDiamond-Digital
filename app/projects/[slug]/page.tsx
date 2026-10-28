@@ -2,7 +2,9 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, ArrowRight, Clock, MapPin, Users, Calendar, CheckCircle2, Quote, ExternalLink } from "lucide-react";
+import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
+import CTA from "@/components/sections/CTA";
+import { getCaseStudy } from "@/data/portfolio";
 import { client } from "@/sanity/lib/client";
 import { generateSEO } from '@/lib/seo';
 import { CMS_REVALIDATE, docTag, entryTag, listTag } from '@/lib/cms-cache';
@@ -73,6 +75,15 @@ async function getAdjacentProjects(currentSlug: string) {
 
 export const revalidate = 60;
 
+const categoryLabels: Record<string, string> = {
+  web: "Web Design",
+  webdev: "Web Development",
+  uiux: "UI/UX Design",
+  seo: "SEO",
+  branding: "Branding",
+  ecommerce: "E-commerce",
+};
+
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const project = await getProject(slug);
@@ -81,16 +92,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     return {};
   }
 
-  const categoryMap: Record<string, string> = {
-    web: 'Web Design',
-    webdev: 'Web Development',
-    uiux: 'UI/UX Design',
-    seo: 'SEO',
-    branding: 'Branding',
-    ecommerce: 'E-commerce',
-  };
-
-  const categoryName = categoryMap[project.category] || project.category;
+  const categoryName = categoryLabels[project.category] || project.category;
 
   return generateSEO({
     title: `${project.title} - ${categoryName} Project`,
@@ -124,198 +126,150 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
   }
 
   const { nextProject, prevProject } = await getAdjacentProjects(slug);
+  const caseStudy = getCaseStudy(slug);
+
+  const facts = [
+    { label: "Client", value: project.client?.name },
+    { label: "Industry", value: project.client?.industry },
+    { label: "Location", value: project.client?.location },
+    { label: "Timeline", value: project.duration },
+    { label: "Year", value: project.year },
+  ].filter((fact) => fact.value);
 
   return (
     <Layout>
-      <section className="pt-24 pb-12 bg-background relative overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="bg-orb bg-orb-1 opacity-20" />
-        </div>
+      <section className="pt-10 pb-12 lg:pt-14 lg:pb-16">
+        <div className="container-wide">
+          <Link
+            href="/projects"
+            className="inline-flex items-center gap-2 font-mono text-xs text-muted-foreground hover:text-accent transition-colors mb-10"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            All projects
+          </Link>
 
-        <div className="container-wide relative">
+          <div className="max-w-4xl">
+            <p className="bp-label mb-6">
+              {categoryLabels[project.category] || project.category}
+              {project.client?.industry ? ` · ${project.client.industry}` : ""}
+            </p>
+            <h1 className="text-[40px] leading-[1.05] sm:text-6xl lg:text-7xl font-bold tracking-[-0.03em]">{project.title}</h1>
+            <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed mt-6 max-w-3xl">{project.description}</p>
+          </div>
 
-          <div className="grid lg:grid-cols-2 gap-12 items-start">
-            <div>
-              <div className="flex flex-wrap items-center gap-2 mb-4">
-                <span className="px-3 py-1 glass-card text-xs font-medium text-accent">
-                  {project.category === 'web' ? 'Web Design' :
-                   project.category === 'webdev' ? 'Web Development' :
-                   project.category === 'uiux' ? 'UI/UX Design' :
-                   project.category === 'seo' ? 'SEO' :
-                   project.category === 'branding' ? 'Branding' :
-                   project.category === 'ecommerce' ? 'E-commerce' : project.category}
-                </span>
-                <span className="text-muted-foreground text-xs">•</span>
-                <span className="px-3 py-1 glass-card text-xs font-medium text-foreground">
-                  {project.client.industry}
-                </span>
-              </div>
-              <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
-                {project.title}
-              </h1>
-              <p className="text-xl text-muted-foreground leading-relaxed mb-8">
-                {project.description}
-              </p>
+          {facts.length > 0 && (
+            <dl className="grid grid-cols-2 md:grid-cols-5 gap-px bg-border border border-border mt-10">
+              {facts.map((fact) => (
+                <div key={fact.label} className="bg-card p-4 flex flex-col gap-1 [&:last-child:nth-child(odd)]:col-span-2 md:[&:last-child:nth-child(odd)]:col-span-1">
+                  <dt className="bp-label">{fact.label}</dt>
+                  <dd className="font-semibold">{fact.value}</dd>
+                </div>
+              ))}
+            </dl>
+          )}
 
-              <div className="grid grid-cols-2 gap-4 mb-8">
-                <div className="glass-card p-4">
-                  <div className="flex items-center gap-3">
-                    <MapPin className="w-5 h-5 text-accent" />
-                    <div>
-                      <p className="text-xs text-muted-foreground">Location</p>
-                      <p className="text-sm font-medium text-foreground">{project.client.location}</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="glass-card p-4">
-                  <div className="flex items-center gap-3">
-                    <Users className="w-5 h-5 text-accent" />
-                    <div>
-                      <p className="text-xs text-muted-foreground">Industry</p>
-                      <p className="text-sm font-medium text-foreground">{project.client.industry}</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="glass-card p-4">
-                  <div className="flex items-center gap-3">
-                    <Clock className="w-5 h-5 text-accent" />
-                    <div>
-                      <p className="text-xs text-muted-foreground">Duration</p>
-                      <p className="text-sm font-medium text-foreground">{project.duration}</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="glass-card p-4">
-                  <div className="flex items-center gap-3">
-                    <Calendar className="w-5 h-5 text-accent" />
-                    <div>
-                      <p className="text-xs text-muted-foreground">Year</p>
-                      <p className="text-sm font-medium text-foreground">{project.year}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex flex-wrap gap-3 mb-8">
-                {project.results.map((result) => (
-                  <span
-                    key={result}
-                    className="px-4 py-2 bg-accent/10 text-accent text-sm font-medium rounded-full border border-accent/20"
-                  >
-                    {result}
-                  </span>
-                ))}
-              </div>
-
-              {project.projectUrl && (
-                <div>
-                  <Button
-                    variant="hero"
-                    size="lg"
-                    asChild
-                    className="group"
-                  >
-                    <a
-                      href={project.projectUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      View Live Project
-                      <ExternalLink className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                    </a>
-                  </Button>
-                </div>
-              )}
+          {project.image && (
+            <div className="bp-panel p-2 sm:p-3 mt-8">
+              <img src={`${project.image}?w=2000&auto=format`} alt={`${project.title} website`} className="w-full h-auto block" />
             </div>
+          )}
 
-            <div className="relative">
-              <div className="glass-card overflow-hidden">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-[400px] lg:h-[500px] object-cover"
-                />
-              </div>
+          <div className="flex flex-wrap items-center gap-4 mt-6">
+            {project.projectUrl && (
+              <Button variant="accent" asChild>
+                <a href={project.projectUrl} target="_blank" rel="noopener noreferrer">
+                  Visit the live site
+                  <ExternalLink />
+                </a>
+              </Button>
+            )}
+            {caseStudy && (
+              <Button variant="outline" asChild>
+                <Link href={`/portfolio/${caseStudy.slug}`}>
+                  Read the full case study
+                  <ArrowRight />
+                </Link>
+              </Button>
+            )}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-12 lg:py-16">
+        <div className="container-wide">
+          <div className="grid lg:grid-cols-2 gap-px bg-border border border-border">
+            <div className="bg-card p-6 sm:p-8">
+              <p className="bp-label mb-4">The challenge</p>
+              <p className="text-lg leading-relaxed">{project.challenge}</p>
+            </div>
+            <div className="bg-card p-6 sm:p-8">
+              <p className="bp-label mb-4">The solution</p>
+              <p className="text-lg leading-relaxed">{project.solution}</p>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="py-20 bg-secondary/30 border-t border-border/50">
-        <div className="container-wide">
-          <div className="grid lg:grid-cols-2 gap-12">
-            <div className="glass-card p-8">
-              <h2 className="font-heading text-2xl font-bold text-foreground mb-4">
-                The Challenge
-              </h2>
-              <p className="text-muted-foreground leading-relaxed">
-                {project.challenge}
-              </p>
-            </div>
-
-            <div className="glass-card p-8">
-              <h2 className="font-heading text-2xl font-bold text-foreground mb-4">
-                Our Solution
-              </h2>
-              <p className="text-muted-foreground leading-relaxed">
-                {project.solution}
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-20 bg-background">
-        <div className="container-wide">
-          <div className="grid lg:grid-cols-2 gap-12">
+      <section className="py-12 lg:py-16">
+        <div className="container-wide grid lg:grid-cols-[1.4fr_1fr] gap-12">
+          {project.strategy?.length > 0 && (
             <div>
-              <h2 className="font-heading text-3xl font-bold text-foreground mb-6">
-                Our Strategy
-              </h2>
-              <div className="space-y-4">
-                {project.strategy.map((step, index) => (
-                  <div key={index} className="flex items-start gap-4">
-                    <div className="w-8 h-8 bg-accent/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <CheckCircle2 className="w-4 h-4 text-accent" />
-                    </div>
-                    <p className="text-muted-foreground">{step}</p>
-                  </div>
-                ))}
+              <div className="bp-heading mb-6">
+                <h2 className="text-3xl font-bold">Approach</h2>
+                <span className="bp-note">{project.strategy.length} steps</span>
               </div>
+              <ol className="border-t border-border">
+                {project.strategy.map((step: string, index: number) => (
+                  <li key={step} className="flex gap-5 py-4 border-b border-border">
+                    <span className="font-mono text-sm text-accent pt-0.5">{String(index + 1).padStart(2, "0")}</span>
+                    <span className="leading-relaxed">{step}</span>
+                  </li>
+                ))}
+              </ol>
             </div>
+          )}
 
-            <div>
-              <h2 className="font-heading text-3xl font-bold text-foreground mb-6">
-                Services Provided
-              </h2>
-              <div className="flex flex-wrap gap-3">
-                {project.services.map((service) => (
-                  <span
-                    key={service}
-                    className="px-4 py-2 glass-card text-foreground font-medium"
-                  >
-                    {service}
-                  </span>
-                ))}
+          <div className="space-y-10">
+            {project.results?.length > 0 && (
+              <div>
+                <h2 className="text-3xl font-bold mb-6">Outcome</h2>
+                <ul className="flex flex-wrap gap-2">
+                  {project.results.map((result: string) => (
+                    <li key={result} className="bp-result">
+                      {result}
+                    </li>
+                  ))}
+                </ul>
               </div>
-            </div>
+            )}
+            {project.services?.length > 0 && (
+              <div>
+                <p className="bp-label mb-4">Services provided</p>
+                <ul className="flex flex-wrap gap-2">
+                  {project.services.map((service: string) => (
+                    <li key={service} className="font-mono text-xs border border-border bg-card px-2.5 py-1.5">
+                      {service}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
         </div>
       </section>
 
       {project.gallery && project.gallery.length > 0 && (
-        <section className="py-20 bg-secondary/30 border-t border-border/50">
+        <section className="py-12 lg:py-16">
           <div className="container-wide">
-            <h2 className="font-heading text-3xl font-bold text-foreground mb-8 text-center">
-              Project Gallery
-            </h2>
+            <h2 className="text-3xl font-bold mb-6">Gallery</h2>
             <div className="grid md:grid-cols-2 gap-6">
-              {project.gallery.map((image, index) => (
-                <div key={index} className="glass-card overflow-hidden">
+              {project.gallery.map((image: string, index: number) => (
+                <div key={image} className="bp-panel p-2">
                   <img
-                    src={image}
-                    alt={`${project.title} - Image ${index + 1}`}
-                    className="w-full h-[300px] object-cover hover:scale-105 transition-transform duration-500"
+                    src={`${image}?w=1200&auto=format`}
+                    alt={`${project.title} screen ${index + 1}`}
+                    loading="lazy"
+                    className="w-full h-auto block"
                   />
                 </div>
               ))}
@@ -325,70 +279,49 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
       )}
 
       {project.testimonial && (
-        <section className="py-20 bg-background border-t border-border/50">
+        <section className="py-12 lg:py-16">
           <div className="container-wide">
-            <div className="max-w-3xl mx-auto text-center">
-              <Quote className="w-12 h-12 text-accent/30 mx-auto mb-6" />
-              <blockquote className="font-heading text-2xl md:text-3xl text-foreground mb-8 leading-relaxed">
-                "{project.testimonial.quote}"
+            <figure className="bg-foreground text-background p-8 sm:p-12 max-w-4xl">
+              <blockquote className="text-2xl sm:text-3xl leading-snug tracking-tight">
+                &ldquo;{project.testimonial.quote}&rdquo;
               </blockquote>
-              <div>
-                <p className="font-medium text-foreground">{project.testimonial.author}</p>
-                <p className="text-muted-foreground text-sm">{project.testimonial.role}</p>
-              </div>
-            </div>
+              <figcaption className="mt-8">
+                <p className="font-semibold">{project.testimonial.author}</p>
+                <p className="font-mono text-xs text-background/70 mt-1">
+                  {project.testimonial.role}
+                  {project.testimonial.company ? ` · ${project.testimonial.company}` : ""}
+                </p>
+              </figcaption>
+            </figure>
           </div>
         </section>
       )}
 
-      <section className="py-12 bg-background border-t border-border/50">
+      <nav className="py-10" aria-label="More projects">
         <div className="container-wide">
-          <div className="flex justify-between items-center">
-            <Link
-              href={`/projects/${prevProject.slug}`}
-              className="group flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors"
-            >
-              <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
-              <div className="text-left">
-                <p className="text-xs uppercase tracking-wide">Previous</p>
-                <p className="font-medium">{prevProject.title}</p>
-              </div>
+          <div className="grid grid-cols-2 gap-px bg-border border border-border">
+            <Link href={`/projects/${prevProject.slug}`} className="group bg-card p-5 sm:p-6 flex items-center gap-3">
+              <ArrowLeft className="w-5 h-5 text-muted-foreground group-hover:-translate-x-1 transition-transform shrink-0" />
+              <span className="min-w-0">
+                <span className="bp-label block">Previous</span>
+                <span className="font-semibold block truncate group-hover:text-accent transition-colors">{prevProject.title}</span>
+              </span>
             </Link>
-            <Link
-              href={`/projects/${nextProject.slug}`}
-              className="group flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors"
-            >
-              <div className="text-right">
-                <p className="text-xs uppercase tracking-wide">Next</p>
-                <p className="font-medium">{nextProject.title}</p>
-              </div>
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            <Link href={`/projects/${nextProject.slug}`} className="group bg-card p-5 sm:p-6 flex items-center justify-end gap-3 text-right">
+              <span className="min-w-0">
+                <span className="bp-label block">Next</span>
+                <span className="font-semibold block truncate group-hover:text-accent transition-colors">{nextProject.title}</span>
+              </span>
+              <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:translate-x-1 transition-transform shrink-0" />
             </Link>
           </div>
         </div>
-      </section>
+      </nav>
 
-      <section className="py-20 bg-background border-t border-border/50">
-        <div className="container-wide">
-          <div className="glass-card p-12 md:p-16 text-center relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-accent-secondary/5" />
-            <div className="relative z-10">
-              <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-4">
-                Ready for Similar <span className="text-gradient">Results?</span>
-              </h2>
-              <p className="text-muted-foreground text-lg mb-8 max-w-xl mx-auto">
-                Let's discuss how we can help your business achieve the same success.
-              </p>
-              <Button variant="hero" size="xl" asChild>
-                <Link href="/contact">
-                  Start Your Project
-                  <ArrowRight className="w-5 h-5" />
-                </Link>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
+      <CTA
+        title="Want a website like this?"
+        description="Tell me about your organisation and what your visitors need to do. I reply to every enquiry within 24 hours."
+      />
     </Layout>
   );
 }

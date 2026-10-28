@@ -3,7 +3,7 @@ import Link from "next/link";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import CTA from "@/components/sections/CTA";
-import { ArrowLeft, ArrowRight, Clock, User, Calendar, Sparkles } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { client } from "@/sanity/lib/client";
 import { PortableText } from "@portabletext/react";
 import { generateSEO } from '@/lib/seo';
@@ -122,65 +122,48 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
 
   return (
     <Layout>
-      <section className="pt-24 pb-12 bg-background relative overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="bg-orb bg-orb-1 opacity-15" />
-          <div className="bg-orb bg-orb-2 opacity-10" />
-        </div>
-
-        <div className="container-wide relative">
-          <div className="max-w-4xl mx-auto">
-            <span className="inline-block px-3 py-1 bg-accent/20 text-accent text-sm font-medium rounded-full mb-4">
-              {post.category}
-            </span>
-            
-            <h1 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6">
-              {post.title}
-            </h1>
-            
-            <div className="flex flex-wrap items-center gap-6 text-sm text-muted-foreground">
-              <span className="flex items-center gap-2">
-                <User className="w-4 h-4 text-accent" />
-                {post.author}
+      <section className="pt-10 pb-10 lg:pt-14">
+        <div className="container-wide">
+          <div className="max-w-4xl">
+            <Link
+              href="/blog"
+              className="inline-flex items-center gap-2 font-mono text-xs text-muted-foreground hover:text-accent transition-colors mb-10"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              All articles
+            </Link>
+            {post.category && <p className="bp-label text-accent mb-5">{post.category}</p>}
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.05] tracking-[-0.03em]">{post.title}</h1>
+            <p className="bp-label mt-6 flex flex-wrap gap-x-4 gap-y-1 normal-case tracking-normal">
+              <span>{post.author}</span>
+              <span>
+                {new Date(post.publishedDate).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
               </span>
-              <span className="flex items-center gap-2">
-                <Calendar className="w-4 h-4 text-accent" />
-                {new Date(post.publishedDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-              </span>
-              <span className="flex items-center gap-2">
-                <Clock className="w-4 h-4 text-accent" />
-                {readTime}
-              </span>
-            </div>
+              <span>{readTime}</span>
+            </p>
           </div>
         </div>
       </section>
 
       {post.image && (
-        <section className="pb-12 bg-background">
+        <section className="pb-12">
           <div className="container-wide">
-            <div className="max-w-4xl mx-auto">
-              <div className="glass-card overflow-hidden">
-                <img 
-                  src={post.image} 
-                  alt={post.title}
-                  className="w-full aspect-video object-cover"
-                />
-              </div>
+            <div className="max-w-5xl bp-panel p-2 sm:p-3">
+              <img src={post.image} alt="" className="w-full aspect-video object-cover block" />
             </div>
           </div>
         </section>
       )}
 
-      <section className="pb-20 bg-background">
+      <section className="pb-16 lg:pb-24">
         <div className="container-wide">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
             <article className="lg:col-span-8">
-              <div className="prose prose-lg prose-invert max-w-none text-foreground prose-headings:font-heading prose-headings:text-foreground prose-p:text-muted-foreground prose-li:text-muted-foreground prose-a:text-accent prose-strong:text-foreground">
+              <div className="prose prose-lg max-w-none text-foreground prose-headings:font-heading prose-headings:text-foreground prose-p:text-muted-foreground prose-li:text-muted-foreground prose-a:text-accent prose-strong:text-foreground">
                 <PortableText value={post.content} components={portableTextComponents} />
               </div>
 
-              <div className="mt-12 pt-8 border-t border-border/50">
+              <div className="mt-12 pt-8 border-t border-border">
                 <ShareButtons 
                   title={post.title}
                   url={`/blog/${slug}`}
@@ -188,44 +171,35 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
                 />
               </div>
 
-              <div className="mt-8 glass-card p-6">
-                <div className="flex items-start gap-4">
-                  <div className="w-16 h-16 bg-gradient-to-br from-accent to-accent-secondary rounded-full flex items-center justify-center flex-shrink-0">
-                    <span className="text-accent-foreground font-heading font-bold text-xl">
-                      {post.author.split(" ").map((n: string) => n[0]).join("")}
-                    </span>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-foreground mb-1">{post.author}</h4>
-                    <p className="text-sm text-accent mb-2">CEO & Lead Strategist at RealDiamond Digital</p>
-                    <p className="text-sm text-muted-foreground">
-                      With years of experience in digital strategy and web development, Oluwatimilehin helps 
-                      businesses build effective digital presences that drive real results.
-                    </p>
-                  </div>
+              <div className="mt-8 bp-panel p-6 flex items-start gap-4">
+                <div className="w-14 h-14 bg-foreground text-background flex items-center justify-center shrink-0 font-mono text-sm">
+                  {post.author.split(" ").map((n: string) => n[0]).join("")}
+                </div>
+                <div>
+                  <p className="font-semibold">{post.author}</p>
+                  <p className="bp-label mt-1 mb-2">Founder · RealDiamond Digital</p>
+                  <p className="text-muted-foreground leading-relaxed">
+                    UI/UX designer and front-end developer. I design and build websites for non-profits, churches,
+                    consultancies and small businesses, and write about what I learn along the way.
+                  </p>
                 </div>
               </div>
             </article>
 
             <aside className="lg:col-span-4">
               <div className="sticky top-24 space-y-8">
-                <div className="glass-card p-6 relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-accent/10 to-accent-secondary/10" />
-                  <div className="relative z-10">
-                    <Sparkles className="w-8 h-8 text-accent mb-3" />
-                    <h3 className="font-heading font-semibold text-lg text-foreground mb-2">
-                      Need Help With Your Website?
-                    </h3>
-                    <p className="text-sm text-muted-foreground mb-4">
-                      Let's discuss how we can help your business grow online.
-                    </p>
-                    <Button variant="accent" size="sm" className="w-full" asChild>
-                      <Link href="/contact">
-                        Get in Touch
-                        <ArrowRight className="w-4 h-4" />
-                      </Link>
-                    </Button>
-                  </div>
+                <div className="bg-foreground text-background p-6">
+                  <p className="font-mono text-xs uppercase tracking-wider text-background/60 mb-3">Need help?</p>
+                  <h2 className="text-xl font-semibold mb-2">Want a website that works this way?</h2>
+                  <p className="text-background/75 leading-relaxed mb-5">
+                    Tell me about your project and I&apos;ll reply within 24 hours.
+                  </p>
+                  <Button variant="accent" size="sm" className="w-full" asChild>
+                    <Link href="/contact">
+                      Get in touch
+                      <ArrowRight />
+                    </Link>
+                  </Button>
                 </div>
               </div>
             </aside>
@@ -233,10 +207,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
         </div>
       </section>
 
-      <CTA 
-        title="Ready to Build a Website That Works for Your Business?"
-        description="Let's discuss how RealDiamond Digital can help you create a professional online presence."
-      />
+      <CTA />
     </Layout>
   );
 }

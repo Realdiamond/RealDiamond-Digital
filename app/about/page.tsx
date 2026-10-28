@@ -1,300 +1,176 @@
 import Link from "next/link";
+import Image from "next/image";
+import { ArrowRight } from "lucide-react";
 import Layout from "@/components/layout/Layout";
+import PageHeader from "@/components/layout/PageHeader";
 import { Button } from "@/components/ui/button";
 import CTA from "@/components/sections/CTA";
-import { ArrowRight, Target, Users, Lightbulb, Award, Clock, Heart, Sparkles, Diamond, TrendingUp, Star, Zap } from "lucide-react";
-import { generateSEO } from '@/lib/seo';
-import { client } from '@/sanity/lib/client';
-import Image from 'next/image';
-import { CMS_REVALIDATE, docTag, listTag } from '@/lib/cms-cache';
+import ProofBar from "@/components/sections/ProofBar";
+import { generateSEO } from "@/lib/seo";
+import { client } from "@/sanity/lib/client";
+import { CMS_REVALIDATE, docTag, listTag } from "@/lib/cms-cache";
 
 export const metadata = generateSEO({
-  title: 'About Us',
-  description: 'Meet the team behind RealDiamond Digital. We combine strategic thinking with creative execution to deliver measurable results for businesses worldwide.',
-  keywords: ['about us', 'digital agency team', 'web design experts', 'UI/UX designers', 'SEO specialists', 'digital marketing professionals'],
-  canonical: 'https://realdiamonddigital.studio/about',
+  title: "About",
+  description:
+    "RealDiamond Digital is a small design and development studio led by Oluwatimilehin Akinsanmi, a UI/UX designer and front-end developer based in Nigeria and working worldwide.",
+  keywords: ["about", "UI/UX designer", "front-end developer", "web design studio", "Oluwatimilehin Akinsanmi"],
+  canonical: "https://realdiamonddigital.studio/about",
 });
 
 // Time-based ISR
 export const revalidate = 3600;
 
-// Fetch CEO/team data
-async function getCEOData() {
-  const ceo = await client.fetch(
+async function getFounder() {
+  return client.fetch(
     `*[_type == "teamMember" && role match "CEO*"][0]{
       name,
       role,
-      initials,
       bio,
       "image": image.asset->url,
-      linkedin,
-      twitter,
-      email
+      linkedin
     }`,
     {},
     {
       next: {
         revalidate: CMS_REVALIDATE.teamMember,
-        tags: [docTag('teamMember'), listTag('teamMember')],
-      }
+        tags: [docTag("teamMember"), listTag("teamMember")],
+      },
     }
   );
-  return ceo;
 }
 
-const values = [
+const principles = [
   {
-    icon: Target,
-    title: "Results-Driven",
-    description: "Every decision we make is guided by the outcomes that matter most to your business.",
+    title: "Structure first",
+    description:
+      "We agree the pages, content and the path to each action before any visual design, so nothing important gets lost in the styling.",
   },
   {
-    icon: Heart,
-    title: "Client-Centered",
-    description: "We treat your business as if it were our own, bringing the same care and commitment.",
+    title: "You talk to the designer",
+    description:
+      "No account managers in between. You work directly with me, and I bring in trusted collaborators when a project needs extra hands.",
   },
   {
-    icon: Lightbulb,
-    title: "Strategic Thinking",
-    description: "We focus on long-term growth strategies, not quick fixes or surface-level solutions.",
+    title: "Built for your team",
+    description:
+      "Every site comes with a CMS or WordPress set up around your content, so you can update pages without calling a developer.",
   },
   {
-    icon: Clock,
-    title: "Reliable Delivery",
-    description: "We set clear expectations and consistently deliver on our commitments.",
+    title: "Refined after launch",
+    description:
+      "Launch is a starting point. I look at how visitors actually use the site and keep improving the pages that matter most.",
   },
 ];
 
 const About = async () => {
-  const ceo = await getCEOData();
+  const founder = await getFounder();
+  const name = founder?.name || "Oluwatimilehin Akinsanmi";
+
+  const facts = [
+    { label: "Role", value: "Founder, UI/UX designer & front-end developer" },
+    { label: "Education", value: "B.Tech Information Technology, Federal University of Technology, Akure" },
+    { label: "Certification", value: "Google UX Design Professional Certificate" },
+    { label: "Clients in", value: "Nigeria · USA · Canada · New Zealand" },
+  ];
 
   return (
     <Layout>
-      <section className="pt-24 pb-16 bg-background relative overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="bg-orb bg-orb-1 opacity-20" />
-          <div className="bg-orb bg-orb-2 opacity-15" />
-        </div>
+      <PageHeader
+        eyebrow="About"
+        title="A small studio, led by the person who designs your site."
+        description={`RealDiamond Digital is the studio of ${name}. Since 2023 I've designed and built websites for non-profits, churches, consultancies, financial services and small businesses.`}
+      />
 
-        <div className="container-wide relative">
-          <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-4 py-2 glass-card mb-6">
-              <Sparkles className="w-4 h-4 text-accent" />
-              <span className="text-sm font-medium text-muted-foreground">About RealDiamond Digital</span>
+      <section className="pb-16 lg:pb-24">
+        <div className="container-wide grid lg:grid-cols-[360px_minmax(0,1fr)] gap-12 lg:gap-16 items-start">
+          {founder?.image && (
+            <figure className="bp-crop bp-panel p-3 w-full max-w-[320px] mx-auto lg:mx-0 lg:max-w-none">
+              <i aria-hidden="true" />
+              <i aria-hidden="true" />
+              <i aria-hidden="true" />
+              <i aria-hidden="true" />
+              <Image
+                src={founder.image}
+                alt={name}
+                width={720}
+                height={900}
+                sizes="(min-width: 1024px) 360px, 320px"
+                className="w-full aspect-[4/5] object-cover object-top grayscale"
+              />
+              <figcaption className="flex justify-between gap-4 mt-3 font-mono text-xs text-muted-foreground">
+                <span>{name}</span>
+                <span>Founder</span>
+              </figcaption>
+            </figure>
+          )}
+
+          <div className="min-w-0">
+            <h2 className="text-3xl sm:text-4xl font-bold mb-6">Hi, I&apos;m {name.split(" ")[0]}.</h2>
+            <div className="space-y-5 text-lg leading-relaxed text-muted-foreground max-w-2xl">
+              {founder?.bio ? (
+                <p>{founder.bio}</p>
+              ) : (
+                <>
+                  <p>
+                    I&apos;m a UI/UX designer and front-end developer. I started RealDiamond Digital to give organisations
+                    a website that is clear, fast and easy to manage, without the layers of a large agency.
+                  </p>
+                  <p>
+                    Because I also write the code, I design with real constraints in mind: responsive layouts, reusable
+                    components, and pages your team can update themselves. When a project needs more hands, I work with a
+                    small group of trusted collaborators, and you keep one point of contact: me.
+                  </p>
+                </>
+              )}
             </div>
-            <h1 className="font-heading text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6">
-              Your Partner for{" "}
-              <span className="text-gradient">More Calls & Revenue</span>
-            </h1>
-            <p className="text-xl text-muted-foreground leading-relaxed">
-              We're a CEO-led digital agency focused on building high-converting websites and local SEO strategies 
-              that help service businesses grow. We work closely with local service businesses like HVAC, plumbing, roofing, cleaning, and similar companies to deliver real leads and measurable revenue.
-            </p>
-          </div>
-        </div>
-      </section>
 
-      <section className="py-20 bg-background">
-        <div className="container-wide">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <p className="text-accent font-medium mb-4 tracking-wide uppercase text-sm">Our Story</p>
-              <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-6">
-                Built on Experience, <span className="text-gradient">Driven by Results</span>
-              </h2>
-              <div className="space-y-4 text-muted-foreground">
-                <p>
-                  RealDiamond Digital was founded with a clear vision: to provide businesses with the same 
-                  level of digital expertise that large corporations have access to, but with the personal 
-                  attention and agility that only a focused team can deliver.
-                </p>
-                <p>
-                  We've seen too many businesses struggle with agencies that overpromise and underdeliver, 
-                  or freelancers who lack the strategic depth to drive real results. That's why we built 
-                  a different kind of agency—one that combines strategic thinking with hands-on execution.
-                </p>
-                <p>
-                  Today, we specialize in helping local service businesses like HVAC, plumbing, roofing, cleaning, and similar companies who are ready to invest in their digital presence and see measurable returns.
-                </p>
-              </div>
-            </div>
-
-            <div className="relative">
-              <div className="glass-card p-8 relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-accent/10 to-accent-secondary/10" />
-                <div className="relative z-10 space-y-8">
-                  <div className="flex items-center gap-4">
-                    <div className="w-16 h-16 bg-gradient-to-br from-accent to-accent-secondary rounded-xl flex items-center justify-center flex-shrink-0">
-                      <TrendingUp className="w-8 h-8 text-accent-foreground" />
-                    </div>
-                    <div>
-                      <p className="text-3xl font-heading font-bold text-foreground">10+</p>
-                      <p className="text-sm text-muted-foreground">Client Websites Launched</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-center gap-4">
-                    <div className="w-16 h-16 bg-gradient-to-br from-accent-secondary to-accent rounded-xl flex items-center justify-center flex-shrink-0">
-                      <Star className="w-8 h-8 text-accent-foreground" />
-                    </div>
-                    <div>
-                      <p className="text-3xl font-heading font-bold text-foreground">5.0/5</p>
-                      <p className="text-sm text-muted-foreground">Average Client Rating</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-center gap-4">
-                    <div className="w-16 h-16 bg-gradient-to-br from-accent to-accent-secondary rounded-xl flex items-center justify-center flex-shrink-0">
-                      <Zap className="w-8 h-8 text-accent-foreground" />
-                    </div>
-                    <div>
-                      <p className="text-3xl font-heading font-bold text-foreground">3-5</p>
-                      <p className="text-sm text-muted-foreground">Expert Team Members</p>
-                    </div>
-                  </div>
+            <dl className="grid sm:grid-cols-2 gap-px bg-border border border-border mt-10">
+              {facts.map((fact) => (
+                <div key={fact.label} className="bg-card p-5">
+                  <dt className="bp-label mb-2">{fact.label}</dt>
+                  <dd className="font-medium">{fact.value}</dd>
                 </div>
-              </div>
+              ))}
+            </dl>
+
+            <div className="flex flex-col sm:flex-row gap-3 mt-8">
+              <Button variant="accent" size="lg" asChild>
+                <Link href="/contact">
+                  Discuss your project
+                  <ArrowRight />
+                </Link>
+              </Button>
+              <Button variant="outline" size="lg" asChild>
+                <Link href="/portfolio">See my case studies</Link>
+              </Button>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="py-20 bg-secondary/30 border-y border-border/50">
+      <ProofBar />
+
+      <section className="py-16 lg:py-24">
         <div className="container-wide">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="lg:order-2">
-              <div className="glass-card overflow-hidden relative group h-[650px] md:h-[700px]">
-                {ceo?.image ? (
-                  <>
-                    <Image
-                      src={ceo.image}
-                      alt={ceo.name || 'CEO'}
-                      fill
-                      className="object-cover object-top"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 via-30% to-transparent" />
-                    <div className="absolute bottom-0 left-0 right-0 p-8 text-left z-10">
-                      <p className="text-gradient font-heading text-2xl md:text-3xl font-bold mb-2">
-                        {ceo?.name || 'Oluwatimilehin Akinsanmi'}
-                      </p>
-                      <p className="text-accent text-lg font-medium">{ceo?.role || 'CEO & Lead Strategist'}</p>
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    <div className="absolute inset-0 bg-gradient-to-br from-accent to-accent-secondary flex items-center justify-center">
-                      <span className="font-heading text-8xl font-bold text-accent-foreground opacity-20">
-                        {ceo?.initials || 'OA'}
-                      </span>
-                    </div>
-                    <div className="absolute bottom-0 left-0 right-0 p-8 text-left z-10 bg-gradient-to-t from-background via-background/50 via-30% to-transparent">
-                      <p className="text-gradient font-heading text-2xl md:text-3xl font-bold mb-2">
-                        {ceo?.name || 'Oluwatimilehin Akinsanmi'}
-                      </p>
-                      <p className="text-accent text-lg font-medium">{ceo?.role || 'CEO & Lead Strategist'}</p>
-                    </div>
-                  </>
-                )}
-              </div>
-            </div>
-
-            <div className="lg:order-1">
-              <p className="text-accent font-medium mb-4 tracking-wide uppercase text-sm">Leadership</p>
-              <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-6">
-                CEO-Led, <span className="text-gradient">Personally Invested</span>
-              </h2>
-              <div className="space-y-4 text-muted-foreground">
-                {ceo?.bio ? (
-                  <p>{ceo.bio}</p>
-                ) : (
-                  <>
-                    <p>
-                      RealDiamond Digital is led by <strong className="text-foreground">{ceo?.name || 'Oluwatimilehin Akinsanmi'}</strong>, 
-                      who brings years of experience in digital strategy, web development, and business growth.
-                    </p>
-                    <p>
-                      Unlike large agencies where your project might be handed off to junior staff, at RealDiamond Digital, 
-                      the CEO is actively involved in every engagement. This means senior-level strategic thinking and 
-                      hands-on attention from day one.
-                    </p>
-                    <p>
-                      Backed by a dedicated team of 3-5 specialists in UI/UX design, development, and SEO, we deliver the 
-                      capabilities of a full-service agency with the personal commitment of a trusted partner.
-                    </p>
-                  </>
-                )}
-              </div>
-              <div className="mt-8">
-                <Button className="bg-gradient-to-r from-accent to-accent-secondary hover:shadow-glow text-white font-semibold" asChild>
-                  <Link href="/contact">
-                    Let's Discuss Your Project
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
-                </Button>
-              </div>
-            </div>
+          <div className="bp-heading mb-10">
+            <h2 className="text-4xl md:text-5xl font-bold">How I work</h2>
+            <span className="bp-note">four principles behind every project</span>
           </div>
-        </div>
-      </section>
-
-      <section className="py-20 bg-background">
-        <div className="container-wide">
-          <div className="max-w-2xl mx-auto text-center mb-16">
-            <p className="text-accent font-medium mb-4 tracking-wide uppercase text-sm">Our Values</p>
-            <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-4">
-              What <span className="text-gradient">Guides Our Work</span>
-            </h2>
-            <p className="text-muted-foreground">
-              These principles shape every decision we make and every project we deliver.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {values.map((value) => (
-              <div key={value.title} className="glass-card-hover p-8 text-center">
-                <div className="w-14 h-14 bg-gradient-to-br from-accent to-accent-secondary rounded-xl flex items-center justify-center mx-auto mb-4">
-                  <value.icon className="w-7 h-7 text-accent-foreground" />
-                </div>
-                <h3 className="font-semibold text-foreground mb-2">{value.title}</h3>
-                <p className="text-sm text-muted-foreground">{value.description}</p>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-border border border-border">
+            {principles.map((principle) => (
+              <div key={principle.title} className="bg-card p-6 sm:p-7">
+                <h3 className="text-xl font-semibold mb-3">{principle.title}</h3>
+                <p className="text-muted-foreground leading-relaxed">{principle.description}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="py-20 bg-secondary/30 border-y border-border/50">
-        <div className="container-wide">
-          <div className="max-w-2xl mx-auto text-center mb-16">
-            <p className="text-accent font-medium mb-4 tracking-wide uppercase text-sm">The Team</p>
-            <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Small Team, <span className="text-gradient">Big Impact</span>
-            </h2>
-            <p className="text-muted-foreground">
-              We keep our team intentionally small to ensure every client receives focused attention 
-              and every project gets senior-level expertise.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            {[
-              { icon: Users, title: "3-5 Core Members", desc: "A focused team of specialists who work directly on your project." },
-              { icon: Target, title: "Direct Access", desc: "Communicate directly with the people doing the work—no middlemen." },
-              { icon: Award, title: "Senior Expertise", desc: "Every team member brings years of specialized experience." },
-            ].map((item) => (
-              <div key={item.title} className="glass-card-hover p-8 text-center">
-                <item.icon className="w-12 h-12 text-accent mx-auto mb-4" />
-                <h3 className="font-semibold text-foreground mb-2">{item.title}</h3>
-                <p className="text-sm text-muted-foreground">{item.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <CTA 
-        title="Ready to Work With Us?"
-        description="We'd love to learn about your business and discuss how we can help you achieve your goals."
+      <CTA
+        title="Let's work together."
+        description="Tell me about your organisation and what you need your website to do. I reply to every enquiry within 24 hours."
       />
     </Layout>
   );

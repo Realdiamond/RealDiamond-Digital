@@ -1,191 +1,89 @@
 import Link from "next/link";
-import { 
-  Globe, 
-  Search, 
-  Palette, 
-  Zap, 
-  ArrowRight, 
-  ShoppingCart, 
-  TrendingUp, 
-  Code, 
-  FileCode, 
-  BarChart3, 
-  MapPin, 
-  Settings, 
-  Sparkles, 
-  CheckCircle,
-  Target,
-  Rocket,
-  Lightbulb,
-  Smartphone,
-  Monitor,
-  Mail,
-  Lock,
-  PenTool,
-  Layers,
-  MousePointerClick,
-  LayoutTemplate,
-  Users,
-  LucideIcon
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
 import { client } from "@/sanity/lib/client";
+import { CMS_REVALIDATE, docTag, listTag } from "@/lib/cms-cache";
+import { getServiceTag } from "@/lib/service-tags";
+
+interface FeaturedService {
+  _id: string;
+  id?: { current?: string };
+  title: string;
+  tagline?: string;
+  solution?: string;
+  subServices?: { _key: string; name: string }[];
+}
 
 async function getServices() {
-  const services = await client.fetch(
+  return client.fetch<FeaturedService[]>(
     `*[_type == "service" && featured == true] | order(coalesce(order, 999) asc) {
       _id,
       id,
       title,
       tagline,
-      icon,
-      problem,
       solution,
-      benefits,
-      bestFor,
-      subServices,
-      gradient,
-      order
+      subServices[]{ _key, name }
     }`,
     {},
     {
-      next: { revalidate: 1800 } // 30 minutes - services change rarely
+      next: {
+        revalidate: CMS_REVALIDATE.service,
+        tags: [docTag("service"), listTag("service")],
+      },
     }
   );
-  return services;
 }
-
-const iconMap: Record<string, LucideIcon> = {
-  Globe,
-  Search,
-  Palette,
-  Zap,
-  ShoppingCart,
-  TrendingUp,
-  Code,
-  FileCode,
-  BarChart3,
-  MapPin,
-  Settings,
-  Sparkles,
-  CheckCircle,
-  Target,
-  Rocket,
-  Lightbulb,
-  Smartphone,
-  Monitor,
-  Mail,
-  Lock,
-  PenTool,
-  Layers,
-  MousePointerClick,
-  LayoutTemplate,
-  Users,
-};
-
-// Fallback gradients for services
-const gradientMap: any = {
-  "Web Design & Development": "from-blue-500 to-cyan-500",
-  "UI/UX Design": "from-indigo-500 to-violet-500",
-  "Search Engine Optimization": "from-green-500 to-emerald-500",
-  "Brand & Visual Design": "from-purple-500 to-pink-500",
-  "E-commerce Solutions": "from-orange-500 to-red-500",
-};
-
-const getServiceGradient = (title: string, gradient: string) => {
-  // If gradient is empty, white, or not set, use fallback
-  if (!gradient || gradient.includes('white') || gradient.trim() === '') {
-    return gradientMap[title] || 'from-accent to-accent-secondary';
-  }
-  return gradient;
-}; 
 
 export default async function ServicesGrid() {
   const services = await getServices();
 
   return (
-    <section className="py-32 bg-gradient-to-b from-secondary/20 to-background relative overflow-hidden">
-      <div className="container-wide relative">
-        <div className="max-w-2xl mx-auto text-center mb-20">
-          <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-            Everything You Need to{" "}
-            <span className="text-gradient">Dominate Your Local Market</span>
+    <section className="py-16 lg:py-24" aria-labelledby="services-title">
+      <div className="container-wide">
+        <div className="bp-heading mb-10">
+          <h2 id="services-title" className="text-4xl md:text-5xl font-bold">
+            Services
           </h2>
-          <p className="text-lg text-muted-foreground">
-            Websites, UI/UX design, SEO, and lead systems built specifically for service businesses. Get more calls, fill your schedule, and grow your revenue.
-          </p>
+          <span className="bp-note">one team, first sketch to launch</span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-          {services.map((service: any, index: number) => {
-            const iconKey = service.icon?.trim() || '';
-            const IconComponent = iconMap[iconKey] || Globe;
-            const serviceGradient = getServiceGradient(service.title, service.gradient);
-            
-            return (
-              <Link
-                key={service._id}
-                href={`/services#${service.id?.current || service._id}`}
-                className="group relative glass-card p-8 md:last:odd:col-span-2 hover:shadow-elevated transition-all duration-500 hover:-translate-y-2 overflow-hidden block cursor-pointer"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <div className={`absolute inset-0 bg-gradient-to-br ${serviceGradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
-                
-                <div className="relative z-10">
-                  <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-lg bg-gradient-to-br ${serviceGradient}`}>
-                    <IconComponent className="w-8 h-8 text-white" />
-                  </div>
-
-                  <h3 className="font-heading text-2xl md:text-3xl font-bold text-foreground mb-4 group-hover:text-accent transition-colors">
-                    {service.title}
-                  </h3>
-
-                  <p className="text-muted-foreground mb-6 leading-relaxed">
-                    {service.tagline || service.solution}
-                  </p>
-
-                  {service.subServices && service.subServices.length > 0 && (
-                    <div className="flex flex-wrap gap-2 mb-6">
-                      {service.subServices.slice(0, 4).map((sub: any) => {
-                        const subIconKey = sub.icon?.trim() || '';
-                        const SubIcon = iconMap[subIconKey] || Code;
-                        return (
-                          <span
-                            key={sub._key}
-                            className="flex items-center gap-1.5 px-3 py-1.5 bg-secondary text-foreground text-xs font-medium rounded-lg border border-border/50"
-                          >
-                            <SubIcon className="w-3.5 h-3.5 text-accent" />
-                            {sub.name}
-                          </span>
-                        );
-                      })}
-                    </div>
-                  )}
-
-                  <div className="inline-flex items-center gap-2 text-accent font-semibold group-hover:gap-4 transition-all">
-                    Learn More
-                    <ArrowRight className="w-4 h-4" />
-                  </div>
-                </div>
-
-                <div className="absolute top-0 right-0 w-32 h-32 opacity-0 group-hover:opacity-10 transition-opacity duration-500">
-                  <div className={`w-full h-full bg-gradient-to-br ${serviceGradient} rounded-full blur-3xl`} />
-                </div>
-              </Link>
-            );
-          })}
-        </div>
-
-        <div className="text-center">
-          <p className="text-muted-foreground mb-6">
-            Not sure what you need? Let's figure it out together.
-          </p>
-          <Button size="lg" asChild className="bg-gradient-to-r from-accent to-accent-secondary text-white font-bold">
-            <Link href="/contact#consultation">
-              Schedule a Free Consultation
-              <ArrowRight className="w-4 h-4" />
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-border border border-border">
+          {services.map((service) => (
+            <Link
+              key={service._id}
+              href={`/services#${service.id?.current || service._id}`}
+              className="group p-6 sm:p-7 bg-card hover:bg-secondary transition-colors"
+            >
+              <p className="bp-label">{getServiceTag(service.title)}</p>
+              <h3 className="text-xl font-semibold mt-3 mb-2 group-hover:text-accent transition-colors">{service.title}</h3>
+              <p className="text-muted-foreground leading-relaxed">{service.tagline || service.solution}</p>
+              {service.subServices && service.subServices.length > 0 && (
+                <ul className="flex flex-wrap gap-2 mt-5">
+                  {service.subServices.slice(0, 4).map((sub) => (
+                    <li key={sub._key} className="font-mono text-[11px] text-muted-foreground border border-border px-2 py-1">
+                      {sub.name}
+                    </li>
+                  ))}
+                </ul>
+              )}
             </Link>
-          </Button>
+          ))}
+
+          <Link
+            href="/contact"
+            className="group p-6 sm:p-7 bg-foreground text-background flex flex-col justify-between gap-8"
+          >
+            <div>
+              <p className="font-mono text-xs uppercase tracking-wider text-background/70">Not sure?</p>
+              <h3 className="text-xl font-semibold mt-3 mb-2">Tell me what you&apos;re trying to fix</h3>
+              <p className="text-background/75 leading-relaxed">
+                A free call to work out what your website actually needs.
+              </p>
+            </div>
+            <span className="inline-flex items-center gap-2 font-semibold group-hover:gap-3 transition-all">
+              Book a free call
+              <ArrowRight className="w-4 h-4" />
+            </span>
+          </Link>
         </div>
       </div>
     </section>

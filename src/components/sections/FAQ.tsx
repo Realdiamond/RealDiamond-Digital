@@ -4,7 +4,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { HelpCircle } from "lucide-react";
 import { client } from "@/sanity/lib/client";
 
 async function getFAQs() {
@@ -25,40 +24,39 @@ async function getFAQs() {
 
 export default async function FAQ() {
   const faqs = await getFAQs();
+
+  if (!faqs.length) {
+    return null;
+  }
+
   return (
-    <section className="section-padding bg-secondary/30 border-y border-border/50">
-      <div className="container-wide">
-        <div className="max-w-2xl mx-auto text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 glass-card mb-6">
-            <HelpCircle className="w-4 h-4 text-accent" />
-            <span className="text-sm font-medium text-muted-foreground">FAQ</span>
-          </div>
-          <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Frequently Asked <span className="text-gradient">Questions</span>
+    <section className="py-16 lg:py-24 border-t border-border" aria-labelledby="faq-title">
+      <div className="container-wide grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)] gap-10 lg:gap-16">
+        <div>
+          <p className="bp-label mb-4">FAQ</p>
+          <h2 id="faq-title" className="text-4xl md:text-5xl font-bold">
+            Questions clients often ask
           </h2>
-          <p className="text-muted-foreground">
-            Got questions? We've got answers. Here are some of the most common things our clients ask.
+          <p className="text-muted-foreground leading-relaxed mt-5 max-w-md">
+            Can&apos;t find your answer here? Send a message and I&apos;ll reply within 24 business hours.
           </p>
         </div>
 
-        <div className="max-w-3xl mx-auto">
-          <Accordion type="single" collapsible className="space-y-4">
-            {faqs.map((faq: any, index: number) => (
-              <AccordionItem 
-                key={faq._id} 
-                value={`item-${index}`}
-                className="glass-card px-6 border-none rounded-xl"
-              >
-                <AccordionTrigger className="text-left text-foreground hover:text-accent hover:no-underline py-6">
-                  {faq.question}
-                </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground pb-6">
-                  {faq.answer}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        </div>
+        <Accordion type="single" collapsible className="border-t border-border">
+          {faqs.map((faq: any, index: number) => (
+            <AccordionItem key={faq._id} value={`item-${index}`} className="border-b border-border">
+              <AccordionTrigger className="text-left text-lg font-semibold hover:text-accent hover:no-underline py-5 gap-4">
+                <span className="flex gap-4">
+                  <span className="font-mono text-sm text-accent pt-1">{String(index + 1).padStart(2, "0")}</span>
+                  <span>{faq.question}</span>
+                </span>
+              </AccordionTrigger>
+              <AccordionContent className="text-muted-foreground text-base leading-relaxed pb-6 pl-10">
+                {faq.answer}
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
       </div>
     </section>
   );

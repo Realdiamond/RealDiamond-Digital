@@ -1,45 +1,32 @@
-"use client";
-
-import { usePathname } from "next/navigation";
-import { useEffect } from "react";
 import Link from "next/link";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Home } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
-const NotFound = () => {
-  const pathname = usePathname();
-
-  useEffect(() => {
-    console.error("404 Error: User attempted to access non-existent route:", pathname);
-  }, [pathname]);
-
+export default function NotFound() {
   return (
     <Layout>
-      <section className="section-padding bg-background min-h-[60vh] flex items-center">
+      <section className="py-20 lg:py-28 min-h-[60vh] flex items-center">
         <div className="container-wide">
-          <div className="max-w-2xl mx-auto text-center">
-            <div className="font-heading text-8xl md:text-9xl font-bold text-accent/20 mb-4">
-              404
+          <div className="max-w-3xl">
+            <p className="bp-label mb-14">Error 404</p>
+            <div className="relative bp-frame inline-block">
+              <span className="bp-note absolute -top-8 left-0">page not found</span>
+              <h1 className="text-[44px] leading-[1.02] sm:text-6xl lg:text-7xl font-bold tracking-[-0.03em]">
+                This page isn&apos;t on the plan.
+              </h1>
             </div>
-            <h1 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Page Not Found
-            </h1>
-            <p className="text-muted-foreground text-lg mb-8">
-              The page you're looking for doesn't exist or has been moved. 
-              Let's get you back on track.
+            <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed mt-10 max-w-2xl">
+              The page you&apos;re looking for doesn&apos;t exist or has moved. Try the homepage or the case studies.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-3 mt-8">
               <Button variant="accent" size="lg" asChild>
-                <Link href="/">
-                  <Home className="w-4 h-4" />
-                  Back to Home
-                </Link>
+                <Link href="/">Back to the homepage</Link>
               </Button>
               <Button variant="outline" size="lg" asChild>
-                <Link href="/contact">
-                  Contact Us
-                  <ArrowRight className="w-4 h-4" />
+                <Link href="/portfolio">
+                  See the case studies
+                  <ArrowRight />
                 </Link>
               </Button>
             </div>
@@ -48,6 +35,4 @@ const NotFound = () => {
       </section>
     </Layout>
   );
-};
-
-export default NotFound;
+}

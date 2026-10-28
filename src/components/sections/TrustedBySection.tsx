@@ -25,46 +25,37 @@ const TrustedBySection = async () => {
   const doubledClients = [...clients, ...clients];
 
   return (
-    <section className="relative pt-12 pb-12 sm:pt-16 sm:pb-16 bg-gradient-to-b from-background to-secondary/5 overflow-hidden">
-      <div className="container-wide mb-12 text-center">
-        <p className="text-base font-medium text-muted-foreground uppercase tracking-wider">
-          Trusted by leading brands
-        </p>
-      </div>
-
-      <div className="relative">
-        <div className="absolute left-0 top-0 bottom-0 w-24 sm:w-32 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-24 sm:w-32 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
-        
-        <div className="flex w-max animate-marquee">
-          {doubledClients.map((client, index) => {
-            const imageUrl = client.logo ? urlForImage(client.logo)?.width(400).url() : null;
-            return (
-              <div 
-                key={`${client._id}-${index}`}
-                className="flex-shrink-0 px-4 sm:px-6"
-              >
-                {imageUrl ? (
+    <section className="pt-8" aria-label="Clients">
+      <div className="container-wide">
+        <div className="bp-panel flex flex-col md:flex-row md:items-center overflow-hidden">
+          <p className="bp-label px-6 pt-5 md:py-0 md:w-48 shrink-0">Clients I&apos;ve worked with</p>
+          <div className="relative flex-1 overflow-hidden md:border-l border-border">
+            <div className="flex w-max animate-marquee">
+              {doubledClients.map((client: any, index: number) => {
+                const imageUrl = client.logo ? urlForImage(client.logo)?.width(400).url() : null;
+                return (
                   <div
-                    className="h-16 sm:h-20 w-40 sm:w-48 flex-shrink-0 
-                               bg-center bg-no-repeat bg-contain
-                               opacity-90 hover:opacity-100 
-                               transition-all duration-300"
-                    style={{
-                      backgroundImage: `url(${imageUrl})`,
-                    }}
-                    aria-label={client.name}
-                  />
-                ) : (
-                  <div className="h-16 sm:h-20 w-32 sm:w-40 flex items-center justify-center">
-                    <div className="px-4 py-2 rounded-lg bg-secondary/30 backdrop-blur-sm border border-border/50 opacity-80 hover:opacity-100 transition-all duration-300">
-                      <span className="font-heading font-bold text-lg text-foreground">{client.initials}</span>
-                    </div>
+                    key={`${client._id}-${index}`}
+                    className="flex-shrink-0 px-6 sm:px-8 py-5"
+                    aria-hidden={index >= clients.length ? true : undefined}
+                  >
+                    {imageUrl ? (
+                      <div
+                        role="img"
+                        aria-label={client.name}
+                        className="h-12 sm:h-14 w-32 sm:w-36 bg-center bg-no-repeat bg-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition"
+                        style={{ backgroundImage: `url(${imageUrl})` }}
+                      />
+                    ) : (
+                      <span className="h-12 sm:h-14 flex items-center font-mono text-sm text-muted-foreground">
+                        {client.initials || client.name}
+                      </span>
+                    )}
                   </div>
-                )}
-              </div>
-            );
-          })}
+                );
+              })}
+            </div>
+          </div>
         </div>
       </div>
     </section>

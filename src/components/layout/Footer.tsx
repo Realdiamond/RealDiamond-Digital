@@ -1,130 +1,108 @@
 import Link from "next/link";
-import { Mail, Phone, MapPin, Linkedin, Twitter, Instagram } from "lucide-react";
-import { FaWhatsapp } from "react-icons/fa";
 import Image from "next/image";
+import { Linkedin, Twitter } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
+
+const columns = [
+  {
+    title: "Work",
+    links: [
+      { label: "Case studies", href: "/portfolio" },
+      { label: "All projects", href: "/projects" },
+      { label: "Design system", href: "/portfolio/design-system" },
+      { label: "Testimonials", href: "/testimonials" },
+    ],
+  },
+  {
+    title: "Studio",
+    links: [
+      { label: "Services", href: "/services" },
+      { label: "About", href: "/about" },
+      { label: "Community", href: "/community" },
+      { label: "Blog", href: "/blog" },
+    ],
+  },
+];
+
+const socials = [
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/oluwatimilehin0-akinsanmi1/", Icon: Linkedin },
+  { label: "X (Twitter)", href: "https://x.com/Iam_RealDiamond/", Icon: Twitter },
+  { label: "WhatsApp", href: "https://wa.me/2348138462476", Icon: FaWhatsapp },
+];
 
 const Footer = () => {
   return (
-    <footer className="bg-secondary/50 border-t border-border/50 relative overflow-hidden">
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="bg-orb bg-orb-2 opacity-20" />
-      </div>
-
-      <div className="container-wide section-padding relative">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-          <div className="space-y-6">
-            <Link href="/" className="flex items-center">
+    <footer className="border-t border-border bg-card">
+      <div className="container-wide py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr] gap-12">
+          <div className="space-y-5">
+            <Link href="/" className="inline-flex" aria-label="RealDiamond Digital home">
               <Image
                 src="/icons/logo.png"
                 alt="RealDiamond Digital"
                 width={300}
-                height={120}
-                className="h-24 w-auto object-contain"
+                height={68}
+                className="h-9 w-auto object-contain"
               />
             </Link>
-            <p className="text-muted-foreground text-sm leading-relaxed">
-              Strategic web design, UI/UX, development & SEO that transforms visitors into customers and grows revenue.
+            <p className="text-muted-foreground leading-relaxed max-w-xs">
+              A small design and development studio led by Oluwatimilehin Akinsanmi. UI/UX design, websites and SEO
+              for organisations that want to be understood at first glance.
             </p>
-            <div className="flex gap-3">
-              {[
-                { Icon: Linkedin, href: "https://www.linkedin.com/in/oluwatimilehin0-akinsanmi1/" },
-                { Icon: Twitter, href: "https://x.com/Iam_RealDiamond/" },
-                { Icon: Instagram, href: "#" },
-              ].map(({ Icon, href }, i) => (
-                <a 
-                  key={i}
+            <div className="flex gap-2">
+              {socials.map(({ label, href, Icon }) => (
+                <a
+                  key={label}
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 glass-card flex items-center justify-center text-muted-foreground hover:text-accent hover:border-accent/50 transition-all duration-300"
+                  aria-label={label}
+                  className="w-10 h-10 flex items-center justify-center border border-border rounded-md text-muted-foreground hover:text-accent hover:border-accent transition-colors"
                 >
                   <Icon className="w-4 h-4" />
                 </a>
               ))}
-              <a 
-                href="https://wa.me/2348138462476"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 glass-card flex items-center justify-center text-muted-foreground hover:text-accent hover:border-accent/50 transition-all duration-300"
-              >
-                <FaWhatsapp className="w-5 h-5" />
-              </a>
             </div>
           </div>
 
-          <div className="space-y-6">
-            <h4 className="font-heading font-semibold text-lg text-foreground">Services</h4>
-            <ul className="space-y-3">
-              {["Web Design & Development", "UI/UX Design", "SEO & Online Visibility", "Brand & Visual Design", "Growth & Optimization"].map((service) => (
-                <li key={service}>
-                  <Link href="/services" className="text-muted-foreground hover:text-accent text-sm transition-colors">
-                    {service}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {columns.map((column) => (
+            <div key={column.title}>
+              <p className="bp-label mb-5">{column.title}</p>
+              <ul className="space-y-3">
+                {column.links.map((link) => (
+                  <li key={link.href}>
+                    <Link href={link.href} className="text-foreground hover:text-accent transition-colors">
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
 
-          <div className="space-y-6">
-            <h4 className="font-heading font-semibold text-lg text-foreground">Company</h4>
+          <div>
+            <p className="bp-label mb-5">Contact</p>
             <ul className="space-y-3">
-              {[
-                { label: "About Us", href: "/about" },
-                { label: "Projects", href: "/projects" },
-                { label: "Testimonials", href: "/testimonials" },
-                { label: "Blog", href: "/blog" },
-                { label: "Contact", href: "/contact" },
-              ].map((link) => (
-                <li key={link.label}>
-                  <Link href={link.href} className="text-muted-foreground hover:text-accent text-sm transition-colors">
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="space-y-6">
-            <h4 className="font-heading font-semibold text-lg text-foreground">Contact</h4>
-            <ul className="space-y-4">
-              <li className="flex items-center gap-3 text-sm">
-                <div className="w-8 h-8 glass-card flex items-center justify-center">
-                  <Mail className="w-4 h-4 text-accent" />
-                </div>
-                <a href="mailto:realdiamonddigital@gmail.com" className="text-muted-foreground hover:text-accent transition-colors">
+              <li>
+                <a href="mailto:realdiamonddigital@gmail.com" className="text-foreground hover:text-accent transition-colors break-all">
                   realdiamonddigital@gmail.com
                 </a>
               </li>
-              <li className="flex items-center gap-3 text-sm">
-                <div className="w-8 h-8 glass-card flex items-center justify-center">
-                  <Phone className="w-4 h-4 text-accent" />
-                </div>
-                <a href="tel:08138462476" className="text-muted-foreground hover:text-accent transition-colors">
-                  08138462476
+              <li>
+                <a href="tel:+2348138462476" className="text-foreground hover:text-accent transition-colors">
+                  +234 813 846 2476
                 </a>
               </li>
-              <li className="flex items-start gap-3 text-sm text-muted-foreground">
-                <div className="w-8 h-8 glass-card flex items-center justify-center flex-shrink-0">
-                  <MapPin className="w-4 h-4 text-accent" />
-                </div>
-                <span>Available Worldwide</span>
-              </li>
+              <li className="text-muted-foreground">Based in Nigeria, working worldwide</li>
             </ul>
           </div>
         </div>
 
-        <div className="mt-16 pt-8 border-t border-border/50 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} RealDiamond Digital. All rights reserved.
+        <div className="mt-14 pt-6 border-t border-border flex flex-col sm:flex-row justify-between gap-3">
+          <p className="font-mono text-xs text-muted-foreground">
+            © {new Date().getFullYear()} RealDiamond Digital
           </p>
-          <div className="flex gap-6">
-            <Link href="#" className="text-sm text-muted-foreground hover:text-accent transition-colors">
-              Privacy Policy
-            </Link>
-            <Link href="#" className="text-sm text-muted-foreground hover:text-accent transition-colors">
-              Terms of Service
-            </Link>
-          </div>
+          <p className="font-mono text-xs text-muted-foreground">Designed and built in-house on an 8pt grid</p>
         </div>
       </div>
     </footer>

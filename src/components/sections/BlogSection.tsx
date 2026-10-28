@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Calendar, Clock } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { client } from "@/sanity/lib/client";
 import { calculateReadTime } from '@/lib/readtime';
@@ -24,84 +24,69 @@ async function getRecentPosts() {
   return posts;
 }
 
+const columnClasses: Record<number, string> = {
+  1: "md:grid-cols-1",
+  2: "md:grid-cols-2",
+  3: "md:grid-cols-3",
+};
+
 export default async function BlogSection() {
   const posts = await getRecentPosts();
 
-  return (
-    <section className="py-32 bg-gradient-to-b from-background to-secondary/20 relative overflow-hidden">
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="bg-orb bg-orb-3 opacity-5" />
-      </div>
+  if (!posts.length) {
+    return null;
+  }
 
-      <div className="container-wide relative">
-        <div className="max-w-2xl mb-16">
-          <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-            Latest from Our{" "}
-            <span className="text-gradient">Blog</span>
-          </h2>
-          <p className="text-lg text-muted-foreground">
-            Expert insights, industry trends, and actionable tips to help you succeed online.
-          </p>
+  return (
+    <section className="py-16 lg:py-24" aria-labelledby="blog-title">
+      <div className="container-wide">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
+          <div className="bp-heading">
+            <h2 id="blog-title" className="text-4xl md:text-5xl font-bold">
+              Notes from the studio
+            </h2>
+            <span className="bp-note">latest articles</span>
+          </div>
+          <Button variant="outline" asChild>
+            <Link href="/blog">
+              All articles
+              <ArrowRight />
+            </Link>
+          </Button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-          {posts.map((post: any, index: number) => (
-            <Link
-              key={post._id}
-              href={`/blog/${post.slug}`}
-              className="group glass-card overflow-hidden hover:shadow-elevated transition-all duration-500 hover:-translate-y-2"
-            >
+        <div className={`grid ${columnClasses[Math.min(posts.length, 3)]} gap-px bg-border border border-border`}>
+          {posts.map((post: any) => (
+            <Link key={post._id} href={`/blog/${post.slug}`} className="group bg-card flex flex-col">
               {post.image && (
-                <div className="relative h-48 overflow-hidden bg-gradient-to-br from-accent/10 to-accent-secondary/10">
+                <div className="aspect-[16/10] overflow-hidden border-b border-border bg-secondary">
                   <img
                     src={post.image}
-                    alt={post.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    alt=""
+                    loading="lazy"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                   />
-                  <div className="absolute top-4 left-4">
-                    <span className="px-3 py-1 bg-accent text-accent-foreground text-xs font-bold rounded-full uppercase">
-                      {post.category}
-                    </span>
-                  </div>
                 </div>
               )}
-
-              <div className="p-6">
-                <div className="flex items-center gap-4 text-xs text-muted-foreground mb-4">
-                  <span className="flex items-center gap-1">
-                    <Calendar className="w-3 h-3" />
-                    {new Date(post.publishedDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+              <div className="p-6 flex flex-col flex-1">
+                <p className="bp-label mb-4 flex flex-wrap gap-x-3 gap-y-1">
+                  {post.category && <span className="text-accent">{post.category}</span>}
+                  <span>
+                    {new Date(post.publishedDate).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
                   </span>
-                  <span className="flex items-center gap-1">
-                    <Clock className="w-3 h-3" />
-                    {calculateReadTime(post.content)}
-                  </span>
-                </div>
-
-                <h3 className="font-heading text-xl font-bold text-foreground mb-3 group-hover:text-accent transition-colors line-clamp-2">
+                  <span>{calculateReadTime(post.content)}</span>
+                </p>
+                <h3 className="text-xl font-semibold leading-snug mb-3 group-hover:text-accent transition-colors line-clamp-2">
                   {post.title}
                 </h3>
-
-                <p className="text-muted-foreground text-sm leading-relaxed mb-4 line-clamp-3">
-                  {post.excerpt}
-                </p>
-
-                <div className="flex items-center gap-2 text-accent font-semibold text-sm group-hover:gap-3 transition-all">
-                  <span>Read Article</span>
+                <p className="text-muted-foreground leading-relaxed line-clamp-3 mb-6">{post.excerpt}</p>
+                <span className="mt-auto inline-flex items-center gap-2 text-accent font-semibold text-sm">
+                  Read article
                   <ArrowRight className="w-4 h-4" />
-                </div>
+                </span>
               </div>
             </Link>
           ))}
-        </div>
-
-        <div className="text-center">
-          <Button variant="outline" size="lg" asChild>
-            <Link href="/blog">
-              View All Articles
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </Button>
         </div>
       </div>
     </section>
